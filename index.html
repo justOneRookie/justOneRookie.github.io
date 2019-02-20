@@ -226,36 +226,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            日程表
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
-            
-            站点地图
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
-            
-            公益404
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -382,7 +352,7 @@
       
         
           
-            <h2 id="Maven学习过程（一）"><a href="#Maven学习过程（一）" class="headerlink" title="Maven学习过程（一）"></a>Maven学习过程（一）</h2><p><img src="images/maven/logo.png"></p>
+            <h2 id="Maven学习过程（一）"><a href="#Maven学习过程（一）" class="headerlink" title="Maven学习过程（一）"></a>Maven学习过程（一）</h2><p><img src="/images/maven/logo.png"></p>
 <p>Maven 提倡使用一个共同的标准目录结构，Maven 使用约定优于配置的原则，大家尽可能的遵守这样的目录结构。如下所示：</p>
 <table>
 <thead>
@@ -452,7 +422,8 @@
 </ul>
 <p>所有 POM 文件都需要 根节点<strong>project 元素</strong>和<strong>三个必需字段</strong>：<strong>groupId</strong>，<strong>artifactId</strong>，<strong>version</strong>。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span> = <span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span> = <span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span> = <span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"> 	<span class="comment">&lt;!-- project为工程的根标签 必须设置--&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="comment">&lt;!-- 模型版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--基础设置--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成， 如com.companyname.project-group，maven会将该项目打成的jar包放本地路径：/com/companyname/project-group --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.companyname.project-group<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">&lt;!-- 项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">&lt;!-- 版本号 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Maven项目构建生命周期"><a href="#Maven项目构建生命周期" class="headerlink" title="Maven项目构建生命周期"></a>Maven项目构建生命周期</h2><div align="left"><br>    <img src="images/maven/shengmingzhouqi.png"><br></div>
+<h2 id="Maven项目构建生命周期"><a href="#Maven项目构建生命周期" class="headerlink" title="Maven项目构建生命周期"></a>Maven项目构建生命周期</h2><div align="left"><br>    <img src="/images/maven/shengmingzhouqi.png"><br></div>
+
 
 
 
