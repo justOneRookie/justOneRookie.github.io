@@ -259,6 +259,125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Solr学习（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/21/Solr学习（二）/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T10:50:17+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Solr学习（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,9 +476,8 @@
 <p>一个基于Apache Lucene的开源的快速的企业搜索引擎。</p>
 </blockquote>
 <p>Solr将数据组织在文档<strong>document</strong>和字段<strong>field</strong>里面；schema.xml是用户手动编辑的模式文件。</p>
-<p>{ % blockquote %}</p>
-<p>Tips: 字符串<code>solr</code>是<code>org.apache.solr.schema</code>或<code>org.apache.solr.analysis</code>的缩写</p>
-<p>{ % endblockquote %}</p>
+<blockquote><p>Tips: 字符串<code>solr</code>是<code>org.apache.solr.schema</code>或<code>org.apache.solr.analysis</code>的缩写</p>
+</blockquote>
 <p>以下部分描述了Solr如何分解并处理文本数据。有三个主要概念需要理解：<strong>分析器Analuzer</strong>，<strong>标记器Tokenizer</strong>和<strong>过滤器Filter</strong>。</p>
 <ul>
 <li><p><strong>分析器Analyzer</strong></p>
@@ -374,9 +492,8 @@
 </li>
 <li><p>还可以通过子元素定义：（内嵌tokenizer和filter）</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"nametext"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">analyzer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">"solr.StandardTokenizerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.LowerCaseFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.StopFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.EnglishPorterFilterFactory"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>{ % blockquote %}</p>
-<p>请注意：<code>org.apache.solr.analysis</code>此处的类可以使用速记<code>solr.</code>前缀引用。</p>
-<p>{ % endblockquote %}</p>
+<blockquote><p>请注意：<code>org.apache.solr.analysis</code>此处的类可以使用速记<code>solr.</code>前缀引用。</p>
+</blockquote>
 </li>
 </ol>
 <blockquote>
@@ -392,7 +509,7 @@
 </li>
 </ul>
 <ul>
-<li><p>Filter</p>
+<li><p><strong>Filter</strong></p>
 <blockquote>
 <p>Filter检查，过滤Token流。</p>
 </blockquote>
@@ -826,7 +943,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
