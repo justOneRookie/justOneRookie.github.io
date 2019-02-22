@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Lucene,">
 
 
 
@@ -79,13 +79,26 @@
 
 
 
-<meta property="og:type" content="website">
+<meta name="description" content="学习并转载自：博客园高压锅里的小白-Lucene介绍与入门使用 Lucene简介　　Lucene是apache软件基金会4 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便">
+<meta name="keywords" content="Lucene">
+<meta property="og:type" content="article">
 <meta property="og:title" content="RookieGuy Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/02/22/Lucene_learn_1_20190222/index.html">
 <meta property="og:site_name" content="RookieGuy Blog">
+<meta property="og:description" content="学习并转载自：博客园高压锅里的小白-Lucene介绍与入门使用 Lucene简介　　Lucene是apache软件基金会4 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/lucene/logo.png">
+<meta property="og:image" content="http://yoursite.com/images/lucene/index_search.png">
+<meta property="og:image" content="http://yoursite.com/images/lucene/document_stru.png">
+<meta property="og:image" content="http://yoursite.com/images/lucene/indexDB_stru.png">
+<meta property="og:image" content="http://yoursite.com/images/lucene/table.png">
+<meta property="og:image" content="http://yoursite.com/images/lucene/dir_jar.png">
+<meta property="og:image" content="http://yoursite.com/images/lucene/dic.png">
+<meta property="og:updated_time" content="2019-02-22T02:41:41.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RookieGuy Blog">
+<meta name="twitter:description" content="学习并转载自：博客园高压锅里的小白-Lucene介绍与入门使用 Lucene简介　　Lucene是apache软件基金会4 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便">
+<meta name="twitter:image" content="http://yoursite.com/images/lucene/logo.png">
 
 
 
@@ -115,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/22/Lucene_learn_1_20190222/">
 
 
 
 
 
-  <title>RookieGuy Blog</title>
+  <title> | RookieGuy Blog</title>
   
 
 
@@ -140,8 +153,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,201 +256,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/DB_review_1_20190222/" itemprop="url">数据库基础复习（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据库复习笔记（一）"><a href="#数据库复习笔记（一）" class="headerlink" title="数据库复习笔记（一）"></a>数据库复习笔记（一）</h1><h2 id="1-事务（transaction）"><a href="#1-事务（transaction）" class="headerlink" title="1. 事务（transaction）"></a>1. 事务（transaction）</h2><p><strong>事务</strong>是访问并可能更新数据项的的一个程序执行单元。</p>
-<p>事务具有<strong>ACID</strong>特性：</p>
-<ol>
-<li><p><strong>原子性Atomicity</strong>：事务的所有操作要么<strong>全部正确</strong>反映出来，要么<strong>完全不反应</strong>。</p>
-<blockquote>
-<p>事务如果不成功执行，称为<strong>中止aborted</strong>，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚<strong>rollback</strong>。典型的方法就是维护一个<strong>日志log</strong>。</p>
-</blockquote>
-</li>
-<li><p><strong>一致性Consistency</strong>：事务的一致性指的是在一个事务执行之前和执行之后数据库都必须处于一致性状态。</p>
-<blockquote>
-<p>如果事务成功地完成，那么系统中所有变化将正确地应用，系统处于有效状态。</p>
-<p>如果在事务中出现错误，那么系统中的所有变化将自动地回滚，系统返回到原始状态。</p>
-</blockquote>
-</li>
-<li><p><strong>隔离性Isolation</strong>：尽管多个事务可能并发执行，但是系统保证每个事务都感觉不到系统有其他事务在执行。</p>
-<blockquote>
-<p>指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改它之后的状态，事务不会查看到中间状态的数据。</p>
-</blockquote>
-</li>
-<li><p><strong>持久性Durability</strong>：一个事务一旦完成，它对数据库的改变必须是永久的，即使系统出现故障，也不会因此而失去改动。</p>
-</li>
-</ol>
-<p>在<strong>MySQL</strong>中，事务的ACID由<strong>InnoDB</strong>存储引擎的日志和锁保证的，事务的<strong>隔离性</strong>是通过<strong>数据库锁</strong>的机制实现的，<strong>持久性</strong>通过 <strong>Redo Log（重做日志）</strong>来实现，<strong>原子性和一致性</strong>通过 <strong>Undo Log</strong> 来实现。</p>
-<p><img src="/images/DB/InnoDB_ACID.png" alt></p>
-<blockquote>
-<p><strong>Undo Log</strong> 的原理很简单，为了满足事务的<strong>原子性</strong>，在操作任何数据之前，首先将数据备份到一个地方（这个存储数据备份的地方称为 <strong>Undo Log</strong>）。然后进行数据的修改。</p>
-<p>如果出现了错误或者用户执行了 Rollback 语句，系统可以利用 Undo Log 中的备份将数据恢复到事务开始之前的状态。</p>
-<p>和 Undo Log <strong>相反</strong>，<strong>Redo Log</strong> 记录的是<em>新数据的备份</em>。在事务提交前，只要将 Redo Log 持久化即可，不需要将数据持久化。</p>
-<p>当系统崩溃时，虽然数据没有持久化，<em>但是 Redo Log 已经持久化</em>。系统可以根据 Redo Log 的内容，将所有数据恢复到最新的状态。</p>
-</blockquote>
-<h2 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h2><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
-<p>举个例子，事务A和事务B操纵的是同一个资源，事务A有若干个子事务，事务B也有若干个子事务，事务A和事务B在高并发的情况下，会出现各种各样的问题。总结一下主要就是五种：第一类丢失更新、第二类丢失更新、脏读、不可重复读、幻读。五种之中，第一类丢失更新、第二类丢失更新不重要，不讲了，讲一下脏读、不可重复读和幻读。</p>
-<p><strong>1、脏读</strong></p>
-<p>所谓脏读，就是指<strong><u>事务A读到了事务B还没有提交的数据</u></strong>，比如银行取钱，事务A开启事务，此时切换到事务B，事务B开启事务–&gt;取走100元，此时切换回事务A，事务A读取的肯定是数据库里面的原始数据，因为事务B取走了100块钱，并没有提交，数据库里面的账务余额肯定还是原始余额，这就是脏读。</p>
-<p><strong>2、不可重复读</strong></p>
-<p>所谓不可重复读，就是指<strong><u>在一个事务里面读取了两次某个数据，读出来的数据<em>不一致</em></u></strong>。还是以银行取钱为例，事务A开启事务–&gt;查出银行卡余额为1000元，此时切换到事务B事务B开启事务–&gt;事务B取走100元–&gt;提交，数据库里面余额变为900元，此时切换回事务A，事务A再查一次查出账户余额为900元，这样对事务A而言，在同一个事务内两次读取账户余额数据不一致，这就是不可重复读。</p>
-<p><strong>3、幻读</strong></p>
-<p>所谓幻读，就是指<strong><u>在一个事务里面的操作中发现了未被操作的数据</u></strong>。比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。<em>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</em></p>
-<h3 id="事务隔离级别："><a href="#事务隔离级别：" class="headerlink" title="事务隔离级别："></a>事务隔离级别：</h3><p>事务隔离级别，就是为了解决上面几种问题而诞生的。为什么要有事务隔离级别，因为<strong>事务隔离级别越高，在并发下会产生的问题就越少，但同时付出的性能消耗也将越大</strong>，因此很多时候必须<u>在并发性和性能之间做一个权衡</u>。所以设立了几种事务隔离级别，以便让不同的项目可以根据自己项目的并发情况选择合适的事务隔离级别，对于在事务隔离级别之外会产生的并发问题，在代码中做补偿。</p>
-<p>事务隔离级别有4种，但是像Spring会提供给用户5种，来看一下：</p>
-<p><strong>1、DEFAULT</strong></p>
-<p><strong>默认隔离级别</strong>，每种数据库支持的事务隔离级别不一样，如果Spring配置事务时将isolation设置为这个值的话，那么将使用底层数据库的默认事务隔离级别。顺便说一句，如果使用的MySQL，可以使用”<strong>select @@tx_isolation</strong>“来查看默认的事务隔离级别</p>
-<p><strong>2、未提交读READ_UNCOMMITTED</strong></p>
-<p>未提交读，<strong>即能够读取到没有被提交的数据</strong>，所以很明显这个级别的隔离机制<strong><em>无法解决脏读、不可重复读、幻读中的任何一种</em></strong>，因此很少使用。</p>
-<p><strong>3、已提交读READ_COMMITED</strong></p>
-<p>已提交读，即<strong>能够读到那些已经提交的数据</strong>，<strong><em>自然能够防止脏读，但是无法限制不可重复读和幻读</em></strong>。</p>
-<p><strong>4、可重复读REPEATABLE_READ</strong></p>
-<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决***。</p>
-<p><strong>5、可串行化SERLALIZABLE</strong></p>
-<p>串行化，最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
-<p><img src="/images/DB/isolation_table.png" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -468,9 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/Lucene_learn_1_20190222/" itemprop="url">未命名</a></h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -542,9 +360,7 @@
       
 
       
-        
-          
-            <p><img src="/images/lucene/logo.png" alt="logo"></p>
+        <p><img src="/images/lucene/logo.png" alt="logo"></p>
 <p>学习并转载自：<a href="https://www.cnblogs.com/xiaobai1226/p/7652093.html" target="_blank" rel="noopener">博客园高压锅里的小白-Lucene介绍与入门使用</a></p>
 <h1 id="Lucene简介"><a href="#Lucene简介" class="headerlink" title="Lucene简介"></a>Lucene简介</h1><p>　　Lucene是apache软件基金会4 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了<strong>完整的查询引擎和索引引擎</strong>，<strong>部分文本分析引擎（英文与德文两种西方语言）</strong>。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。Lucene是一套用于全文检索和搜寻的开源程式库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程式接口，能够做全文索引和搜寻。在Java开发环境里Lucene是一个成熟的免费开源工具。就其本身而言，Lucene是当前以及最近几年最受欢迎的免费Java信息检索程序库。<u><em>人们经常提到信息检索程序库，虽然与搜索引擎有关，但不应该将信息检索程序库与搜索引擎相混淆。</em></u></p>
 <h3 id="那么先来说一说什么是全文搜索"><a href="#那么先来说一说什么是全文搜索" class="headerlink" title="　　那么先来说一说什么是全文搜索"></a>　　那么先来说一说什么是全文搜索</h3><p>　　说之前先说一说<strong>数据的分类</strong>：　</p>
@@ -842,8 +658,6 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改索引库</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateIndex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line">    IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line">    <span class="comment">//创建一个Document对象</span></span><br><span class="line">    Document document = <span class="keyword">new</span> Document();</span><br><span class="line">    <span class="comment">//向document对象中添加域。</span></span><br><span class="line">    <span class="comment">//不同的document可以有不同的域，同一个document可以有相同的域。</span></span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"fileXXX"</span>, <span class="string">"要更新的文档"</span>, Store.YES));</span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"contentYYY"</span>, <span class="string">"简介 Lucene 是一个基于 Java 的全文信息检索工具包。"</span>, Store.YES));</span><br><span class="line">    indexWriter.updateDocument(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>), document);</span><br><span class="line">    <span class="comment">//关闭indexWriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> 　　这样，Lucene的简单介绍使用就完成了。</p>
 
-          
-        
       
     </div>
     
@@ -858,414 +672,40 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/maven_learn_2_20190221/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/maven_learn_2_20190221/" itemprop="url">Maven学习（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T14:30:30+08:00">
-                2019-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Lucene/" rel="tag"># Lucene</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Maven学习过程（二）"><a href="#Maven学习过程（二）" class="headerlink" title="Maven学习过程（二）"></a>Maven学习过程（二）</h1><p><img src="/images/maven/logo.png" alt="logo"></p>
-<h2 id="快速构建Java项目"><a href="#快速构建Java项目" class="headerlink" title="快速构建Java项目"></a>快速构建Java项目</h2><p>Maven 使用 archetype(原型) 来创建自定义的项目结构，形成 Maven 项目模板。</p>
-<blockquote>
-<p>在命令窗口使用<code>mvn archetype:generate</code>命令，按下enter键不断进行下一步的操作，直到创建成功。</p>
-</blockquote>
-<p>普通的maven项目，可以使用<code>maven-archetype-quickstart</code>插件创建maven项目：</p>
-<p>这里我们直接一次写好所有的配置，其他使用默认值：</p>
-<blockquote>
-<p>mvn archetype:generate -DgroupId=com.companyname.bank -DartifactId=consumerBanking -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false</p>
-</blockquote>
-<p>生成的项目结构如图：</p>
-<p><img src="/images/maven/projectDir.png" alt></p>
-<p>可知默认情况下Maven已经添加了一个源码文件<strong>comsumerBanking\src\main\java\com\companyname\bank\App.java</strong>和一个测试文件<strong>comsumerBanking\src\main\test\com\companyname\bank\AppTest.java</strong>；同样，查看<strong>pom.xml</strong>文件，会自带依赖<strong>junit</strong>。</p>
-<p>文件说明：</p>
-<table>
-<thead>
-<tr>
-<th>文件夹结构</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>consumerBanking</td>
-<td>包含 src 文件夹和 pom.xml</td>
-</tr>
-<tr>
-<td>src/main/java contains</td>
-<td>java 代码文件在包结构下（com/companyname/bank）。</td>
-</tr>
-<tr>
-<td>src/main/test contains</td>
-<td>测试代码文件在包结构下（com/companyname/bank）。</td>
-</tr>
-<tr>
-<td>src/main/resources</td>
-<td>包含了 图片 / 属性 文件（在上面的例子中，我们需要手动创建这个结构）。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Maven引入外部依赖"><a href="#Maven引入外部依赖" class="headerlink" title="Maven引入外部依赖"></a>Maven引入外部依赖</h2><p><strong>如果我们需要引入第三库文件到项目，该怎么操作呢？</strong></p>
-<p>pom.xml 的 dependencies 列表列出了我们的项目需要构建的所有外部依赖项。</p>
-<p>要添加依赖项，我们一般是先在 src 文件夹下添加 lib 文件夹，然后将你工程需要的 jar 文件复制到 lib 文件夹下。如：我们添加一个 ldapjdk.jar ，它是为 LDAP 操作的一个帮助库，加入到lib文件夹后，在<strong>pom.xml</strong>里面添加：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 在这里添加你的依赖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  <span class="comment">&lt;!-- 库名称，也可以自定义 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>    <span class="comment">&lt;!--库名称，也可以自定义--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!--版本号--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span> <span class="comment">&lt;!--作用域--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;basedir&#125;\src\lib\ldapjdk.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span> <span class="comment">&lt;!--项目根目录下的lib文件夹下--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Tips：maven项目的依赖可以传递，如果父项目已经绑定了依赖，不需要再添加依赖。</p>
-</blockquote>
-<h2 id="Maven项目文档"><a href="#Maven项目文档" class="headerlink" title="Maven项目文档"></a>Maven项目文档</h2><p>此时，新鲜出炉的maven项目需要在<strong>pom.xml</strong>文件添加如下配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">pluginManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-site-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-project-info-reports-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">pluginManagement</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><em>不然运行</em> <strong><em>mvn site</em></strong> <em>命令时出现</em> <strong>java.lang.NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent</strong> <em>的问题， 这是由于 maven-site-plugin 版本过低，升级到 3.3+ 即可。</em></p>
-</blockquote>
-<p>此时再运行mvn site命令执行完成后，可以在<strong><em>consumerBanking\target\site</em></strong>文件夹中打开<strong><em>index.html</em></strong>文件查看项目文档。</p>
-<h2 id="Maven自动化部署"><a href="#Maven自动化部署" class="headerlink" title="Maven自动化部署"></a>Maven自动化部署</h2><blockquote>
-<p>一般的项目开发部署过程：</p>
-<ul>
-<li>每个团队将所有的项目代码提交到 SVN 或者代码库中并打上标签。</li>
-<li>从 SVN 上下载完整的源代码。</li>
-<li>构建应用。</li>
-<li>存储构建输出的 WAR 或者 EAR 文件到一个常用的网络位置下。</li>
-<li>从网络上获取文件并且部署文件到生产站点上。</li>
-<li>更新文档并且更新应用的版本号。</li>
-</ul>
-</blockquote>
-<p>其中涉及多个团队，很容易出错，maven可以结合如下方案实现自动化部署：</p>
-<ul>
-<li>使用 Maven 构建和发布项目</li>
-<li>使用 SubVersion， 源码仓库来管理源代码</li>
-<li>使用远程仓库管理软件（Jfrog或者Nexus） 来管理项目二进制文件。</li>
-</ul>
-<p>具体使用可以查看<a href="http://www.runoob.com/maven/maven-deployment-automation.html" target="_blank" rel="noopener">菜鸟教程Maven自动化部署</a>。</p>
-<h2 id="使用Maven创建Web项目"><a href="#使用Maven创建Web项目" class="headerlink" title="使用Maven创建Web项目"></a>使用Maven创建Web项目</h2><p>这次我们使用<code>maven-archetype-webapp</code>插件，执行如下命令：</p>
-<blockquote>
-<p>mvn archetype:generate -DgroupId=com.companyname.automobile -DartifactId=trucks -DarchetypeArtifactId=maven-archetype-webapp  -DinteractiveMode=false</p>
-</blockquote>
-<p>完成后看到项目结构：</p>
-<p><img src="/images/maven/webprojectDir.png" alt="maven web项目"></p>
-<p>Maven 目录结构是标准的，各个目录作用如下表所示:</p>
-<table>
-<thead>
-<tr>
-<th>文件夹结构</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>trucks(即项目文件夹)</td>
-<td>包含 src 文件夹和 pom.xml 文件。</td>
-</tr>
-<tr>
-<td>src/main/webapp</td>
-<td>包含 index.jsp 文件和 WEB-INF 文件夹.</td>
-</tr>
-<tr>
-<td>src/main/webapp/WEB-INF</td>
-<td>包含 web.xml 文件</td>
-</tr>
-<tr>
-<td>src/main/resources</td>
-<td>包含图片、properties资源文件。</td>
-</tr>
-</tbody>
-</table>
-<p><strong><em>pom.xml</em></strong>的配置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.companyname.automobile<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>trucks<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>trucks Maven Webapp<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>trucks<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>同理在<strong>trucks</strong>目录下执行<code>mvn clean package</code>命令，构建项目成功后，找到<strong><em>\trucks\target\trucks.war</em></strong>，并复制到你的 web 服务器的 web 应用目录（本地的Tomcat服务器即可），然后重启 web 服务器，即可通过访问URL:<strong><em><a href="http://localhost:8080/trucks/index.jsp" target="_blank" rel="noopener">http://localhost:8080/trucks/index.jsp</a></em></strong>（比如我的tomcat服务器主机为localhost:8080）运行web应用。</p>
-<blockquote>
-<p>最后在这里加一个Maven在Eclipse下的使用: <a href="http://www.runoob.com/maven/maven-eclispe.html" target="_blank" rel="noopener">菜鸟教程之Maven Eclipse</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Solr_learn_2_20190221/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/Solr_learn_2_20190221/" itemprop="url">Solr搜索引擎学习（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T11:11:50+08:00">
-                2019-02-21
-              </time>
+              <a href="/2019/02/21/maven_learn_2_20190221/" rel="next" title="Maven学习（二）">
+                <i class="fa fa-chevron-left"></i> Maven学习（二）
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
+              <a href="/2019/02/22/DB_review_1_20190222/" rel="prev" title="数据库基础复习（一）">
+                数据库基础复习（一） <i class="fa fa-chevron-right"></i>
+              </a>
             
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p><img src="/images/Solr/logo.png" alt="solr"></p>
-<h1 id="Solr的学习日记（二）"><a href="#Solr的学习日记（二）" class="headerlink" title="Solr的学习日记（二）"></a>Solr的学习日记（二）</h1><h2 id="Solr索引"><a href="#Solr索引" class="headerlink" title="Solr索引"></a>Solr索引</h2><p>Solr索引可以接受来自许多不同来源的数据，包括XML文件，逗号分隔值（CSV）文件，从数据库中的表中提取的数据以及常用文件格式（如Microsoft Word或PDF）中的文件。</p>
-<p>以下是将数据加载到Solr索引的三种最常用方法：</p>
-<ul>
-<li>使用基于Apache Tika构建的<a href="https://lucene.apache.org/solr/guide/7_6/uploading-data-with-solr-cell-using-apache-tika.html#uploading-data-with-solr-cell-using-apache-tika" target="_blank" rel="noopener">Solr Cell</a>框架来提取二进制文件或结构化文件，如Office，Word，PDF和其他专有格式。</li>
-<li>通过从可以生成此类请求的任何环境向Solr服务器发送HTTP请求来上载XML文件。</li>
-<li>编写自定义Java应用程序以通过Solr的Java客户端API（在<a href="https://lucene.apache.org/solr/guide/7_6/client-apis.html#client-apis" target="_blank" rel="noopener">客户端API</a>中更详细地描述）来提取数据。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1275,542 +715,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Solr_learn_1_20190221/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/Solr_learn_1_20190221/" itemprop="url">Solr搜索引擎学习（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T10:20:31+08:00">
-                2019-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/Solr/logo.png" alt="solr"></p>
-<h1 id="Solr的学习日记（一）"><a href="#Solr的学习日记（一）" class="headerlink" title="Solr的学习日记（一）"></a>Solr的学习日记（一）</h1><h2 id="Solr引擎"><a href="#Solr引擎" class="headerlink" title="Solr引擎"></a>Solr引擎</h2><blockquote>
-<p>一个基于Apache Lucene的开源的快速的企业搜索引擎。</p>
-</blockquote>
-<p>Solr将数据组织在文档<strong>document</strong>和字段<strong>field</strong>里面；schema.xml是用户手动编辑的模式文件。</p>
-<blockquote class="pullquote"><p>Tips: 字符串<code>solr</code>是<code>org.apache.solr.schema</code>或<code>org.apache.solr.analysis</code>的缩写</p>
-</blockquote>
-<p>以下部分描述了Solr如何分解并处理文本数据。有三个主要概念需要理解：<strong>分析器Analuzer</strong>，<strong>标记器Tokenizer</strong>和<strong>过滤器Filter</strong>。</p>
-<ul>
-<li><p><strong>分析器Analyzer</strong></p>
-<blockquote>
-<p>分析器在输入阶段（建索引阶段）和检索阶段使用。分析器可以是单个类，也可以由一系列标记器和过滤器类组成。</p>
-<p>Analyzer检查输入文本，并生成token流。</p>
-</blockquote>
-<p>Analyzer是schema.xml中<code>&lt;filedType&gt;</code>元素的子元素，在同目录的solrconfig.xml中定义。一般而言，只有<code>solr.TextField</code>或<code>solr.SortableTextField</code>类型的字段可以定义一个Analyzer。</p>
-<ol>
-<li><p>可以通过在<code>&lt;filedType&gt;</code>中使用<code>&lt;anlyzer&gt;</code>元素直接指定，如：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"nametext"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--analyzer必须都继承于org.apache.lucene.analysis.Analyzer--&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">class</span>=<span class="string">"org.apache.lucene.analysis.core.WhitespaceAnalyzer"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>还可以通过子元素定义：（内嵌tokenizer和filter）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"nametext"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">analyzer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">"solr.StandardTokenizerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.LowerCaseFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.StopFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.EnglishPorterFilterFactory"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote class="pullquote"><p>请注意：<code>org.apache.solr.analysis</code>此处的类可以使用速记<code>solr.</code>前缀引用。</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>另外，你可以在index和query两个不同的阶段使用不同的analyzer：</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"nametext"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">type</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">"solr.StandardTokenizerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.LowerCaseFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.KeepWordFilterFactory"</span> <span class="attr">words</span>=<span class="string">"keepwords.txt"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.SynonymFilterFactory"</span> <span class="attr">synonyms</span>=<span class="string">"syns.txt"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">type</span>=<span class="string">"query"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">"solr.StandardTokenizerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.LowerCaseFilterFactory"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Tokenizer</strong></p>
-<blockquote>
-<p>Tokenizer的工作是将文本流分解为标记，其中每个标记（通常）是文本中字符的子序列。</p>
-</blockquote>
-<p>使用Tokenizer可以丢弃输入流中的字符，例如空格或其他分隔符。它们也可以被添加或替换，例如将别名或缩写映射到规范化形式。除了文本值之外，Token还包含各种元数据，例如Token在字段中出现的位置。</p>
-</li>
-</ul>
-<ul>
-<li><p><strong>Filter</strong></p>
-<blockquote>
-<p>Filter检查，过滤Token流。</p>
-</blockquote>
-<p>Filter的工作比Tokenizer简单，与其类似。Filter的输入是不同的Token流，它的作用是选择更改或者舍弃某些token，如将drove改为drive，将Run改为run。</p>
-</li>
-</ul>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/maven_learn_1_20190219/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/20/maven_learn_1_20190219/" itemprop="url">Maven学习（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T11:20:20+08:00">
-                2019-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Maven学习过程（一）"><a href="#Maven学习过程（一）" class="headerlink" title="Maven学习过程（一）"></a>Maven学习过程（一）</h2><p><img src="/images/maven/logo.png"></p>
-<p>Maven 提倡使用一个共同的标准目录结构，Maven 使用约定优于配置的原则，大家尽可能的遵守这样的目录结构。如下所示：</p>
-<table>
-<thead>
-<tr>
-<th>目录</th>
-<th>目的</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>${basedir}</td>
-<td>存放pom.xml和所有的子目录</td>
-</tr>
-<tr>
-<td>${basedir}/src/main/java</td>
-<td>项目的java源代码</td>
-</tr>
-<tr>
-<td>${basedir}/src/main/resources</td>
-<td>项目的资源，比如说property文件，springmvc.xml</td>
-</tr>
-<tr>
-<td>${basedir}/src/test/java</td>
-<td>项目的测试类，比如说Junit代码</td>
-</tr>
-<tr>
-<td>${basedir}/src/test/resources</td>
-<td>测试用的资源</td>
-</tr>
-<tr>
-<td>${basedir}/src/main/webapp/WEB-INF</td>
-<td>web应用文件目录，web项目的信息，比如存放web.xml、本地图片、jsp视图页面</td>
-</tr>
-<tr>
-<td>${basedir}/target</td>
-<td>打包输出目录</td>
-</tr>
-<tr>
-<td>${basedir}/target/classes</td>
-<td>编译输出目录</td>
-</tr>
-<tr>
-<td>${basedir}/target/test-classes</td>
-<td>测试编译输出目录</td>
-</tr>
-<tr>
-<td>Test.java</td>
-<td>Maven只会自动运行符合该命名规则的测试类</td>
-</tr>
-<tr>
-<td>~/.m2/repository</td>
-<td>Maven默认的本地仓库目录位置</td>
-</tr>
-</tbody>
-</table>
-<h2 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h2><p>POM( Project Object Model，项目对象模型 ) 是 Maven 工程的基本工作单元，是一个XML文件，包含了项目的基本信息，用于描述项目如何构建，声明项目依赖，等等。</p>
-<p>执行任务或目标时，Maven 会在当前目录中查找 POM。它读取 POM，获取所需的配置信息，然后执行目标。</p>
-<p>POM 中可以指定以下配置：</p>
-<ul>
-<li>项目依赖 dependencies</li>
-<li>插件 plugins</li>
-<li>执行目标 goals</li>
-<li>项目构建 profile</li>
-<li>项目版本 project version</li>
-<li>项目开发者列表 developers</li>
-<li>相关邮件列表信息 mailing list</li>
-</ul>
-<p>所有 POM 文件都需要 根节点<strong>project 元素</strong>和<strong>三个必需字段</strong>：<strong>groupId</strong>，<strong>artifactId</strong>，<strong>version</strong>。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span> = <span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span> = <span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span> = <span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"> 	<span class="comment">&lt;!-- project为工程的根标签 必须设置--&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="comment">&lt;!-- 模型版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--基础设置--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成， 如com.companyname.project-group，maven会将该项目打成的jar包放本地路径：/com/companyname/project-group --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.companyname.project-group<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">&lt;!-- 项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">&lt;!-- 版本号 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Maven项目构建生命周期"><a href="#Maven项目构建生命周期" class="headerlink" title="Maven项目构建生命周期"></a>Maven项目构建生命周期</h2><div align="left"><br>    <img src="/images/maven/shengmingzhouqi.png"><br></div>
-
-
-
-
-<h2 id="Maven本地仓库"><a href="#Maven本地仓库" class="headerlink" title="Maven本地仓库"></a>Maven本地仓库</h2><p>运行 Maven 的时候，Maven 所需要的任何构件都是<strong>直接从本地仓库</strong>获取的。如果本地仓库没有，它会首先尝试从远程仓库/中央仓库下载构件至本地仓库，然后再使用本地仓库的构件。每个用户在自己的用户目录下都有一个路径名为 <strong>.m2/respository/</strong> 的仓库目录。要修改默认位置，在 <strong>%M2_HOME%\conf</strong> 目录中的 Maven 的 <strong>settings.xml</strong> 文件中定义另一个路径。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0 </span></span></span><br><span class="line"><span class="tag"><span class="string">	http://maven.apache.org/xsd/settings-1.0.0.xsd"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>C:/MyLocalRepository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Maven插件"><a href="#Maven插件" class="headerlink" title="Maven插件"></a>Maven插件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-antrun-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">id</span>&gt;</span>id.clean<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">phase</span>&gt;</span>clean<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>run<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tasks</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">echo</span>&gt;</span>clean phase<span class="tag">&lt;/<span class="name">echo</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tasks</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">execution</span>&gt;</span>     </span><br><span class="line">   <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面的例子展示了以下关键概念：</p>
-<ul>
-<li>插件是在 pom.xml 中使用 plugins 元素定义的。</li>
-<li>每个插件可以有多个目标。</li>
-<li>你可以定义阶段，插件会使用它的 phase 元素开始处理。我们已经使用了 <strong>clean</strong> 阶段。</li>
-<li>你可以通过绑定到插件的目标的方式来配置要执行的任务。我们已经绑定了 <strong>echo</strong> 任务到 maven-antrun-plugin 的 <strong>run</strong> 目标。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/第一篇测试文章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/16/第一篇测试文章/" itemprop="url">第一篇测试文章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T19:24:07+08:00">
-                2019-02-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2019.02.16 19:40  成功完成第一篇。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -1818,6 +727,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -1838,8 +751,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1899,6 +821,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lucene简介"><span class="nav-number">1.</span> <span class="nav-text">Lucene简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#那么先来说一说什么是全文搜索"><span class="nav-number">1.0.1.</span> <span class="nav-text">　　那么先来说一说什么是全文搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化数据查询方法"><span class="nav-number">1.1.</span> <span class="nav-text">　　结构化数据查询方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库搜索"><span class="nav-number">1.1.1.</span> <span class="nav-text">　　数据库搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非结构化数据查询方法"><span class="nav-number">1.2.</span> <span class="nav-text">　　非结构化数据查询方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全文检索的应用场景"><span class="nav-number">1.2.1.</span> <span class="nav-text">　　全文检索的应用场景</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Lucene实现全文检索的流程"><span class="nav-number">2.</span> <span class="nav-text">　　Lucene实现全文检索的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引和搜索流程图"><span class="nav-number">2.0.1.</span> <span class="nav-text">　　索引和搜索流程图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1，创建索引"><span class="nav-number">2.1.</span> <span class="nav-text">　1，创建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-获得原始文档"><span class="nav-number">2.1.1.</span> <span class="nav-text">　　1.1.1.   获得原始文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-创建文档对象"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.1.2.   创建文档对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-分析文档"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.1.3.   分析文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-创建索引"><span class="nav-number">2.1.4.</span> <span class="nav-text">1.1.4.   创建索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Field域的属性概述"><span class="nav-number">2.2.</span> <span class="nav-text">Field域的属性概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-查询索引"><span class="nav-number">2.3.</span> <span class="nav-text">　　2. 查询索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-用户查询接口"><span class="nav-number">2.3.1.</span> <span class="nav-text">　　2.1.   用户查询接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-创建查询"><span class="nav-number">2.3.2.</span> <span class="nav-text">　　2.2.   创建查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-执行查询"><span class="nav-number">2.3.3.</span> <span class="nav-text">　　2.3.   执行查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MatchAllDocsQuery"><span class="nav-number">2.3.4.</span> <span class="nav-text">　　MatchAllDocsQuery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TermQuery（精准查询）"><span class="nav-number">2.3.5.</span> <span class="nav-text">　　TermQuery（精准查询）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NumericRangeQuery"><span class="nav-number">2.3.6.</span> <span class="nav-text">　　NumericRangeQuery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BooleanQuery"><span class="nav-number">2.3.7.</span> <span class="nav-text">　　BooleanQuery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询语法"><span class="nav-number">2.3.7.1.</span> <span class="nav-text">　　查询语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MultiFieldQueryParser"><span class="nav-number">2.3.8.</span> <span class="nav-text">　　MultiFieldQueryParser</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IndexSearcher搜索方法"><span class="nav-number">2.4.</span> <span class="nav-text">IndexSearcher搜索方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TopDocs"><span class="nav-number">2.5.</span> <span class="nav-text">　　TopDocs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-删除索引"><span class="nav-number">2.6.</span> <span class="nav-text">　　3. 删除索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-索引库的修改"><span class="nav-number">2.7.</span> <span class="nav-text">　　4 索引库的修改</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2039,6 +977,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

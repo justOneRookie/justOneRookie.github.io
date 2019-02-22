@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Solr,">
+  <meta name="keywords" content="DataBase,Review,">
 
 
 
@@ -79,20 +79,21 @@
 
 
 
-<meta name="description" content="Solr的学习日记（二）Solr索引Solr索引可以接受来自许多不同来源的数据，包括XML文件，逗号分隔值（CSV）文件，从数据库中的表中提取的数据以及常用文件格式（如Microsoft Word或PDF）中的文件。 以下是将数据加载到Solr索引的三种最常用方法：  使用基于Apache Tika构建的Solr Cell框架来提取二进制文件或结构化文件，如Office，Word，PDF和其他专">
-<meta name="keywords" content="Solr">
+<meta name="description" content="数据库复习笔记（一）1. 事务（transaction）事务是访问并可能更新数据项的的一个程序执行单元。 事务具有ACID特性：  原子性Atomicity：事务的所有操作要么全部正确反映出来，要么完全不反应。  事务如果不成功执行，称为中止aborted，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚rollback。典型的方法就是维护一个日志log。   一致性Consis">
+<meta name="keywords" content="DataBase,Review">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Solr搜索引擎学习（二）">
-<meta property="og:url" content="http://yoursite.com/2019/02/21/Solr_learn_2_20190221/index.html">
+<meta property="og:title" content="数据库基础复习（一）">
+<meta property="og:url" content="http://yoursite.com/2019/02/22/DB_review_1_20190222/index.html">
 <meta property="og:site_name" content="RookieGuy Blog">
-<meta property="og:description" content="Solr的学习日记（二）Solr索引Solr索引可以接受来自许多不同来源的数据，包括XML文件，逗号分隔值（CSV）文件，从数据库中的表中提取的数据以及常用文件格式（如Microsoft Word或PDF）中的文件。 以下是将数据加载到Solr索引的三种最常用方法：  使用基于Apache Tika构建的Solr Cell框架来提取二进制文件或结构化文件，如Office，Word，PDF和其他专">
+<meta property="og:description" content="数据库复习笔记（一）1. 事务（transaction）事务是访问并可能更新数据项的的一个程序执行单元。 事务具有ACID特性：  原子性Atomicity：事务的所有操作要么全部正确反映出来，要么完全不反应。  事务如果不成功执行，称为中止aborted，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚rollback。典型的方法就是维护一个日志log。   一致性Consis">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/Solr/logo.png">
-<meta property="og:updated_time" content="2019-02-21T09:05:41.287Z">
+<meta property="og:image" content="http://yoursite.com/images/DB/InnoDB_ACID.png">
+<meta property="og:image" content="http://yoursite.com/images/DB/isolation_table.png">
+<meta property="og:updated_time" content="2019-02-22T07:49:04.539Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Solr搜索引擎学习（二）">
-<meta name="twitter:description" content="Solr的学习日记（二）Solr索引Solr索引可以接受来自许多不同来源的数据，包括XML文件，逗号分隔值（CSV）文件，从数据库中的表中提取的数据以及常用文件格式（如Microsoft Word或PDF）中的文件。 以下是将数据加载到Solr索引的三种最常用方法：  使用基于Apache Tika构建的Solr Cell框架来提取二进制文件或结构化文件，如Office，Word，PDF和其他专">
-<meta name="twitter:image" content="http://yoursite.com/images/Solr/logo.png">
+<meta name="twitter:title" content="数据库基础复习（一）">
+<meta name="twitter:description" content="数据库复习笔记（一）1. 事务（transaction）事务是访问并可能更新数据项的的一个程序执行单元。 事务具有ACID特性：  原子性Atomicity：事务的所有操作要么全部正确反映出来，要么完全不反应。  事务如果不成功执行，称为中止aborted，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚rollback。典型的方法就是维护一个日志log。   一致性Consis">
+<meta name="twitter:image" content="http://yoursite.com/images/DB/InnoDB_ACID.png">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/21/Solr_learn_2_20190221/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
 
 
 
 
 
-  <title>Solr搜索引擎学习（二） | RookieGuy Blog</title>
+  <title>数据库基础复习（一） | RookieGuy Blog</title>
   
 
 
@@ -265,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Solr_learn_2_20190221/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="rookieChen">
@@ -282,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Solr搜索引擎学习（二）</h1>
+          <h1 class="post-title" itemprop="name headline">数据库基础复习（一）</h1>
         
 
         <div class="post-meta">
@@ -294,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T11:11:50+08:00">
-                2019-02-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
+                2019-02-22
               </time>
             
 
@@ -354,14 +355,57 @@
       
 
       
-        <p><img src="/images/Solr/logo.png" alt="solr"></p>
-<h1 id="Solr的学习日记（二）"><a href="#Solr的学习日记（二）" class="headerlink" title="Solr的学习日记（二）"></a>Solr的学习日记（二）</h1><h2 id="Solr索引"><a href="#Solr索引" class="headerlink" title="Solr索引"></a>Solr索引</h2><p>Solr索引可以接受来自许多不同来源的数据，包括XML文件，逗号分隔值（CSV）文件，从数据库中的表中提取的数据以及常用文件格式（如Microsoft Word或PDF）中的文件。</p>
-<p>以下是将数据加载到Solr索引的三种最常用方法：</p>
-<ul>
-<li>使用基于Apache Tika构建的<a href="https://lucene.apache.org/solr/guide/7_6/uploading-data-with-solr-cell-using-apache-tika.html#uploading-data-with-solr-cell-using-apache-tika" target="_blank" rel="noopener">Solr Cell</a>框架来提取二进制文件或结构化文件，如Office，Word，PDF和其他专有格式。</li>
-<li>通过从可以生成此类请求的任何环境向Solr服务器发送HTTP请求来上载XML文件。</li>
-<li>编写自定义Java应用程序以通过Solr的Java客户端API（在<a href="https://lucene.apache.org/solr/guide/7_6/client-apis.html#client-apis" target="_blank" rel="noopener">客户端API</a>中更详细地描述）来提取数据。</li>
-</ul>
+        <h1 id="数据库复习笔记（一）"><a href="#数据库复习笔记（一）" class="headerlink" title="数据库复习笔记（一）"></a>数据库复习笔记（一）</h1><h2 id="1-事务（transaction）"><a href="#1-事务（transaction）" class="headerlink" title="1. 事务（transaction）"></a>1. 事务（transaction）</h2><p><strong>事务</strong>是访问并可能更新数据项的的一个程序执行单元。</p>
+<p>事务具有<strong>ACID</strong>特性：</p>
+<ol>
+<li><p><strong>原子性Atomicity</strong>：事务的所有操作要么<strong>全部正确</strong>反映出来，要么<strong>完全不反应</strong>。</p>
+<blockquote>
+<p>事务如果不成功执行，称为<strong>中止aborted</strong>，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚<strong>rollback</strong>。典型的方法就是维护一个<strong>日志log</strong>。</p>
+</blockquote>
+</li>
+<li><p><strong>一致性Consistency</strong>：事务的一致性指的是在一个事务执行之前和执行之后数据库都必须处于一致性状态。</p>
+<blockquote>
+<p>如果事务成功地完成，那么系统中所有变化将正确地应用，系统处于有效状态。</p>
+<p>如果在事务中出现错误，那么系统中的所有变化将自动地回滚，系统返回到原始状态。</p>
+</blockquote>
+</li>
+<li><p><strong>隔离性Isolation</strong>：尽管多个事务可能并发执行，但是系统保证每个事务都感觉不到系统有其他事务在执行。</p>
+<blockquote>
+<p>指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改它之后的状态，事务不会查看到中间状态的数据。</p>
+</blockquote>
+</li>
+<li><p><strong>持久性Durability</strong>：一个事务一旦完成，它对数据库的改变必须是永久的，即使系统出现故障，也不会因此而失去改动。</p>
+</li>
+</ol>
+<p>在<strong>MySQL</strong>中，事务的ACID由<strong>InnoDB</strong>存储引擎的日志和锁保证的，事务的<strong>隔离性</strong>是通过<strong>数据库锁</strong>的机制实现的，<strong>持久性</strong>通过 <strong>Redo Log（重做日志）</strong>来实现，<strong>原子性和一致性</strong>通过 <strong>Undo Log</strong> 来实现。</p>
+<p><img src="/images/DB/InnoDB_ACID.png" alt></p>
+<blockquote>
+<p><strong>Undo Log</strong> 的原理很简单，为了满足事务的<strong>原子性</strong>，在操作任何数据之前，首先将数据备份到一个地方（这个存储数据备份的地方称为 <strong>Undo Log</strong>）。然后进行数据的修改。</p>
+<p>如果出现了错误或者用户执行了 Rollback 语句，系统可以利用 Undo Log 中的备份将数据恢复到事务开始之前的状态。</p>
+<p>和 Undo Log <strong>相反</strong>，<strong>Redo Log</strong> 记录的是<em>新数据的备份</em>。在事务提交前，只要将 Redo Log 持久化即可，不需要将数据持久化。</p>
+<p>当系统崩溃时，虽然数据没有持久化，<em>但是 Redo Log 已经持久化</em>。系统可以根据 Redo Log 的内容，将所有数据恢复到最新的状态。</p>
+</blockquote>
+<h2 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h2><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
+<p>举个例子，事务A和事务B操纵的是同一个资源，事务A有若干个子事务，事务B也有若干个子事务，事务A和事务B在高并发的情况下，会出现各种各样的问题。总结一下主要就是五种：第一类丢失更新、第二类丢失更新、脏读、不可重复读、幻读。五种之中，第一类丢失更新、第二类丢失更新不重要，不讲了，讲一下脏读、不可重复读和幻读。</p>
+<p><strong>1、脏读</strong></p>
+<p>所谓脏读，就是指<strong><u>事务A读到了事务B还没有提交的数据</u></strong>，比如银行取钱，事务A开启事务，此时切换到事务B，事务B开启事务–&gt;取走100元，此时切换回事务A，事务A读取的肯定是数据库里面的原始数据，因为事务B取走了100块钱，并没有提交，数据库里面的账务余额肯定还是原始余额，这就是脏读。</p>
+<p><strong>2、不可重复读</strong></p>
+<p>所谓不可重复读，就是指<strong><u>在一个事务里面读取了两次某个数据，读出来的数据<em>不一致</em></u></strong>。还是以银行取钱为例，事务A开启事务–&gt;查出银行卡余额为1000元，此时切换到事务B事务B开启事务–&gt;事务B取走100元–&gt;提交，数据库里面余额变为900元，此时切换回事务A，事务A再查一次查出账户余额为900元，这样对事务A而言，在同一个事务内两次读取账户余额数据不一致，这就是不可重复读。</p>
+<p><strong>3、幻读</strong></p>
+<p>所谓幻读，就是指<strong><u>在一个事务里面的操作中发现了未被操作的数据</u></strong>。比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。<em>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</em></p>
+<h3 id="事务隔离级别："><a href="#事务隔离级别：" class="headerlink" title="事务隔离级别："></a>事务隔离级别：</h3><p>事务隔离级别，就是为了解决上面几种问题而诞生的。为什么要有事务隔离级别，因为<strong>事务隔离级别越高，在并发下会产生的问题就越少，但同时付出的性能消耗也将越大</strong>，因此很多时候必须<u>在并发性和性能之间做一个权衡</u>。所以设立了几种事务隔离级别，以便让不同的项目可以根据自己项目的并发情况选择合适的事务隔离级别，对于在事务隔离级别之外会产生的并发问题，在代码中做补偿。</p>
+<p>事务隔离级别有4种，但是像Spring会提供给用户5种，来看一下：</p>
+<p><strong>1、DEFAULT</strong></p>
+<p><strong>默认隔离级别</strong>，每种数据库支持的事务隔离级别不一样，如果Spring配置事务时将isolation设置为这个值的话，那么将使用底层数据库的默认事务隔离级别。顺便说一句，如果使用的MySQL，可以使用”<strong>select @@tx_isolation</strong>“来查看默认的事务隔离级别</p>
+<p><strong>2、未提交读READ_UNCOMMITTED</strong></p>
+<p>未提交读，<strong>即能够读取到没有被提交的数据</strong>，所以很明显这个级别的隔离机制<strong><em>无法解决脏读、不可重复读、幻读中的任何一种</em></strong>，因此很少使用。</p>
+<p><strong>3、已提交读READ_COMMITED</strong></p>
+<p>已提交读，即<strong>能够读到那些已经提交的数据</strong>，<strong><em>自然能够防止脏读，但是无法限制不可重复读和幻读</em></strong>。</p>
+<p><strong>4、可重复读REPEATABLE_READ</strong></p>
+<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决***。</p>
+<p><strong>5、可串行化SERLALIZABLE</strong></p>
+<p>串行化，最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
+<p><img src="/images/DB/isolation_table.png" alt></p>
 
       
     </div>
@@ -379,7 +423,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Solr/" rel="tag"># Solr</a>
+            <a href="/tags/DataBase/" rel="tag"># DataBase</a>
+          
+            <a href="/tags/Review/" rel="tag"># Review</a>
           
         </div>
       
@@ -392,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/21/Solr_learn_1_20190221/" rel="next" title="Solr搜索引擎学习（一）">
-                <i class="fa fa-chevron-left"></i> Solr搜索引擎学习（一）
+              <a href="/2019/02/22/Lucene_learn_1_20190222/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -401,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/21/maven_learn_2_20190221/" rel="prev" title="Maven学习（二）">
-                Maven学习（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -536,7 +578,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Solr的学习日记（二）"><span class="nav-number">1.</span> <span class="nav-text">Solr的学习日记（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solr索引"><span class="nav-number">1.1.</span> <span class="nav-text">Solr索引</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库复习笔记（一）"><span class="nav-number">1.</span> <span class="nav-text">数据库复习笔记（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-事务（transaction）"><span class="nav-number">1.1.</span> <span class="nav-text">1. 事务（transaction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于隔离性："><span class="nav-number">1.2.</span> <span class="nav-text">关于隔离性：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离级别："><span class="nav-number">1.2.1.</span> <span class="nav-text">事务隔离级别：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
