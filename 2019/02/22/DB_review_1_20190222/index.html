@@ -89,7 +89,10 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/DB/InnoDB_ACID.png">
 <meta property="og:image" content="http://yoursite.com/images/DB/isolation_table.png">
-<meta property="og:updated_time" content="2019-02-22T07:49:04.539Z">
+<meta property="og:image" content="http://yoursite.com/images/DB/nextkeylock.png">
+<meta property="og:image" content="http://yoursite.com/images/DB/fanshi_relation.png">
+<meta property="og:image" content="http://yoursite.com/images/DB/fanshi_1.png">
+<meta property="og:updated_time" content="2019-02-23T12:17:22.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库基础复习（一）">
 <meta name="twitter:description" content="数据库复习笔记（一）1. 事务（transaction）事务是访问并可能更新数据项的的一个程序执行单元。 事务具有ACID特性：  原子性Atomicity：事务的所有操作要么全部正确反映出来，要么完全不反应。  事务如果不成功执行，称为中止aborted，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚rollback。典型的方法就是维护一个日志log。   一致性Consis">
@@ -385,14 +388,20 @@
 <p>和 Undo Log <strong>相反</strong>，<strong>Redo Log</strong> 记录的是<em>新数据的备份</em>。在事务提交前，只要将 Redo Log 持久化即可，不需要将数据持久化。</p>
 <p>当系统崩溃时，虽然数据没有持久化，<em>但是 Redo Log 已经持久化</em>。系统可以根据 Redo Log 的内容，将所有数据恢复到最新的状态。</p>
 </blockquote>
-<h2 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h2><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
+<h3 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h3><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
 <p>举个例子，事务A和事务B操纵的是同一个资源，事务A有若干个子事务，事务B也有若干个子事务，事务A和事务B在高并发的情况下，会出现各种各样的问题。总结一下主要就是五种：第一类丢失更新、第二类丢失更新、脏读、不可重复读、幻读。五种之中，第一类丢失更新、第二类丢失更新不重要，不讲了，讲一下脏读、不可重复读和幻读。</p>
 <p><strong>1、脏读</strong></p>
+<blockquote>
 <p>所谓脏读，就是指<strong><u>事务A读到了事务B还没有提交的数据</u></strong>，比如银行取钱，事务A开启事务，此时切换到事务B，事务B开启事务–&gt;取走100元，此时切换回事务A，事务A读取的肯定是数据库里面的原始数据，因为事务B取走了100块钱，并没有提交，数据库里面的账务余额肯定还是原始余额，这就是脏读。</p>
+</blockquote>
 <p><strong>2、不可重复读</strong></p>
+<blockquote>
 <p>所谓不可重复读，就是指<strong><u>在一个事务里面读取了两次某个数据，读出来的数据<em>不一致</em></u></strong>。还是以银行取钱为例，事务A开启事务–&gt;查出银行卡余额为1000元，此时切换到事务B事务B开启事务–&gt;事务B取走100元–&gt;提交，数据库里面余额变为900元，此时切换回事务A，事务A再查一次查出账户余额为900元，这样对事务A而言，在同一个事务内两次读取账户余额数据不一致，这就是不可重复读。</p>
+</blockquote>
 <p><strong>3、幻读</strong></p>
+<blockquote>
 <p>所谓幻读，就是指<strong><u>在一个事务里面的操作中发现了未被操作的数据</u></strong>。比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。<em>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</em></p>
+</blockquote>
 <h3 id="事务隔离级别："><a href="#事务隔离级别：" class="headerlink" title="事务隔离级别："></a>事务隔离级别：</h3><p>事务隔离级别，就是为了解决上面几种问题而诞生的。为什么要有事务隔离级别，因为<strong>事务隔离级别越高，在并发下会产生的问题就越少，但同时付出的性能消耗也将越大</strong>，因此很多时候必须<u>在并发性和性能之间做一个权衡</u>。所以设立了几种事务隔离级别，以便让不同的项目可以根据自己项目的并发情况选择合适的事务隔离级别，对于在事务隔离级别之外会产生的并发问题，在代码中做补偿。</p>
 <p>事务隔离级别有4种，但是像Spring会提供给用户5种，来看一下：</p>
 <p><strong>1、DEFAULT</strong></p>
@@ -402,10 +411,69 @@
 <p><strong>3、已提交读READ_COMMITED</strong></p>
 <p>已提交读，即<strong>能够读到那些已经提交的数据</strong>，<strong><em>自然能够防止脏读，但是无法限制不可重复读和幻读</em></strong>。</p>
 <p><strong>4、可重复读REPEATABLE_READ</strong></p>
-<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决***。</p>
+<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决<em>**。</em>是innoDB的默认事务隔离级别。*</p>
+<blockquote>
+<p>READ_COMMITED(RC)和REPEATABLE_READ(RR)是innoDB里面使用范围最广的隔离级别。</p>
+</blockquote>
 <p><strong>5、可串行化SERLALIZABLE</strong></p>
 <p>串行化，最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
 <p><img src="/images/DB/isolation_table.png" alt></p>
+<h3 id="事务隔离技术：MVCC与NEXT-KEY-LOCKING"><a href="#事务隔离技术：MVCC与NEXT-KEY-LOCKING" class="headerlink" title="事务隔离技术：MVCC与NEXT-KEY LOCKING"></a>事务隔离技术：MVCC与NEXT-KEY LOCKING</h3><p><strong>MVCC多版本并发控制（Multiversion Currency Control）</strong>：一般情况下，事务性储存引擎不是只使用表锁，行加锁的处理数据，而是结合了MVCC机制，以处理更多的并发问题。Mvcc处理高并发能力最强，但系统开销比最大（较表锁、行级锁），这是最求高并发付出的代价。</p>
+<blockquote>
+<p><strong>InnoDB实现MVCC的方法是，它存储了每一行的三个额外的隐藏字段:</strong></p>
+<ol>
+<li><p><strong>DB_TRX_ID</strong>：一个6byte的标识，每处理一个事务，其值自动+1<br>#下面提到的“创建时间”和“删除时间”记录的就是这个DB_TRX_ID的值<br>#如insert、update、delete操作时，删除操作用1个bit表示。<br>#<strong>DB_TRX_ID是最重要的一个</strong>，可以通过语句“show engine innodb status”来查找 </p>
+</li>
+<li><p><strong>DB_ROLL_PTR</strong>: 大小是7byte,指向写到rollback segment（回滚段）的一条undo log记录<br> （update操作的话，记录update前的ROW值）</p>
+</li>
+<li><p><strong>DB_ROW_ID</strong>: 大小是6byte,该值随新行插入单调增加</p>
+</li>
+</ol>
+</blockquote>
+<p>MVCC只工作在<strong>REPEATABLE READ</strong>和<strong>READ COMMITED</strong>隔离级别下：</p>
+<blockquote>
+<ol>
+<li>READ UNCOMMITTED ，不适用MVCC读，可以读到其他事务修改甚至未提交的</li>
+<li>READ COMMITTED ，其他事务对数据库的修改,只要已经提交,其修改的结果就是可见的,<br>与这两个事务开始的先后顺序无关，不完全适用于MVCC读，</li>
+<li>REPEATABLE READ，可重复读，完全适用MVCC，只能读取在它开始之前已经提交的事务对数据库的修改,<br>在它开始以后,所有其他事务对数据库的修改对它来说均不可见</li>
+<li>SERIALIZABLE ，完全不适合适用MVCC，这样所有的query都会加锁，再它之后的事务都要等待 </li>
+</ol>
+</blockquote>
+<p><strong>NEXT-KEY LOCKING</strong>：InnoDB中的RR级别作为范围如此广的隔离级别，其通过NEXT-KEY locking技术解决幻读问题，<strong>就是锁住一个范围</strong>：<em>例如：A追求一个女生，使用了NEXT-KEY LOCKING技术，即使得A在追求时要跟女孩说，只要我开始追求你，问了你有没有男朋友，在我结束追求你之前，你不可以答应别人的追求！我要把你脑子里记录男朋友的区域全部锁起来！</em></p>
+<p><img src="/images/DB/nextkeylock.png" alt="幻读问题在RR下的解决"></p>
+<hr>
+<h2 id="2-锁"><a href="#2-锁" class="headerlink" title="2. 锁"></a>2. 锁</h2><p>锁主要为<strong>共享锁</strong>和<strong>排他锁</strong>。</p>
+<p>两段锁协议：两段锁协议规定所有的事务应遵守的规则：<br>　　① 在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁。<br>　　② 在释放一个封锁之后，事务不再申请和获得其它任何封锁。<br>　　即事务的执行分为两个阶段：<br>　　第一阶段是获得封锁的阶段，称为<strong>扩展阶段</strong>。第二阶段是释放封锁的阶段，称为<strong>收缩阶段</strong>。</p>
+<p><strong>悲观锁</strong>：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁。<em>Java里面的同步原语synchronized关键字的实现也是悲观锁。</em></p>
+<p><strong>乐观锁</strong>：顾名思义，就是很乐观，假设认为数据一般情况下不会产生并发冲突，所以在数据进行提交更新的时候，才会正式对数据是否产生并发冲突进行检测，如果发现并发冲突了，则让返回用户错误的信息，让用户决定如何去做，可以使用版本号等机制。乐观锁适用于<strong>多读的应用类型</strong>，这样可以提高吞吐量。</p>
+<blockquote>
+<p>乐观锁的一种实现方式-<strong>CAS(Compare and Swap 比较并交换)</strong>：主要就是两个步骤：<strong>冲突检测</strong>和<strong>数据更新</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>CAS与Synchronized的使用情景：</strong>　</p>
+<ol>
+<li>对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</li>
+<li>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</li>
+</ol>
+</blockquote>
+<p><strong>隐式锁Synchronized</strong>：synchronized是Java的关键字，悲观锁的一种，当它用来修饰一个方法或一个代码块时，能够保证在同一时刻最多只有一个线程执行该代码。因为当调用Synchronized修饰的代码时，并不需要显示的加锁和解锁的过程，所以称之为隐式锁。</p>
+<blockquote>
+<p>synchronized在JVM上实现；针对一个对象。</p>
+</blockquote>
+<p><strong>显式锁Lock</strong>：Lock是一个<strong>接口</strong>，提供了无条件的、可轮询的、定时的、可中断的锁获取操作，所有的加锁和解锁操作方法都是显示的，因而称为显示锁。 主要有以下几个实现类：<em>ReentrantLock</em>（可重入锁）、<em>ReentrantReadWriteLock.ReadLock</em>和<em>ReentrantReadWriteLock.WriteLock</em>。记住，每次上锁，都务必记得解锁。</p>
+<blockquote>
+<p>ReentrantLock和ReentrantReadWriteLock是代码块层面的锁定，而且需要显式的加解锁。</p>
+</blockquote>
+<p><strong>快照读</strong>：读取的是记录数据的可见版本（可能是过期的数据），不用加锁。</p>
+<p><strong>当前读</strong>：读取的是记录数据的最新版本，并且当前读返回的记录都会加上锁，保证其他事务不会再并发的修改这条记录。</p>
+<hr>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。说白了就是<strong>一张数据表的表结构所符合的某种设计标准的级别</strong>。范式级别越高，表的设计就越标准。</p>
+<p><img src="/images/DB/fanshi_relation.png" alt="各范式关系"></p>
+<p><strong>第一范式</strong>：第一范式是数据库表需要符合的最基本条件：表的每一个属性不能是再可分的数据项。</p>
+<p><img src="/images/DB/fanshi_1.png" alt></p>
+<p><strong>第二范式</strong>：第二范式就是在第一范式的基础之上消除了非主属性对码的部分依赖 。</p>
+<p><strong>第三范式</strong>：就是在第二范式的基础上再消除了非主属性对码的传递依赖。</p>
+<p><strong>BCNF</strong>：就是在第三范式的基础上消除了主属性对码的部分依赖和传递依赖。</p>
 
       
     </div>
@@ -438,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/22/Lucene_learn_1_20190222/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/02/22/Lucene_learn_1_20190222/" rel="next" title="Lucene入门学习及介绍（一）">
+                <i class="fa fa-chevron-left"></i> Lucene入门学习及介绍（一）
               </a>
             
           </div>
@@ -523,7 +591,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -545,7 +613,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -578,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库复习笔记（一）"><span class="nav-number">1.</span> <span class="nav-text">数据库复习笔记（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-事务（transaction）"><span class="nav-number">1.1.</span> <span class="nav-text">1. 事务（transaction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于隔离性："><span class="nav-number">1.2.</span> <span class="nav-text">关于隔离性：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离级别："><span class="nav-number">1.2.1.</span> <span class="nav-text">事务隔离级别：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库复习笔记（一）"><span class="nav-number">1.</span> <span class="nav-text">数据库复习笔记（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-事务（transaction）"><span class="nav-number">1.1.</span> <span class="nav-text">1. 事务（transaction）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于隔离性："><span class="nav-number">1.1.1.</span> <span class="nav-text">关于隔离性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离级别："><span class="nav-number">1.1.2.</span> <span class="nav-text">事务隔离级别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离技术：MVCC与NEXT-KEY-LOCKING"><span class="nav-number">1.1.3.</span> <span class="nav-text">事务隔离技术：MVCC与NEXT-KEY LOCKING</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-锁"><span class="nav-number">1.2.</span> <span class="nav-text">2. 锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范式"><span class="nav-number">1.3.</span> <span class="nav-text">范式</span></a></li></ol></li></ol></div>
             
 
           </div>
