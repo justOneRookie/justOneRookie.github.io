@@ -259,6 +259,460 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/redis_learn_1_20190226/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/26/redis_learn_1_20190226/" itemprop="url">Redis学习日记(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T00:00:00+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis学习日记（一）"><a href="#Redis学习日记（一）" class="headerlink" title="Redis学习日记（一）"></a>Redis学习日记（一）</h1><p>首先，<strong>什么是redis</strong>？</p>
+<p>Redis 是一个使用<code>ANSI C</code> 编写的开源、支持网络协议、基于内存、可选持久性的键值对数据库,它是一个<code>NOSQL</code>not only sql)数据库,也就是常说的非关系型数据库。</p>
+<blockquote>
+<p>Nosql的全称是Not Only Sql，指的是非关系型数据库，而我们常用的都是关系型数据库。就像我们常用的mysql，sqlserver一样，这些数据库一般用来存储重要信息，应对普通的业务是没有问题的。但是，随着互联网的高速发展，传统的关系型数据库在应付超大规模，超大流量以及高并发的时候力不从心。而就在这个时候，Nosql得到的高速的发展。下面是对比：</p>
+<ul>
+<li>存储方式：关系型数据库是表格式的，因此存储在表的行和列中。他们之间很容易关联协作存储，提取数据很方便。而Nosql数据库则与其相反，他是大块的组合在一起。通常存储在数据集中，就像文档、键值对或者图结构。</li>
+<li>存储结构：关系型数据库对应的是结构化数据，数据表都预先定义了结构（列的定义），结构描述了数据的形式和内容。这一点对数据建模至关重要，虽然预定义结构带来了可靠性和稳定性，但是修改这些数据比较困难。而Nosql数据库基于动态结构，使用与非结构化数据。因为Nosql数据库是动态结构，可以很容易适应数据类型和结构的变化。</li>
+<li>存储扩展：这可能是两者之间最大的区别，关系型数据库是纵向扩展，也就是说想要提高处理能力，要使用速度更快的计算机。因为数据存储在关系表中，操作的性能瓶颈可能涉及到多个表，需要通过提升计算机性能来克服。虽然有很大的扩展空间，但是最终会达到纵向扩展的上限。而Nosql数据库是横向扩展的，它的存储天然就是分布式的，可以通过给资源池添加更多的普通数据库服务器来分担负载。</li>
+</ul>
+</blockquote>
+<h2 id="Redis-应用场景"><a href="#Redis-应用场景" class="headerlink" title="Redis 应用场景"></a>Redis 应用场景</h2><p>主要用于数据量大，并发量高的情况下</p>
+<ul>
+<li>数据缓存（页面具体数据），页面缓存（商品内容，新闻内容）</li>
+<li>分布式集群中架构中的Session分离</li>
+<li>应用排行榜，在线好友列表等</li>
+<li>任务队列，例如抢购秒杀等</li>
+<li>显示最新的项目列表(用户最新的回复，评论等)</li>
+<li>需要负载均衡的场景（主从同步）</li>
+</ul>
+<blockquote>
+<p>Redis在很多方面与其他数据库解决方案不同：它<strong>使用内存提供主存储支持，而仅使用硬盘做持久性的存储</strong>；它的数据模型非常独特，用的是<strong>单线程</strong>。另一个大区别在于，你可以在开发环境中使用Redis的功能，但却不需要转到Redis。</p>
+<p>转向Redis当然也是可取的，许多开发者从一开始就把Redis作为首选数据库；但设想如果你的开发环境已经搭建好，应用已经在上面运行了，那么更换数据库框架显然不那么容易。另外在一些需要大容量数据集的应用，Redis也并不适合，因为它的数据集不会超过系统可用的内存。所以如果你有大数据应用，而且主要是读取访问模式，那么Redis并不是正确的选择。</p>
+<p><em>你可以把它融入到你的系统中来，这就能够解决很多问题，比如那些你现有的数据库处理起来感到缓慢的任务。这些你就可以通过Redis来进行优化，或者为应用创建些新的功能。</em></p>
+</blockquote>
+<h2 id="Redis数据类型简介"><a href="#Redis数据类型简介" class="headerlink" title="Redis数据类型简介"></a>Redis数据类型简介</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>存储的值</th>
+<th>读写能力</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>字符串，整数或浮点数。可以包含任意数据，包括图片等二进制或者序列化的对象等。单个 <code>value</code> 的值最大上限为 <code>1G</code>字节。</td>
+<td>对字符串或一部分字符串执行操作；对整数进行自增和自减操作等</td>
+<td>可用于保存图片，商品序列号等。</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>包含键值对的无序散列表。等价于Java 中的 HashMap。但是在 redis 中 hash 的 key 必须是 string 类型。在 Reids 中，每个 Hash 可以存储多达 4 亿个键值对。</td>
+<td>对单个 元素进行增、删、改；获取所以的键值对等</td>
+<td>保存大量的对象数据</td>
+</tr>
+<tr>
+<td>List</td>
+<td>链表上的节点字符串元素。在 Redis 中的 List 类型，其内部使用的是<code>双向链表</code>实现的。</td>
+<td>推入、弹出元素；修剪、查找、移除元素等</td>
+<td>商品，博客，文章下面的评论列表等。</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>各不相同的字符串元素。redis 中的 set 类型和 java 中的 HashSet 类似，其底层都是用HashMap 实现的，只不过所有的 value 都指向同一个对象。</td>
+<td>对单个 元素进行增、删、改；计算集合 交，并补集等</td>
+<td>对象属性</td>
+</tr>
+<tr>
+<td>Sorted Set</td>
+<td>带分数（权重）的有序集合</td>
+<td>对单个 元素进行增、删、改；按照分数范围查元素等</td>
+<td>商品销售，软件下载等各种排行榜</td>
+</tr>
+<tr>
+<td>HyerLogLog</td>
+<td>基数</td>
+<td>对输入元素不进行存储，、只存储基数。</td>
+<td>基数统计</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><strong>Pub/Sub</strong>：Pub/Sub 从字面上理解就是<strong>发布（Publish）与订阅（Subscribe）</strong>，在Redis中，你可以设定对某一个key值进行消息发布及消息订阅，当一个key值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息。这一功能最明显的用法就是用作实时消息系统，比如普通的即时聊天，群聊等功能。</li>
+</ul>
+</blockquote>
+<h2 id="主从同步（复制）"><a href="#主从同步（复制）" class="headerlink" title="主从同步（复制）"></a>主从同步（复制）</h2><p>Redis的复制功能分为同步（sync）和命令传播（command propagate）两个操作：</p>
+<ul>
+<li>同步操作用于将从服务器的数据库状态更新至主服务器当前所处的数据库状态；</li>
+<li>命令传播操作则用于在主服务器的数据库状态被修改，导致主从服务器的数据库状态出现不一致时，让主从服务器的数据库重新回到一致状态。</li>
+</ul>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>当客户端向从服务器发送SLAVEOF命令，要求从服务器复制主服务器时，从服务器首先需要执行同步操作，也即是，将从服务器的数据库状态更新至主服务器当前所处的数据库状态。</p>
+<p>从服务器对主服务器的同步操作需要通过向主服务器发送SYNC命令来完成，以下是SYNC命令的执行步骤：</p>
+<ol>
+<li>从服务器向主服务器发送SYNC命令；</li>
+<li>收到SYNC命令的主服务器执行BGSAVE命令，在后台生成一个RDB文件，并使用一个缓冲区记录从现在开始执行的所有写命令；</li>
+<li>当主服务器的BGSAVE命令执行完毕时，主服务器会将BGSAVE命令生成的RDB文件发送给从服务器，从服务器接收并载入这个RDB文件，将自己的数据库状态更新至主服务器<strong>执行BGSAVE命令时的数据库状态</strong>。</li>
+<li>主服务器将记录在缓冲区里面的所有写命令发送给从服务器，<strong>从服务器执行这些写命令</strong>，将自己的数据库状态更新至主服务器数据库当前所处的状态。</li>
+</ol>
+<h3 id="命令传播"><a href="#命令传播" class="headerlink" title="命令传播"></a>命令传播</h3><p>在执行完同步操作之后，主从服务器之间数据库状态已经相同了。但这个状态并非一成不变，如果主服务器执行了写操作，那么主服务器的数据库状态就会修改，并导致主从服务器状态不再一致。</p>
+<p>所以为了让主从服务器再次回到一致状态，主服务器需要对从服务器执行命令传播操作：主服务器会将自己执行的写命令，也即是造成主从服务器不一致的那条写命令，发送给从服务器执行，当从服务器执行了相同的写命令之后，主从服务器将再次回到一致状态。</p>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>Redis提供了两种持久化：<strong>快照snapshotting</strong>和<strong>AOF（append-only file）</strong>。</p>
+<h3 id="快照Snapshotting"><a href="#快照Snapshotting" class="headerlink" title="快照Snapshotting"></a>快照Snapshotting</h3><p>快照持久化方法是 Redis 默认开启的持久化方法，Redis 将某一时刻的快照保存成一种称为 RDB 格式的文件中。RDB 文件是一个经过压缩的二进制文件，通过该文件，Redis 可以将内存中的数据恢复成某一时刻的状态。</p>
+<p>Redis 提供了两个命令用来生成 RDB 文件，一个是 SAVE，一个是 BGSAVE。</p>
+<ul>
+<li>SAVE 命令会阻塞 Redis 服务器进程，走到 RDB 文件创建完毕为止，在 Redis 服务器进程阻塞期间，Redis 不能处理任何命令请求。在生产环境，我们一般不会直接使用 SAVE 命令，原因是由于它会阻塞 Redis 进程。但是，如果机器已没有足够的内存去执行 BGSAVE 命令，或者即使等待持久化操作完毕也无所谓，我们也可以使用 SAVE 命令来生成 RDB 文件。</li>
+<li>BGSAVE 命令会派生出一个子进程，然后由子进程创建 RDB 文件，因此，BGSAVE 命令不会阻塞 Redis 服务器进程。</li>
+</ul>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><p>与快照持久化通过直接保存 Redis 的键值对数据不同，AOF 持久化是通过保存 Redis 执行的写命令来记录 Redis 的内存数据。</p>
+<p>理论上说，只要我们保存了所有可能修改 Redis 内存数据的命令（也就是写命令），那么根据这些保存的写命令，我们可以重新恢复 Redis 的内存状态。AOF 持久化正是利用这个原理来实现数据的持久化与数据的恢复的。 </p>
+<blockquote>
+<p><strong>AOF 的优点</strong></p>
+<ul>
+<li>AOF 持久化的方法提供了多种的同步频率，即使使用默认的同步频率每秒同步一次，Redis 最多也就丢失 1 秒的数据而已。</li>
+<li>AOF 文件使用 Redis 命令追加的形式来构造，因此，即使 Redis 只能向 AOF 文件写入命令的片断，使用 redis-check-aof 工具也很容易修正 AOF 文件。</li>
+<li>AOF 文件的格式可读性较强，这也为使用者提供了更灵活的处理方式。例如，如果我们不小心错用了 FLUSHALL 命令，在重写还没进行时，我们可以手工将最后的 FLUSHALL 命令去掉，然后再使用 AOF 来恢复数据。</li>
+</ul>
+<p><strong>AOF 的缺点</strong></p>
+<ul>
+<li>对于具有相同数据的的 Redis，AOF 文件通常会比 RDB文件体积更大。</li>
+<li>虽然 AOF 提供了多种同步的频率，默认情况下，每秒同步一次的频率也具有较高的性能。但在 Redis 的负载较高时，RDB 比 AOF 具好更好的性能保证。</li>
+<li>RDB 使用快照的形式来持久化整个 Redis 数据，而 AOF 只是将每次执行的命令追加到 AOF 文件中，因此从理论上说，RDB 比 AOF 方式更健壮。官方文档也指出，AOF 的确也存在一些 BUG，这些 BUG 在 RDB 没有存在。</li>
+</ul>
+</blockquote>
+<h2 id="Redis-VS-memcache"><a href="#Redis-VS-memcache" class="headerlink" title="Redis VS. memcache"></a>Redis VS. memcache</h2><p>1、Redis和Memcache都是将数据存放在内存中。不过memcache还可用于缓存其他东西，例如图片、视频等等</p>
+<p>2、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储。 </p>
+<p>3、虚拟内存–Redis当物理内存用完时，可以将一些很久没用到的value 交换到磁盘 . </p>
+<p>4、过期策略–memcache在set时就指定，例如set key1 0 0 8,即永不过期。Redis可以通过例如expire 设定，例如expire name 10 </p>
+<p>5、分布式–设定memcache集群，利用magent做一主多从;redis可以做一主多从。都可以一主一从 </p>
+<p><strong>6、存储数据安全–memcache挂掉后，数据没了；redis可以定期保存到磁盘（持久化）,支持持久化，服务器重启，缓存依然可以获取。(这个很重要哦)</strong></p>
+<p> 7、灾难恢复–memcache挂掉后，数据不可恢复; redis数据丢失后可以通过aof恢复</p>
+<p> 8、Redis支持数据的备份，即master-slave模式的数据备份。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/java_review_1_20190226/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/26/java_review_1_20190226/" itemprop="url">Java复习（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T00:00:00+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java复习日记（一）"><a href="#Java复习日记（一）" class="headerlink" title="Java复习日记（一）"></a>Java复习日记（一）</h1><h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><p>ThreadLocal，很多地方叫做线程本地变量，也有些地方叫做线程本地存储，其实意思差不多。可能很多朋友都知道ThreadLocal为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量。</p>
+<p>这里<a href="https://www.cnblogs.com/dolphin0520/p/3920407.html" target="_blank" rel="noopener">博主海子的描述</a>更为详细，就不在此献丑了。</p>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>在并发编程中，我们通常会遇到以下三个问题：原子性问题，可见性问题，有序性问题。</p>
+<blockquote>
+<p>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。</p>
+<p>有序性：即程序执行的顺序按照代码的先后顺序执行。</p>
+</blockquote>
+<p>那么Java语言 本身对 原子性、可见性以及有序性提供了哪些保证呢？</p>
+<p><strong>1.原子性</strong></p>
+<p>　　在Java中，对基本数据类型的变量的读取和赋值操作是原子性操作，即这些操作是不可被中断的，要么执行，要么不执行。</p>
+<p>　　上面一句话虽然看起来简单，但是理解起来并不是那么容易。看下面一个例子i：</p>
+<p>　　请分析以下哪些操作是原子性操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span>;  <span class="comment">//1</span></span><br><span class="line">y = x;   <span class="comment">//2</span></span><br><span class="line">x++;    <span class="comment">//3</span></span><br><span class="line">x = x + <span class="number">1</span>;  <span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+<p>咋一看，有些朋友可能会说上面的4个语句中的操作都是原子性操作。其实只有语句1是原子性操作，其他三个语句都不是原子性操作。</p>
+<p>　　语句1是直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中。</p>
+<p>　　语句2实际上包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。</p>
+<p>　　同样的，x++和 x = x+1包括3个操作：读取x的值，进行加1操作，写入新的值。</p>
+<p> 　　<strong>所以上面4个语句只有语句1的操作具备原子性。</strong></p>
+<p>　　也就是说，只有简单的读取、赋值（而且必须是将数字赋值给某个变量，变量之间的相互赋值不是原子操作）才是原子操作。</p>
+<p><strong>2.可见性</strong></p>
+<p>　　对于可见性，Java提供了<strong>volatile关键字</strong>来保证可见性。</p>
+<p>　　<em>当一个共享变量被volatile修饰时，它会保证修改的值会立即被更新到主存，当有其他线程需要读取时，它会去内存中读取新值。</em></p>
+<p>　　<em>而普通的共享变量不能保证可见性，因为普通共享变量被修改之后，什么时候被写入主存是不确定的，当其他线程去读取时，此时内存中可能还是原来的旧值，因此无法保证可见性。</em></p>
+<p>　　另外，通过<strong>synchronized</strong>和<strong>Lock</strong>也能够保证可见性，<strong>synchronized</strong>和<strong>Lock</strong>能保证同一时刻只有一个线程获取锁然后执行同步代码，并且在释放锁之前会将对变量的修改刷新到主存当中。因此可以保证可见性。</p>
+<p><strong>3.有序性</strong></p>
+<p>　　在Java内存模型中，允许编译器和处理器对指令进行重排序，但是重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性。</p>
+<p>　　在Java里面，可以通过<strong>volatile</strong>关键字来保证一定的“有序性”。另外可以通过synchronized和Lock来保证有序性，很显然，synchronized和Lock保证每个时刻是有一个线程执行同步代码，相当于是让线程顺序执行同步代码，自然就保证了有序性。</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>这里介绍一下volatile，一旦一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义：</p>
+<p>　　1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。</p>
+<p>　　2）禁止进行指令重排序。</p>
+<p>　　先看一段代码，假如线程1先执行，线程2后执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="comment">//线程1``boolean` `stop = ``false``;``while``(!stop)&#123;``    ``doSomething();``&#125;` `//线程2``stop = ``true``;`</span></span><br></pre></td></tr></table></figure>
+<p>这段代码是很典型的一段代码，很多人在中断线程时可能都会采用这种标记办法。但是事实上，这段代码会完全运行正确么？即一定会将线程中断么？不一定，也许在大多数时候，这个代码能够把线程中断，但是也有可能会导致无法中断线程（虽然这个可能性很小，但是只要一旦发生这种情况就会造成死循环了）。</p>
+<blockquote>
+<p>　　下面解释一下这段代码为何有可能导致无法中断线程。每个线程在运行过程中都有自己的工作内存，那么线程1在运行的时候，会将stop变量的值拷贝一份放在自己的工作内存当中。</p>
+<p>　　那么当线程2更改了stop变量的值之后，但是还没来得及写入主存当中，线程2转去做其他事情了，那么线程1由于不知道线程2对stop变量的更改，因此还会一直循环下去。</p>
+<p>　　但是用volatile修饰之后就变得不一样了：</p>
+<p>　　第一：使用volatile关键字会强制将修改的值立即写入主存；</p>
+<p>　　第二：使用volatile关键字的话，当线程2进行修改时，会导致线程1的工作内存中缓存变量stop的缓存行无效（反映到硬件层的话，就是CPU的L1或者L2缓存中对应的缓存行无效）；</p>
+<p>　　第三：由于线程1的工作内存中缓存变量stop的缓存行无效，所以线程1再次读取变量stop的值时会去主存读取。</p>
+<p>　　那么在线程2修改stop值时（当然这里包括2个操作，修改线程2工作内存中的值，然后将修改后的值写入内存），会使得线程1的工作内存中缓存变量stop的缓存行无效，然后线程1读取时，发现自己的缓存行无效，它会等待缓存行对应的主存地址被更新之后，然后去对应的主存读取最新的值。</p>
+<p>　　那么线程1读取到的就是最新的正确的值。</p>
+</blockquote>
+<p><strong>但是volatile没办法保证对变量的操作的原子性，可以部分保证有序性：</strong></p>
+<blockquote>
+<p>volatile关键字禁止指令重排序有两层意思：</p>
+<p>　　1）当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作肯定还没有进行；</p>
+<p>　　2）在进行指令优化时，不能将在对volatile变量访问的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/MySQL_learn_1_20190225/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -352,7 +806,7 @@
       
         
           
-            <h1 id="MySQL学习日记"><a href="#MySQL学习日记" class="headerlink" title="MySQL学习日记"></a>MySQL学习日记</h1><h2 id="索引："><a href="#索引：" class="headerlink" title="索引："></a>索引：</h2><p>索引在MySQL中也叫做“<strong>键</strong>”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能<br>非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。<br>索引优化应该是<em>对查询性能优化最有效的手段</em>了。索引能够轻易将查询性能提高好几个数量级。</p>
+            <h1 id="MySQL学习日记-一"><a href="#MySQL学习日记-一" class="headerlink" title="MySQL学习日记(一)"></a>MySQL学习日记(一)</h1><h2 id="索引："><a href="#索引：" class="headerlink" title="索引："></a>索引：</h2><p>索引在MySQL中也叫做“<strong>键</strong>”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能<br>非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。<br>索引优化应该是<em>对查询性能优化最有效的手段</em>了。索引能够轻易将查询性能提高好几个数量级。</p>
 <p>首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，<strong>当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都读取到内存缓冲区内</strong>，因为局部预读性原理告诉我们，当计算机访问一个地址的数据的时候，与其相邻的数据也会很快被访问到。每一次IO读取的数据我们称之为一页(page)。具体一页有多大数据跟操作系统有关，一般为4k或8k，也就是我们读取一页内的数据时候，实际上才发生了一次IO，这个理论对于索引的数据结构设计非常有帮助。</p>
 <p><strong>索引的数据结构</strong>：任何一种数据结构都不是凭空产生的，一定会有它的背景和使用场景，我们现在总结一下，我们需要这种数据结构能够做些什么，其实很简单，那就是：每次查找数据时把磁盘IO次数控制在一个很小的数量级，最好是常数数量级。那么我们就想到如果一个高度可控的多路搜索树是否能满足需求呢？就这样，b+树应运而生。</p>
 <p><img src="/images/MySQL/B+tree.png" alt></p>
@@ -361,10 +815,8 @@
 <p>因此，我们可以总结出：</p>
 <blockquote>
 <ol>
-<li><p><strong>索引字段要尽量的小</strong>：通过上面的分析，我们知道IO次数取决于b+数的高度h，假设当前数据表的数据为N，每个磁盘块的数据项的数量是m，则有<br>$$<br>h = \log_mN<br>$$<br>，当数据量N一定的情况下，m越大，h越小；而m = 磁盘块的大小 / 数据项的大小，磁盘块的大小也就是一个数据页的大小，是固定的，如果数据项占的空间越小，数据项的数量越多，树的高度越低。这就是为什么每个数据项，即索引字段要尽量的小，比如int占4字节，要比bigint8字节少一半。这也是为什么b+树要求把真实的数据放到叶子节点而不是内层节点，一旦放到内层节点，磁盘块的数据项会大幅度下降，导致树增高。当数据项等于1时将会退化成线性表。</p>
-</li>
-<li><p><strong>索引的最左匹配特性（即从左往右匹配）</strong>：当b+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性。</p>
-</li>
+<li><strong>索引字段要尽量的小</strong>：通过上面的分析，我们知道IO次数取决于b+数的高度h，假设当前数据表的数据为N，每个磁盘块的数据项的数量是m，则有$$h = \log_mN$$，当数据量N一定的情况下，m越大，h越小；而m = 磁盘块的大小 / 数据项的大小，磁盘块的大小也就是一个数据页的大小，是固定的，如果数据项占的空间越小，数据项的数量越多，树的高度越低。这就是为什么每个数据项，即索引字段要尽量的小，比如int占4字节，要比bigint8字节少一半。这也是为什么b+树要求把真实的数据放到叶子节点而不是内层节点，一旦放到内层节点，磁盘块的数据项会大幅度下降，导致树增高。当数据项等于1时将会退化成线性表。</li>
+<li><strong>索引的最左匹配特性（即从左往右匹配）</strong>：当b+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性。</li>
 </ol>
 </blockquote>
 <p><strong>MySQL的索引分类</strong>:</p>
@@ -683,6 +1135,147 @@
 </li>
 </ol>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/22/OS_review_1_20190222/" itemprop="url">操作系统复习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="操作系统复习日记"><a href="#操作系统复习日记" class="headerlink" title="操作系统复习日记"></a>操作系统复习日记</h1>
           
         
       
@@ -1121,147 +1714,6 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改索引库</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateIndex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line">    IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line">    <span class="comment">//创建一个Document对象</span></span><br><span class="line">    Document document = <span class="keyword">new</span> Document();</span><br><span class="line">    <span class="comment">//向document对象中添加域。</span></span><br><span class="line">    <span class="comment">//不同的document可以有不同的域，同一个document可以有相同的域。</span></span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"fileXXX"</span>, <span class="string">"要更新的文档"</span>, Store.YES));</span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"contentYYY"</span>, <span class="string">"简介 Lucene 是一个基于 Java 的全文信息检索工具包。"</span>, Store.YES));</span><br><span class="line">    indexWriter.updateDocument(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>), document);</span><br><span class="line">    <span class="comment">//关闭indexWriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> 　　这样，Lucene的简单介绍使用就完成了。</p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/OS_review_1_20190222/" itemprop="url">操作系统复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="操作系统复习日记"><a href="#操作系统复习日记" class="headerlink" title="操作系统复习日记"></a>操作系统复习日记</h1>
           
         
       
@@ -2108,129 +2560,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/第一篇测试文章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/16/第一篇测试文章/" itemprop="url">第一篇测试文章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T19:24:07+08:00">
-                2019-02-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2019.02.16 19:40  成功完成第一篇。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2274,7 +2610,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2296,7 +2632,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

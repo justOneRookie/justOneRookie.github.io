@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DataBase,Redis,并发,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Redis学习日记（一）首先，什么是redis？ Redis 是一个使用ANSI C 编写的开源、支持网络协议、基于内存、可选持久性的键值对数据库,它是一个NOSQLnot only sql)数据库,也就是常说的非关系型数据库。  Nosql的全称是Not Only Sql，指的是非关系型数据库，而我们常用的都是关系型数据库。就像我们常用的mysql，sqlserver一样，这些数据库一般用来存储">
+<meta name="keywords" content="DataBase,Redis,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis学习日记(一)">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/redis_learn_1_20190226/index.html">
+<meta property="og:site_name" content="RookieGuy Blog">
+<meta property="og:description" content="Redis学习日记（一）首先，什么是redis？ Redis 是一个使用ANSI C 编写的开源、支持网络协议、基于内存、可选持久性的键值对数据库,它是一个NOSQLnot only sql)数据库,也就是常说的非关系型数据库。  Nosql的全称是Not Only Sql，指的是非关系型数据库，而我们常用的都是关系型数据库。就像我们常用的mysql，sqlserver一样，这些数据库一般用来存储">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-26T15:34:54.298Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis学习日记(一)">
+<meta name="twitter:description" content="Redis学习日记（一）首先，什么是redis？ Redis 是一个使用ANSI C 编写的开源、支持网络协议、基于内存、可选持久性的键值对数据库,它是一个NOSQLnot only sql)数据库,也就是常说的非关系型数据库。  Nosql的全称是Not Only Sql，指的是非关系型数据库，而我们常用的都是关系型数据库。就像我们常用的mysql，sqlserver一样，这些数据库一般用来存储">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/26/redis_learn_1_20190226/">
+
+
+
+
+
+  <title>Redis学习日记(一) | RookieGuy Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RookieGuy Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">for better myself</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/redis_learn_1_20190226/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis学习日记(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T00:00:00+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Redis学习日记（一）"><a href="#Redis学习日记（一）" class="headerlink" title="Redis学习日记（一）"></a>Redis学习日记（一）</h1><p>首先，<strong>什么是redis</strong>？</p>
+<p>Redis 是一个使用<code>ANSI C</code> 编写的开源、支持网络协议、基于内存、可选持久性的键值对数据库,它是一个<code>NOSQL</code>not only sql)数据库,也就是常说的非关系型数据库。</p>
+<blockquote>
+<p>Nosql的全称是Not Only Sql，指的是非关系型数据库，而我们常用的都是关系型数据库。就像我们常用的mysql，sqlserver一样，这些数据库一般用来存储重要信息，应对普通的业务是没有问题的。但是，随着互联网的高速发展，传统的关系型数据库在应付超大规模，超大流量以及高并发的时候力不从心。而就在这个时候，Nosql得到的高速的发展。下面是对比：</p>
+<ul>
+<li>存储方式：关系型数据库是表格式的，因此存储在表的行和列中。他们之间很容易关联协作存储，提取数据很方便。而Nosql数据库则与其相反，他是大块的组合在一起。通常存储在数据集中，就像文档、键值对或者图结构。</li>
+<li>存储结构：关系型数据库对应的是结构化数据，数据表都预先定义了结构（列的定义），结构描述了数据的形式和内容。这一点对数据建模至关重要，虽然预定义结构带来了可靠性和稳定性，但是修改这些数据比较困难。而Nosql数据库基于动态结构，使用与非结构化数据。因为Nosql数据库是动态结构，可以很容易适应数据类型和结构的变化。</li>
+<li>存储扩展：这可能是两者之间最大的区别，关系型数据库是纵向扩展，也就是说想要提高处理能力，要使用速度更快的计算机。因为数据存储在关系表中，操作的性能瓶颈可能涉及到多个表，需要通过提升计算机性能来克服。虽然有很大的扩展空间，但是最终会达到纵向扩展的上限。而Nosql数据库是横向扩展的，它的存储天然就是分布式的，可以通过给资源池添加更多的普通数据库服务器来分担负载。</li>
+</ul>
+</blockquote>
+<h2 id="Redis-应用场景"><a href="#Redis-应用场景" class="headerlink" title="Redis 应用场景"></a>Redis 应用场景</h2><p>主要用于数据量大，并发量高的情况下</p>
+<ul>
+<li>数据缓存（页面具体数据），页面缓存（商品内容，新闻内容）</li>
+<li>分布式集群中架构中的Session分离</li>
+<li>应用排行榜，在线好友列表等</li>
+<li>任务队列，例如抢购秒杀等</li>
+<li>显示最新的项目列表(用户最新的回复，评论等)</li>
+<li>需要负载均衡的场景（主从同步）</li>
+</ul>
+<blockquote>
+<p>Redis在很多方面与其他数据库解决方案不同：它<strong>使用内存提供主存储支持，而仅使用硬盘做持久性的存储</strong>；它的数据模型非常独特，用的是<strong>单线程</strong>。另一个大区别在于，你可以在开发环境中使用Redis的功能，但却不需要转到Redis。</p>
+<p>转向Redis当然也是可取的，许多开发者从一开始就把Redis作为首选数据库；但设想如果你的开发环境已经搭建好，应用已经在上面运行了，那么更换数据库框架显然不那么容易。另外在一些需要大容量数据集的应用，Redis也并不适合，因为它的数据集不会超过系统可用的内存。所以如果你有大数据应用，而且主要是读取访问模式，那么Redis并不是正确的选择。</p>
+<p><em>你可以把它融入到你的系统中来，这就能够解决很多问题，比如那些你现有的数据库处理起来感到缓慢的任务。这些你就可以通过Redis来进行优化，或者为应用创建些新的功能。</em></p>
+</blockquote>
+<h2 id="Redis数据类型简介"><a href="#Redis数据类型简介" class="headerlink" title="Redis数据类型简介"></a>Redis数据类型简介</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>存储的值</th>
+<th>读写能力</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>字符串，整数或浮点数。可以包含任意数据，包括图片等二进制或者序列化的对象等。单个 <code>value</code> 的值最大上限为 <code>1G</code>字节。</td>
+<td>对字符串或一部分字符串执行操作；对整数进行自增和自减操作等</td>
+<td>可用于保存图片，商品序列号等。</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>包含键值对的无序散列表。等价于Java 中的 HashMap。但是在 redis 中 hash 的 key 必须是 string 类型。在 Reids 中，每个 Hash 可以存储多达 4 亿个键值对。</td>
+<td>对单个 元素进行增、删、改；获取所以的键值对等</td>
+<td>保存大量的对象数据</td>
+</tr>
+<tr>
+<td>List</td>
+<td>链表上的节点字符串元素。在 Redis 中的 List 类型，其内部使用的是<code>双向链表</code>实现的。</td>
+<td>推入、弹出元素；修剪、查找、移除元素等</td>
+<td>商品，博客，文章下面的评论列表等。</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>各不相同的字符串元素。redis 中的 set 类型和 java 中的 HashSet 类似，其底层都是用HashMap 实现的，只不过所有的 value 都指向同一个对象。</td>
+<td>对单个 元素进行增、删、改；计算集合 交，并补集等</td>
+<td>对象属性</td>
+</tr>
+<tr>
+<td>Sorted Set</td>
+<td>带分数（权重）的有序集合</td>
+<td>对单个 元素进行增、删、改；按照分数范围查元素等</td>
+<td>商品销售，软件下载等各种排行榜</td>
+</tr>
+<tr>
+<td>HyerLogLog</td>
+<td>基数</td>
+<td>对输入元素不进行存储，、只存储基数。</td>
+<td>基数统计</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><strong>Pub/Sub</strong>：Pub/Sub 从字面上理解就是<strong>发布（Publish）与订阅（Subscribe）</strong>，在Redis中，你可以设定对某一个key值进行消息发布及消息订阅，当一个key值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息。这一功能最明显的用法就是用作实时消息系统，比如普通的即时聊天，群聊等功能。</li>
+</ul>
+</blockquote>
+<h2 id="主从同步（复制）"><a href="#主从同步（复制）" class="headerlink" title="主从同步（复制）"></a>主从同步（复制）</h2><p>Redis的复制功能分为同步（sync）和命令传播（command propagate）两个操作：</p>
+<ul>
+<li>同步操作用于将从服务器的数据库状态更新至主服务器当前所处的数据库状态；</li>
+<li>命令传播操作则用于在主服务器的数据库状态被修改，导致主从服务器的数据库状态出现不一致时，让主从服务器的数据库重新回到一致状态。</li>
+</ul>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>当客户端向从服务器发送SLAVEOF命令，要求从服务器复制主服务器时，从服务器首先需要执行同步操作，也即是，将从服务器的数据库状态更新至主服务器当前所处的数据库状态。</p>
+<p>从服务器对主服务器的同步操作需要通过向主服务器发送SYNC命令来完成，以下是SYNC命令的执行步骤：</p>
+<ol>
+<li>从服务器向主服务器发送SYNC命令；</li>
+<li>收到SYNC命令的主服务器执行BGSAVE命令，在后台生成一个RDB文件，并使用一个缓冲区记录从现在开始执行的所有写命令；</li>
+<li>当主服务器的BGSAVE命令执行完毕时，主服务器会将BGSAVE命令生成的RDB文件发送给从服务器，从服务器接收并载入这个RDB文件，将自己的数据库状态更新至主服务器<strong>执行BGSAVE命令时的数据库状态</strong>。</li>
+<li>主服务器将记录在缓冲区里面的所有写命令发送给从服务器，<strong>从服务器执行这些写命令</strong>，将自己的数据库状态更新至主服务器数据库当前所处的状态。</li>
+</ol>
+<h3 id="命令传播"><a href="#命令传播" class="headerlink" title="命令传播"></a>命令传播</h3><p>在执行完同步操作之后，主从服务器之间数据库状态已经相同了。但这个状态并非一成不变，如果主服务器执行了写操作，那么主服务器的数据库状态就会修改，并导致主从服务器状态不再一致。</p>
+<p>所以为了让主从服务器再次回到一致状态，主服务器需要对从服务器执行命令传播操作：主服务器会将自己执行的写命令，也即是造成主从服务器不一致的那条写命令，发送给从服务器执行，当从服务器执行了相同的写命令之后，主从服务器将再次回到一致状态。</p>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>Redis提供了两种持久化：<strong>快照snapshotting</strong>和<strong>AOF（append-only file）</strong>。</p>
+<h3 id="快照Snapshotting"><a href="#快照Snapshotting" class="headerlink" title="快照Snapshotting"></a>快照Snapshotting</h3><p>快照持久化方法是 Redis 默认开启的持久化方法，Redis 将某一时刻的快照保存成一种称为 RDB 格式的文件中。RDB 文件是一个经过压缩的二进制文件，通过该文件，Redis 可以将内存中的数据恢复成某一时刻的状态。</p>
+<p>Redis 提供了两个命令用来生成 RDB 文件，一个是 SAVE，一个是 BGSAVE。</p>
+<ul>
+<li>SAVE 命令会阻塞 Redis 服务器进程，走到 RDB 文件创建完毕为止，在 Redis 服务器进程阻塞期间，Redis 不能处理任何命令请求。在生产环境，我们一般不会直接使用 SAVE 命令，原因是由于它会阻塞 Redis 进程。但是，如果机器已没有足够的内存去执行 BGSAVE 命令，或者即使等待持久化操作完毕也无所谓，我们也可以使用 SAVE 命令来生成 RDB 文件。</li>
+<li>BGSAVE 命令会派生出一个子进程，然后由子进程创建 RDB 文件，因此，BGSAVE 命令不会阻塞 Redis 服务器进程。</li>
+</ul>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><p>与快照持久化通过直接保存 Redis 的键值对数据不同，AOF 持久化是通过保存 Redis 执行的写命令来记录 Redis 的内存数据。</p>
+<p>理论上说，只要我们保存了所有可能修改 Redis 内存数据的命令（也就是写命令），那么根据这些保存的写命令，我们可以重新恢复 Redis 的内存状态。AOF 持久化正是利用这个原理来实现数据的持久化与数据的恢复的。 </p>
+<blockquote>
+<p><strong>AOF 的优点</strong></p>
+<ul>
+<li>AOF 持久化的方法提供了多种的同步频率，即使使用默认的同步频率每秒同步一次，Redis 最多也就丢失 1 秒的数据而已。</li>
+<li>AOF 文件使用 Redis 命令追加的形式来构造，因此，即使 Redis 只能向 AOF 文件写入命令的片断，使用 redis-check-aof 工具也很容易修正 AOF 文件。</li>
+<li>AOF 文件的格式可读性较强，这也为使用者提供了更灵活的处理方式。例如，如果我们不小心错用了 FLUSHALL 命令，在重写还没进行时，我们可以手工将最后的 FLUSHALL 命令去掉，然后再使用 AOF 来恢复数据。</li>
+</ul>
+<p><strong>AOF 的缺点</strong></p>
+<ul>
+<li>对于具有相同数据的的 Redis，AOF 文件通常会比 RDB文件体积更大。</li>
+<li>虽然 AOF 提供了多种同步的频率，默认情况下，每秒同步一次的频率也具有较高的性能。但在 Redis 的负载较高时，RDB 比 AOF 具好更好的性能保证。</li>
+<li>RDB 使用快照的形式来持久化整个 Redis 数据，而 AOF 只是将每次执行的命令追加到 AOF 文件中，因此从理论上说，RDB 比 AOF 方式更健壮。官方文档也指出，AOF 的确也存在一些 BUG，这些 BUG 在 RDB 没有存在。</li>
+</ul>
+</blockquote>
+<h2 id="Redis-VS-memcache"><a href="#Redis-VS-memcache" class="headerlink" title="Redis VS. memcache"></a>Redis VS. memcache</h2><p>1、Redis和Memcache都是将数据存放在内存中。不过memcache还可用于缓存其他东西，例如图片、视频等等</p>
+<p>2、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储。 </p>
+<p>3、虚拟内存–Redis当物理内存用完时，可以将一些很久没用到的value 交换到磁盘 . </p>
+<p>4、过期策略–memcache在set时就指定，例如set key1 0 0 8,即永不过期。Redis可以通过例如expire 设定，例如expire name 10 </p>
+<p>5、分布式–设定memcache集群，利用magent做一主多从;redis可以做一主多从。都可以一主一从 </p>
+<p><strong>6、存储数据安全–memcache挂掉后，数据没了；redis可以定期保存到磁盘（持久化）,支持持久化，服务器重启，缓存依然可以获取。(这个很重要哦)</strong></p>
+<p> 7、灾难恢复–memcache挂掉后，数据不可恢复; redis数据丢失后可以通过aof恢复</p>
+<p> 8、Redis支持数据的备份，即master-slave模式的数据备份。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DataBase/" rel="tag"># DataBase</a>
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/26/java_review_1_20190226/" rel="next" title="Java复习（一）">
+                <i class="fa fa-chevron-left"></i> Java复习（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">rookieChen</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis学习日记（一）"><span class="nav-number">1.</span> <span class="nav-text">Redis学习日记（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-应用场景"><span class="nav-number">1.1.</span> <span class="nav-text">Redis 应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis数据类型简介"><span class="nav-number">1.2.</span> <span class="nav-text">Redis数据类型简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从同步（复制）"><span class="nav-number">1.3.</span> <span class="nav-text">主从同步（复制）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步"><span class="nav-number">1.3.1.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令传播"><span class="nav-number">1.3.2.</span> <span class="nav-text">命令传播</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持久化"><span class="nav-number">1.4.</span> <span class="nav-text">持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快照Snapshotting"><span class="nav-number">1.4.1.</span> <span class="nav-text">快照Snapshotting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF"><span class="nav-number">1.4.2.</span> <span class="nav-text">AOF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-VS-memcache"><span class="nav-number">1.5.</span> <span class="nav-text">Redis VS. memcache</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rookieChen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

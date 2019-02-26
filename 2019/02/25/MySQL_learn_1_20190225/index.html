@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="MySQL学习日记索引：索引在MySQL中也叫做“键”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。 首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都">
+<meta name="description" content="MySQL学习日记(一)索引：索引在MySQL中也叫做“键”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。 首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL的一些学习过程（一）">
 <meta property="og:url" content="http://yoursite.com/2019/02/25/MySQL_learn_1_20190225/index.html">
 <meta property="og:site_name" content="RookieGuy Blog">
-<meta property="og:description" content="MySQL学习日记索引：索引在MySQL中也叫做“键”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。 首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都">
+<meta property="og:description" content="MySQL学习日记(一)索引：索引在MySQL中也叫做“键”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。 首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/MySQL/B+tree.png">
-<meta property="og:updated_time" content="2019-02-25T03:42:26.864Z">
+<meta property="og:updated_time" content="2019-02-26T07:33:01.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的一些学习过程（一）">
-<meta name="twitter:description" content="MySQL学习日记索引：索引在MySQL中也叫做“键”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。 首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都">
+<meta name="twitter:description" content="MySQL学习日记(一)索引：索引在MySQL中也叫做“键”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。 首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数">
 <meta name="twitter:image" content="http://yoursite.com/images/MySQL/B+tree.png">
 
 
@@ -354,7 +354,7 @@
       
 
       
-        <h1 id="MySQL学习日记"><a href="#MySQL学习日记" class="headerlink" title="MySQL学习日记"></a>MySQL学习日记</h1><h2 id="索引："><a href="#索引：" class="headerlink" title="索引："></a>索引：</h2><p>索引在MySQL中也叫做“<strong>键</strong>”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能<br>非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。<br>索引优化应该是<em>对查询性能优化最有效的手段</em>了。索引能够轻易将查询性能提高好几个数量级。</p>
+        <h1 id="MySQL学习日记-一"><a href="#MySQL学习日记-一" class="headerlink" title="MySQL学习日记(一)"></a>MySQL学习日记(一)</h1><h2 id="索引："><a href="#索引：" class="headerlink" title="索引："></a>索引：</h2><p>索引在MySQL中也叫做“<strong>键</strong>”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能<br>非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。<br>索引优化应该是<em>对查询性能优化最有效的手段</em>了。索引能够轻易将查询性能提高好几个数量级。</p>
 <p>首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，<strong>当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都读取到内存缓冲区内</strong>，因为局部预读性原理告诉我们，当计算机访问一个地址的数据的时候，与其相邻的数据也会很快被访问到。每一次IO读取的数据我们称之为一页(page)。具体一页有多大数据跟操作系统有关，一般为4k或8k，也就是我们读取一页内的数据时候，实际上才发生了一次IO，这个理论对于索引的数据结构设计非常有帮助。</p>
 <p><strong>索引的数据结构</strong>：任何一种数据结构都不是凭空产生的，一定会有它的背景和使用场景，我们现在总结一下，我们需要这种数据结构能够做些什么，其实很简单，那就是：每次查找数据时把磁盘IO次数控制在一个很小的数量级，最好是常数数量级。那么我们就想到如果一个高度可控的多路搜索树是否能满足需求呢？就这样，b+树应运而生。</p>
 <p><img src="/images/MySQL/B+tree.png" alt></p>
@@ -363,10 +363,8 @@
 <p>因此，我们可以总结出：</p>
 <blockquote>
 <ol>
-<li><p><strong>索引字段要尽量的小</strong>：通过上面的分析，我们知道IO次数取决于b+数的高度h，假设当前数据表的数据为N，每个磁盘块的数据项的数量是m，则有<br>$$<br>h = \log_mN<br>$$<br>，当数据量N一定的情况下，m越大，h越小；而m = 磁盘块的大小 / 数据项的大小，磁盘块的大小也就是一个数据页的大小，是固定的，如果数据项占的空间越小，数据项的数量越多，树的高度越低。这就是为什么每个数据项，即索引字段要尽量的小，比如int占4字节，要比bigint8字节少一半。这也是为什么b+树要求把真实的数据放到叶子节点而不是内层节点，一旦放到内层节点，磁盘块的数据项会大幅度下降，导致树增高。当数据项等于1时将会退化成线性表。</p>
-</li>
-<li><p><strong>索引的最左匹配特性（即从左往右匹配）</strong>：当b+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性。</p>
-</li>
+<li><strong>索引字段要尽量的小</strong>：通过上面的分析，我们知道IO次数取决于b+数的高度h，假设当前数据表的数据为N，每个磁盘块的数据项的数量是m，则有$$h = \log_mN$$，当数据量N一定的情况下，m越大，h越小；而m = 磁盘块的大小 / 数据项的大小，磁盘块的大小也就是一个数据页的大小，是固定的，如果数据项占的空间越小，数据项的数量越多，树的高度越低。这就是为什么每个数据项，即索引字段要尽量的小，比如int占4字节，要比bigint8字节少一半。这也是为什么b+树要求把真实的数据放到叶子节点而不是内层节点，一旦放到内层节点，磁盘块的数据项会大幅度下降，导致树增高。当数据项等于1时将会退化成线性表。</li>
+<li><strong>索引的最左匹配特性（即从左往右匹配）</strong>：当b+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性。</li>
 </ol>
 </blockquote>
 <p><strong>MySQL的索引分类</strong>:</p>
@@ -419,6 +417,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/java_review_1_20190226/" rel="prev" title="Java复习（一）">
+                Java复习（一） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -495,7 +497,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +519,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -550,7 +552,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL学习日记"><span class="nav-number">1.</span> <span class="nav-text">MySQL学习日记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引："><span class="nav-number">1.1.</span> <span class="nav-text">索引：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL学习日记-一"><span class="nav-number">1.</span> <span class="nav-text">MySQL学习日记(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引："><span class="nav-number">1.1.</span> <span class="nav-text">索引：</span></a></li></ol></li></ol></div>
             
 
           </div>
