@@ -259,6 +259,510 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/sort_20190227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/27/sort_20190227/" itemprop="url">常用的一些简单排序算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>思想：从某个方向两两相邻比较元素的值，若为逆序，则交换。每一轮冒泡完可以保证在第i个位置的元素是正确的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len-<span class="number">1</span>;i&gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasSwap = <span class="keyword">false</span>; <span class="comment">//判断是否进行过交换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span>;j--)&#123;   </span><br><span class="line">             <span class="keyword">if</span>(a[j]&gt;a[j-<span class="number">1</span>])&#123;</span><br><span class="line">            	swap(a[j], a[j-<span class="number">1</span>]);</span><br><span class="line">            	hasSwap = <span class="keyword">true</span>;</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!hasSwap) <span class="keyword">break</span>;  <span class="comment">//如果一次交换都没有，则表示已经有序，直接结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>思想：依次将待排序的目标插入到已经排好序的序列里，直到所有的序列都排好序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i-<span class="number">1</span>]&lt;a[i])&#123;  <span class="comment">//如果待排元素比已排最小元素大，则需要进行排序</span></span><br><span class="line">            <span class="keyword">int</span> temp=a[i];  <span class="comment">//保存待排元素</span></span><br><span class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j=i-<span class="number">1</span>;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            	<span class="keyword">if</span>(a[j]&lt;temp)   <span class="comment">//如果这个位置比待排元素小，后移</span></span><br><span class="line">                    a[j+<span class="number">1</span>]=a[j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>；<span class="comment">//否则，表示找到了位置。</span></span><br><span class="line">        	&#125;</span><br><span class="line">            a[j+<span class="number">1</span>]=temp;<span class="comment">//插入到找到的合适的位置。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>思路：从无序区选择一个最大/最小的元素插入到有序区的最后。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> max=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;len;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j]&gt;a[max])</span><br><span class="line">                max=j;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(a[i],a[max]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><p>思想：让序列基本有序，使用<strong>分组插入排序</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,gap,k;</span><br><span class="line">    <span class="keyword">for</span>(gap=len/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap=gap/<span class="number">2</span>)&#123;  <span class="comment">//确定步长</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;gap;i++)&#123;  <span class="comment">//确定分组个数</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(j=i+gap;j&lt;len;j=j+gap)&#123; <span class="comment">//对每个分组进行插入排序</span></span><br><span class="line">                <span class="keyword">if</span>(a[j]&gt;a[j-gap])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = a[j];</span><br><span class="line">                    <span class="keyword">for</span>(k=j-gap;k&gt;=<span class="number">0</span>;k=k-gap)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(a[k]&lt;temp) a[k+gap]=a[k];</span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    a[k+gap]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>思想：分治法，将数组拆分为n个组排序，然后归并。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> end, <span class="keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/java_learn_IOmodel_20190227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/27/java_learn_IOmodel_20190227/" itemprop="url">Java学习日记（二）：Java 网络IO模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考自<a href="https://blog.csdn.net/szxiaohe/article/details/81542605" target="_blank" rel="noopener">CSDN Simon格子的博文</a>。</p>
+<p>这里本文杜撰了一个大嘴开饭店的故事，来类比Java IO模型的演变，帮助理解几种模型的功能和特点，IO分为磁盘IO和网络IO，本文讨论的都是网络IO。</p>
+<p>爪哇村的大嘴做得一手好菜，原本是和平饭店的厨子，对吃的东西悟性很高，工作之余喜欢研究各种创新菜，最近自创一道麻辣小龙虾，顾客们吃后反响强烈，于是，大嘴想自立门户，专门开店经营小龙虾。</p>
+<p>说干就干，为了方便抓虾，大嘴将饭店开在了河边，并取名“河底捞”。大嘴虽然姓大，但是野心其实并不大，起初，只是想采取日式料理的做法，店里就他自己一个人，晚上抓虾，白天做成麻辣小龙虾，服务客人。</p>
+<p>计划赶不上变化，饭店开张没几天，来吃小龙虾的人越来越多，到饭点时间，大嘴一个人根本忙不过来，实在没办法，于是大嘴找到隔壁张三、李四和王五的老婆，对这3个人讲，到饭点时到他店里来帮忙，主要是帮他当服务员，负责给客人点餐，上菜，结账，清理桌子。大嘴说，来了客人，我就叫你们仨，服务完客人，你们各回各家。于是，我们的BIO通信模型登场了：</p>
+<p><img src="/images/java_io_model/BIO.png" alt></p>
+<p>来一个客人（Web Brower1），大嘴（Acceptor）就去隔壁叫张三（New Thread1），服务完客人，张三就回家。</p>
+<p>来两个客人（Web Brower2），大嘴就去隔壁叫李四（New Thread2），服务完客人，李四就回家。</p>
+<p>来三个客人（Web Brower3），大嘴就去隔壁叫王五的老婆（New Thread3），服务完客人，王五的老婆就回家。</p>
+<p>经营理念就是<strong>一个服务员全程服务好一个客人（connection per thread）</strong>，客人上桌后，服务员就要站在旁边服务，直到客人用餐完毕。美味的小龙虾和良好的用餐体验，吸引越来越多的村民来大嘴店里用餐。随着客户端数量不断增加，BIO通信模型的问题显露无疑：<strong>每一个新客户端接入时，服务端必须创建一个新的线程处理新接入的客户端链路，一个线程只能处理一个客户端连接，在高性能服务领域，需要面对成千上万个客户端并发连接，这种模型无法满足高性能、高并发接入场景。</strong>采用这种模型，要想满足客人用餐需求，再多来一个客人，大嘴得临时叫上赵六，孙七，周八，吴九，郑十，大嘴能叫过来帮忙的邻居就这么几位，叫完就没有了。后面来的客人，大嘴只好让他们回家，改天再来。</p>
+<p>这样下去显然不行，大嘴又找到隔壁张三、李四和王五的老婆，对这3个人讲：以后我不叫你们了，你们每天直接来我店里上班，换上“河底捞”的统一服装，朝九晚五，我给你们开固定工资，这样就节省了你们来来回回的时间，一开始张三和李四不是特别愿意，说要在家陪老婆，但是很快被王五的老婆说服了。<strong>于是有了采用线程池和任务队列的“伪异步IO模型”。</strong></p>
+<p><strong>当有新客户端接入时，将客户端的Socket封装成一个Task，投递到后端线程池中进行处理，线程池维护一个消息队列和N个活跃线程，对消息队列中的任务进行处理。由于线程池可以设置消息队列的大小和最大线程数，因此，资源是可控的，无论多少个客户端并发访问，也不会导致资源耗尽和宕机。</strong></p>
+<p><img src="/images/java_io_model/fake_io.png" alt></p>
+<p>没客人时，张三、李四和王五的老婆都在店里待命，新来了客人，他们仨陆续上去服务，服务完，继续在店里待命，店门口放了5个凳子，供客人等候。这样改进之后，用户体验有了一定提升，但3个服务员在客人用餐时，还是全程陪在桌旁为其服务，用过餐的都夸“河底捞”的服务好。尤其是钱大爷，特别满意“河底捞”的服务，钱大爷爱喝酒，每次用餐要4个小时，王五的老婆在旁边一会上菜，一会倒酒，一会递热毛巾，基本上一天就服务钱大爷这一个客人。当钱大爷这类人来用餐时，外面排队的5个凳子早早就坐满了人，并且后面再来的客人，大嘴只能劝他们改日再来。</p>
+<p>这就是这种“伪异步IO模型”典型的问题，<strong>当可用线程都被故障服务器阻塞时，后续所有的IO消息都将在队列中排队，线程池采用阻塞队列实现，当队列积满后，后续入队的操作将被阻塞，<em>前端只有一个Accept线程接收客户端接入，它被阻塞在线程池的同步阻塞队列之后，新的客户端请求将被拒绝，客户端会发生大量连接超时</em>。</strong></p>
+<p>大嘴很快意识到，“伪异步IO模型”依然极大地限制了客流量，导致后面来的客人怨声载道，村里的林捕头每天下班过来，想要吃一顿小龙虾，发现门口已经排满了人，根本吃不上。林捕头放出风声，说大嘴长期在河边抓虾，可能会破坏村里的生态环境。于是大嘴紧急召集张三、李四和王五的老婆开会，讨论如何让林捕头能够排上队，吃上小龙虾。</p>
+<p>张三曾经在爪哇村村委会干过一段时间码农，他说他知道有一种<strong>NIO模型（非阻塞IO）</strong>，和现在店里的情况很像。几乎所有的网络连接都会经过<strong>“读取请求内容—&gt;解码—&gt;计算处理—&gt;编码—&gt;回复”</strong>，类似于店里<strong>“接待—&gt;找桌—&gt;点菜—&gt;上菜—&gt;结账—&gt;收拾桌子”，每开一个桌子，我们称为开了一个channel，每个桌上放一个灯，当客人有点菜、上菜、结账等服务需求时，点亮灯，我们会有一个全局的管理者selector，会不断地在各个channel轮询（polling），检测是否有灯点亮，如果有灯亮，则通知专门的服务员来进行服务。这就是IO多路复用，IO多路复用可同时监听多个描述符（socket），一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作，<em>IO多路复用避免阻塞在IO上，原本为多线程来接收多个连接的消息变为单线程保存多个socket的状态后轮询处理</em>。</strong></p>
+<p><strong>这种机制也叫做反应器模式（Reactor），Reactor负责响应IO事件（accept，read，send），当检测到一个新的事件，将其发送给相应的Handler去处理。Reactor为单个线程，需要处理accept连接，同时发送请求到Handler中。由于只有单个线程，所以Handler中的业务需要能够快速处理完。</strong></p>
+<p><img src="/images/java_io_model/reactor.png" alt></p>
+<p>于是，大嘴安排张三专职点菜传菜，李四负责上菜结账，王五的老婆负责其他on call的特殊服务，大嘴则负责盯着各个桌上的灯是否亮着，有灯点亮就叫相应的服务员过来处理。这样改进后，效果显著，虽然饭店已经人满为患，门口竟然没有排队的，生意越来越红火。</p>
+<p>改进流程后，服务效率显著提高，店里的客流量继续增长，三个服务员每天忙得不可开交，但对于来个十桌八桌客人，三个服务员基本可以轻松应付。不过在某些情况下，会突然出现人手急剧短缺的情况，这种情况在林捕头就餐时经常发生。林捕头有选择困难症，每次点菜时，要考虑半个小时，并且不让服务员离开，因为他有很多问题向服务员咨询。结账时，因为要拿去衙门报销，需要开发票，又需要服务员帮忙写发票抬头，打印，最后还不忘找服务员要停车票。</p>
+<p><strong>这个问题正好就是NIO模型的缺点，这种模型由于IO在阻塞时会一直等待，因此在用户负载增加时，性能下降的非常快。server导致阻塞的原因有：</strong></p>
+<p><strong>1、serversocket的accept方法，阻塞等待client连接，直到client连接成功。</strong></p>
+<p><strong>2、线程从socket inputstream读入数据，会进入阻塞状态，直到全部数据读完。</strong></p>
+<p><strong>3、线程向socket outputstream写入数据，会阻塞直到全部数据写完</strong></p>
+<p>既然能发现缺点，就有相应的解决办法，聊过非阻塞IO后， 再来看看异步IO（AIO）。 IO方面的概念很多，阻塞性与异步性是其关键概念。简单而言，<strong>凡是需要由应用程序将数据读写到应用程序内存中的IO，都是同步IO，比如上面的BIO与NIO。相对的，凡是由OS来完成读写的，就是异步IO。</strong>这个说法有些迷惑，举例而言，<strong>在NIO中，当应用程序检测到某个Channel有可读数据时，必须显式发起一个read请求。而在异步IO中，应用程序仅仅需要告诉OS，我需要什么数据，并提供给OS一个Buffer和一个回调。OS会自己检测Channel的可读性，当发现其可读，会自动将数据复制到Buffer中，并通知应用程序任务完成。</strong>异步IO的典型实现是NodeJS。显然，由于将任务进一步下发到了OS，应用程序的可伸缩性及性能会大大增强。并且，比起非阻塞的NIO，异步IO编程更加容易一些, 性能也基本上总是优于它。</p>
+<p>有了这一理论基础，可以继续讲大嘴的故事。</p>
+<p>不到一年，小龙虾生意一发不可收拾，店里的营收越来越可观，王五的老婆也用上了iPhoneX和ipad pro，但王五的老婆一直想买一辆BMW，在得知ipad里面有很多点餐的APP后，她对大嘴说：其实咱们店只需要一个服务员就可以了，张三和李四完全是多余的，把他们俩的钱给我，我一个人可以服务所有客人。大嘴表示怀疑：咱们店一天接待几十桌客人，你一个人怎么忙得过来？</p>
+<p>王五的老婆说，咱们店里所有的工作分为两类：</p>
+<p>1.马上就能干完的，例如接待，找座，下单，清理桌子等</p>
+<p>2.需要等别人干完才能干的活，比如点菜（需要顾客想好吃什么），上菜（需要后厨做好），结账（需要顾客确认账单、买单）等。</p>
+<p>对于第1类工作，我马上干活，对于第2类工作，我也不会等待，我只要告诉别人，你弄完了告诉我一声，我会接着干，然后马上去做第1类工作。比如点菜，我只要给客人一个ipad，给完ipad我就立刻离开，客人点完餐后叫我，我只要点确认下单即可。结账时，我只要给客人一张带二维码的消费清单小票，我就立刻离开，客人确认完消费清单，自己扫描二维码进行支付，结账完毕后，叫我过来确认即可，我顺便把桌子打扫了，如果顾客需要发票，可以去前台凭小票自助打印，不需要服务员参与。</p>
+<p>王五的老婆说的这一套，正是jdk7引入的NIO2模型，又叫异步IO（AIO）。为了说明异步IO，用计算机视角再回顾一下店里的服务流程：</p>
+<p><strong>服务员：线程</strong></p>
+<p><strong>顾客：http请求</strong></p>
+<p><strong>后厨做菜，客人吃饭：耗时的IO操作</strong></p>
+<p><strong>后厨大喊一声上菜：这是一个长时间IO操作完成后所发出的事件</strong></p>
+<p><strong>客人说结账：另外一个长时间IO操作完成后所发出的事件</strong></p>
+<p>第一类工作(迎客，找座，下单) : 在服务器端的业务逻辑代码，能够快速执行。</p>
+<p>第二类工作(上菜，结账) : 同样是能快速执行的代码，但是他们需要等待那些耗时的IO 操作完成才能开始，确切的来说，收到了系统发出的事件以后才开始执行。在AIO中实际上是在回调函数中来执行的：</p>
+<p>下面是AIO服务模式的伪代码：</p>
+<p><img src="/images/java_io_model/AIO.png" alt></p>
+<p>后厨处理（）这个函数接受两个参数，一个是事件名，另外一个是匿名的回调函数，事件发生，回调函数才会执行。客人吃饭（）函数也是类似。</p>
+<p>王五的老婆接着说，我的秘诀就是不等待，耗时的操作全部使用异步方式，别人做完了再通知我。大嘴听了目瞪口呆，原来饭店可以这样开，一旦拥有这种服务效率，明年利润再翻一番不是问题，后年可以赴港交所上市了。</p>
+<p>总结上述几种IO模型，将其功能和特性进行对比：</p>
+<p><img src="/images/java_io_model/IOtable.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/java_interview_20190227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/27/java_interview_20190227/" itemprop="url">Java面试小题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这里记录一下Java面试的一些小题目，随心记录。</p>
+<ul>
+<li><p>java中，equals()和==的区别</p>
+<blockquote>
+<p>值类型是存储在内存中的堆栈（以后简称栈），而引用类型的变量在<strong>栈中仅仅是存储引用类型变量的地址</strong>，而其<strong>本身则存储在堆中</strong>。</p>
+<p>==操作比较的是两个变量的值是否相等，对于引用型变量表示的是两个变量本身在<strong>堆中的地址</strong>是否相同，即<strong>栈中的内容</strong>是否相同（是否保存了同一个地址）。</p>
+<p>​    equals操作表示的两个变量是否是对同一个对象的引用，即堆中的内容是否相同。</p>
+<p>​    ==比较的是2个对象的地址，而equals比较的是2个对象的内容。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>sleep()和wait()的区别</p>
+<blockquote>
+<p>sleep()是属于Thread类的。而wait()是Object类的。</p>
+<p>sleep的线程不会施放对象锁，sleep导致了程序暂停执行，指定了时间，让出cpu，但是其监控状态仍然保持，到了指定的时间会恢复执行。</p>
+<p>而wait()调用时会放弃对象锁，进入等待该对象的等待锁定池，只有针对该对象调用notify()方法后本线程才进入等待对象池等待。</p>
+</blockquote>
+</li>
+</ul>
+<p>主要看<a href="https://blog.csdn.net/u012073449/article/details/50986250" target="_blank" rel="noopener">CSDN ALice_yufeng的博客: 阿里JAVA开发面试常问问题总结1</a></p>
+<p><a href="https://blog.csdn.net/u012073449/article/details/50986782" target="_blank" rel="noopener">CSDN ALice_yufeng的博客: 阿里JAVA开发面试常问问题总结2</a></p>
+<p><a href="https://blog.csdn.net/u012073449/article/details/50990546" target="_blank" rel="noopener">CSDN ALice_yufeng的博客: 阿里JAVA开发面试常问问题总结3</a></p>
+<p><a href="https://blog.csdn.net/u012073449/article/details/50992348" target="_blank" rel="noopener">CSDN ALice_yufeng的博客: 阿里JAVA开发面试常问问题总结4</a></p>
+<p><a href="https://blog.csdn.net/u012073449/article/details/50975024" target="_blank" rel="noopener">CSDN ALice_yufeng的博客: Java中几个“区别”总结</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/redis_learn_1_20190226/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -878,451 +1382,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/DB_review_1_20190222/" itemprop="url">数据库基础复习（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据库复习笔记（一）"><a href="#数据库复习笔记（一）" class="headerlink" title="数据库复习笔记（一）"></a>数据库复习笔记（一）</h1><h2 id="1-事务（transaction）"><a href="#1-事务（transaction）" class="headerlink" title="1. 事务（transaction）"></a>1. 事务（transaction）</h2><p><strong>事务</strong>是访问并可能更新数据项的的一个程序执行单元。</p>
-<p>事务具有<strong>ACID</strong>特性：</p>
-<ol>
-<li><p><strong>原子性Atomicity</strong>：事务的所有操作要么<strong>全部正确</strong>反映出来，要么<strong>完全不反应</strong>。</p>
-<blockquote>
-<p>事务如果不成功执行，称为<strong>中止aborted</strong>，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚<strong>rollback</strong>。典型的方法就是维护一个<strong>日志log</strong>。</p>
-</blockquote>
-</li>
-<li><p><strong>一致性Consistency</strong>：事务的一致性指的是在一个事务执行之前和执行之后数据库都必须处于一致性状态。</p>
-<blockquote>
-<p>如果事务成功地完成，那么系统中所有变化将正确地应用，系统处于有效状态。</p>
-<p>如果在事务中出现错误，那么系统中的所有变化将自动地回滚，系统返回到原始状态。</p>
-</blockquote>
-</li>
-<li><p><strong>隔离性Isolation</strong>：尽管多个事务可能并发执行，但是系统保证每个事务都感觉不到系统有其他事务在执行。</p>
-<blockquote>
-<p>指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改它之后的状态，事务不会查看到中间状态的数据。</p>
-</blockquote>
-</li>
-<li><p><strong>持久性Durability</strong>：一个事务一旦完成，它对数据库的改变必须是永久的，即使系统出现故障，也不会因此而失去改动。</p>
-</li>
-</ol>
-<p>在<strong>MySQL</strong>中，事务的ACID由<strong>InnoDB</strong>存储引擎的日志和锁保证的，事务的<strong>隔离性</strong>是通过<strong>数据库锁</strong>的机制实现的，<strong>持久性</strong>通过 <strong>Redo Log（重做日志）</strong>来实现，<strong>原子性和一致性</strong>通过 <strong>Undo Log</strong> 来实现。</p>
-<p><img src="/images/DB/InnoDB_ACID.png" alt></p>
-<blockquote>
-<p><strong>Undo Log</strong> 的原理很简单，为了满足事务的<strong>原子性</strong>，在操作任何数据之前，首先将数据备份到一个地方（这个存储数据备份的地方称为 <strong>Undo Log</strong>）。然后进行数据的修改。</p>
-<p>如果出现了错误或者用户执行了 Rollback 语句，系统可以利用 Undo Log 中的备份将数据恢复到事务开始之前的状态。</p>
-<p>和 Undo Log <strong>相反</strong>，<strong>Redo Log</strong> 记录的是<em>新数据的备份</em>。在事务提交前，只要将 Redo Log 持久化即可，不需要将数据持久化。</p>
-<p>当系统崩溃时，虽然数据没有持久化，<em>但是 Redo Log 已经持久化</em>。系统可以根据 Redo Log 的内容，将所有数据恢复到最新的状态。</p>
-</blockquote>
-<h3 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h3><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
-<p>举个例子，事务A和事务B操纵的是同一个资源，事务A有若干个子事务，事务B也有若干个子事务，事务A和事务B在高并发的情况下，会出现各种各样的问题。总结一下主要就是五种：第一类丢失更新、第二类丢失更新、脏读、不可重复读、幻读。五种之中，第一类丢失更新、第二类丢失更新不重要，不讲了，讲一下脏读、不可重复读和幻读。</p>
-<p><strong>1、脏读</strong></p>
-<blockquote>
-<p>所谓脏读，就是指<strong><u>事务A读到了事务B还没有提交的数据</u></strong>，比如银行取钱，事务A开启事务，此时切换到事务B，事务B开启事务–&gt;取走100元，此时切换回事务A，事务A读取的肯定是数据库里面的原始数据，因为事务B取走了100块钱，并没有提交，数据库里面的账务余额肯定还是原始余额，这就是脏读。</p>
-</blockquote>
-<p><strong>2、不可重复读</strong></p>
-<blockquote>
-<p>所谓不可重复读，就是指<strong><u>在一个事务里面读取了两次某个数据，读出来的数据<em>不一致</em></u></strong>。还是以银行取钱为例，事务A开启事务–&gt;查出银行卡余额为1000元，此时切换到事务B事务B开启事务–&gt;事务B取走100元–&gt;提交，数据库里面余额变为900元，此时切换回事务A，事务A再查一次查出账户余额为900元，这样对事务A而言，在同一个事务内两次读取账户余额数据不一致，这就是不可重复读。</p>
-</blockquote>
-<p><strong>3、幻读</strong></p>
-<blockquote>
-<p>所谓幻读，就是指<strong><u>在一个事务里面的操作中发现了未被操作的数据</u></strong>。比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。<em>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</em></p>
-</blockquote>
-<h3 id="事务隔离级别："><a href="#事务隔离级别：" class="headerlink" title="事务隔离级别："></a>事务隔离级别：</h3><p>事务隔离级别，就是为了解决上面几种问题而诞生的。为什么要有事务隔离级别，因为<strong>事务隔离级别越高，在并发下会产生的问题就越少，但同时付出的性能消耗也将越大</strong>，因此很多时候必须<u>在并发性和性能之间做一个权衡</u>。所以设立了几种事务隔离级别，以便让不同的项目可以根据自己项目的并发情况选择合适的事务隔离级别，对于在事务隔离级别之外会产生的并发问题，在代码中做补偿。</p>
-<p>事务隔离级别有4种，但是像Spring会提供给用户5种，来看一下：</p>
-<p><strong>1、DEFAULT</strong></p>
-<p><strong>默认隔离级别</strong>，每种数据库支持的事务隔离级别不一样，如果Spring配置事务时将isolation设置为这个值的话，那么将使用底层数据库的默认事务隔离级别。顺便说一句，如果使用的MySQL，可以使用”<strong>select @@tx_isolation</strong>“来查看默认的事务隔离级别</p>
-<p><strong>2、未提交读READ_UNCOMMITTED</strong></p>
-<p>未提交读，<strong>即能够读取到没有被提交的数据</strong>，所以很明显这个级别的隔离机制<strong><em>无法解决脏读、不可重复读、幻读中的任何一种</em></strong>，因此很少使用。</p>
-<p><strong>3、已提交读READ_COMMITED</strong></p>
-<p>已提交读，即<strong>能够读到那些已经提交的数据</strong>，<strong><em>自然能够防止脏读，但是无法限制不可重复读和幻读</em></strong>。</p>
-<p><strong>4、可重复读REPEATABLE_READ</strong></p>
-<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决<em>**。</em>是innoDB的默认事务隔离级别。*</p>
-<blockquote>
-<p>READ_COMMITED(RC)和REPEATABLE_READ(RR)是innoDB里面使用范围最广的隔离级别。</p>
-</blockquote>
-<p><strong>5、可串行化SERLALIZABLE</strong></p>
-<p>串行化，最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
-<p><img src="/images/DB/isolation_table.png" alt></p>
-<h3 id="事务隔离技术：MVCC与NEXT-KEY-LOCKING"><a href="#事务隔离技术：MVCC与NEXT-KEY-LOCKING" class="headerlink" title="事务隔离技术：MVCC与NEXT-KEY LOCKING"></a>事务隔离技术：MVCC与NEXT-KEY LOCKING</h3><p><strong>MVCC多版本并发控制（Multiversion Currency Control）</strong>：一般情况下，事务性储存引擎不是只使用表锁，行加锁的处理数据，而是结合了MVCC机制，以处理更多的并发问题。Mvcc处理高并发能力最强，但系统开销比最大（较表锁、行级锁），这是最求高并发付出的代价。</p>
-<blockquote>
-<p><strong>InnoDB实现MVCC的方法是，它存储了每一行的三个额外的隐藏字段:</strong></p>
-<ol>
-<li><p><strong>DB_TRX_ID</strong>：一个6byte的标识，每处理一个事务，其值自动+1<br>#下面提到的“创建时间”和“删除时间”记录的就是这个DB_TRX_ID的值<br>#如insert、update、delete操作时，删除操作用1个bit表示。<br>#<strong>DB_TRX_ID是最重要的一个</strong>，可以通过语句“show engine innodb status”来查找 </p>
-</li>
-<li><p><strong>DB_ROLL_PTR</strong>: 大小是7byte,指向写到rollback segment（回滚段）的一条undo log记录<br> （update操作的话，记录update前的ROW值）</p>
-</li>
-<li><p><strong>DB_ROW_ID</strong>: 大小是6byte,该值随新行插入单调增加</p>
-</li>
-</ol>
-</blockquote>
-<p>MVCC只工作在<strong>REPEATABLE READ</strong>和<strong>READ COMMITED</strong>隔离级别下：</p>
-<blockquote>
-<ol>
-<li>READ UNCOMMITTED ，不适用MVCC读，可以读到其他事务修改甚至未提交的</li>
-<li>READ COMMITTED ，其他事务对数据库的修改,只要已经提交,其修改的结果就是可见的,<br>与这两个事务开始的先后顺序无关，不完全适用于MVCC读，</li>
-<li>REPEATABLE READ，可重复读，完全适用MVCC，只能读取在它开始之前已经提交的事务对数据库的修改,<br>在它开始以后,所有其他事务对数据库的修改对它来说均不可见</li>
-<li>SERIALIZABLE ，完全不适合适用MVCC，这样所有的query都会加锁，再它之后的事务都要等待 </li>
-</ol>
-</blockquote>
-<p><strong>NEXT-KEY LOCKING</strong>：InnoDB中的RR级别作为范围如此广的隔离级别，其通过NEXT-KEY locking技术解决幻读问题，<strong>就是锁住一个范围</strong>：<em>例如：A追求一个女生，使用了NEXT-KEY LOCKING技术，即使得A在追求时要跟女孩说，只要我开始追求你，问了你有没有男朋友，在我结束追求你之前，你不可以答应别人的追求！我要把你脑子里记录男朋友的区域全部锁起来！</em></p>
-<p><img src="/images/DB/nextkeylock.png" alt="幻读问题在RR下的解决"></p>
-<hr>
-<h2 id="2-锁"><a href="#2-锁" class="headerlink" title="2. 锁"></a>2. 锁</h2><p>锁主要为<strong>共享锁</strong>和<strong>排他锁</strong>。</p>
-<p>两段锁协议：两段锁协议规定所有的事务应遵守的规则：<br>　　① 在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁。<br>　　② 在释放一个封锁之后，事务不再申请和获得其它任何封锁。<br>　　即事务的执行分为两个阶段：<br>　　第一阶段是获得封锁的阶段，称为<strong>扩展阶段</strong>。第二阶段是释放封锁的阶段，称为<strong>收缩阶段</strong>。</p>
-<p><strong>悲观锁</strong>：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁。<em>Java里面的同步原语synchronized关键字的实现也是悲观锁。</em></p>
-<p><strong>乐观锁</strong>：顾名思义，就是很乐观，假设认为数据一般情况下不会产生并发冲突，所以在数据进行提交更新的时候，才会正式对数据是否产生并发冲突进行检测，如果发现并发冲突了，则让返回用户错误的信息，让用户决定如何去做，可以使用版本号等机制。乐观锁适用于<strong>多读的应用类型</strong>，这样可以提高吞吐量。</p>
-<blockquote>
-<p>乐观锁的一种实现方式-<strong>CAS(Compare and Swap 比较并交换)</strong>：主要就是两个步骤：<strong>冲突检测</strong>和<strong>数据更新</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>CAS与Synchronized的使用情景：</strong>　</p>
-<ol>
-<li>对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</li>
-<li>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</li>
-</ol>
-</blockquote>
-<p><strong>隐式锁Synchronized</strong>：synchronized是Java的关键字，悲观锁的一种，当它用来修饰一个方法或一个代码块时，能够保证在同一时刻最多只有一个线程执行该代码。因为当调用Synchronized修饰的代码时，并不需要显示的加锁和解锁的过程，所以称之为隐式锁。</p>
-<blockquote>
-<p>synchronized在JVM上实现；针对一个对象。</p>
-</blockquote>
-<p><strong>显式锁Lock</strong>：Lock是一个<strong>接口</strong>，提供了无条件的、可轮询的、定时的、可中断的锁获取操作，所有的加锁和解锁操作方法都是显示的，因而称为显示锁。 主要有以下几个实现类：<em>ReentrantLock</em>（可重入锁）、<em>ReentrantReadWriteLock.ReadLock</em>和<em>ReentrantReadWriteLock.WriteLock</em>。记住，每次上锁，都务必记得解锁。</p>
-<blockquote>
-<p>ReentrantLock和ReentrantReadWriteLock是代码块层面的锁定，而且需要显式的加解锁。</p>
-</blockquote>
-<p><strong>快照读</strong>：读取的是记录数据的可见版本（可能是过期的数据），不用加锁。</p>
-<p><strong>当前读</strong>：读取的是记录数据的最新版本，并且当前读返回的记录都会加上锁，保证其他事务不会再并发的修改这条记录。</p>
-<hr>
-<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。说白了就是<strong>一张数据表的表结构所符合的某种设计标准的级别</strong>。范式级别越高，表的设计就越标准。</p>
-<p><img src="/images/DB/fanshi_relation.png" alt="各范式关系"></p>
-<p><strong>第一范式</strong>：第一范式是数据库表需要符合的最基本条件：表的每一个属性不能是再可分的数据项。</p>
-<p><img src="/images/DB/fanshi_1.jpg" alt></p>
-<p><strong>第二范式</strong>：第二范式就是在第一范式的基础之上消除了非主属性对码的部分依赖 。</p>
-<p><strong>第三范式</strong>：就是在第二范式的基础上再消除了非主属性对码的传递依赖。</p>
-<p><strong>BCNF</strong>：就是在第三范式的基础上消除了主属性对码的部分依赖和传递依赖。</p>
-<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><p><strong>drop，truncate和delete的区别</strong>：</p>
-<blockquote>
-<ol>
-<li>DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。</li>
-</ol>
-<p>​       TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行    是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。</p>
-<ol start="2">
-<li><p>表和索引所占空间。</p>
-<p>当表被TRUNCATE 后，这个表和索引所占用的空间会恢复到初始大小，</p>
-<p>DELETE操作不会减少表或索引所占用的空间。</p>
-</li>
-</ol>
-<p>​       drop语句将表所占用的空间全释放掉。</p>
-<ol start="3">
-<li><p>速度上，一般而言，drop &gt; truncate &gt; delete</p>
-</li>
-<li><p>应用范围。</p>
-<p>TRUNCATE 只能对TABLE；         DELETE可以是table和view</p>
-</li>
-<li><p>TRUNCATE 和DELETE只删除数据， DROP则删除整个表（结构和数据）。</p>
-</li>
-</ol>
-</blockquote>
-<h2 id="视图View"><a href="#视图View" class="headerlink" title="视图View"></a>视图View</h2><p>有时候我们不想用户看到所有的逻辑模型，会使用视图。视图有很多用处，比如一个比较复杂的查询不想每次都写很多语句，就可以写个视图；或者给特定用户开放某些表的读取权限，但要加一些行和列的限制，也可以写个视图。</p>
-<p>视图的好处，可以主要分为四点： </p>
-<ol>
-<li><p>使用视图，可以定制用户数据，<strong>聚焦特定的数据</strong>。  </p>
-<blockquote>
-<p>在实际过程中，公司有不同角色的工作人员，我们以销售公司为例的话，<br>采购人员，可以需要一些与其有关的 数据，而与他无关的数据，对他没<br>有任何意义，我们可以根据这一实际情况，专门为采购人员创建一个视<br>图，以后他在查询数据时，只需select   *   from   view_caigou   就可以啦。 </p>
-</blockquote>
-</li>
-<li><p>使用视图，可以<strong>简化数据操作</strong>。 </p>
-<blockquote>
-<p>我们在使用查询时，在很多时候我们要使用聚合函数，同时还要<br>显示其它字段的信息，可能还会需要关联到其它表，这时写的语句可能<br>会很长很复杂，如果这个动作频繁发生的话，我们可以创建视图，这以后，我<br>们只需要select   *   from   view1就可以啦。 </p>
-</blockquote>
-</li>
-<li><p>使用视图，基表中的数据就有了一定的<strong>安全性</strong> 。</p>
-<blockquote>
-<p>因为视图是虚拟的，物理上是不存在的，只是存储了数据的集合，我们可以<br>将基表中重要的字段信息，可以不通过视图给用户，视图是动态的数据的集<br>合，数据是随着基表的更新而更新。同时，用户对视图，不可以随意的更改<br>和删除，可以保证数据的安全性。 </p>
-</blockquote>
-</li>
-<li><p>可以<strong>合并分离的数据</strong>，创建分区视图。 </p>
-<blockquote>
-<p>随着社会的发展，公司的业务量的不断的扩大，一个大公司，下属都设有很<br>多的分公司，为了管理方便，我们需要统一表的结构，定期查看各公司业务<br>情况，而分别看各个公司的数据很不方便，没有很好的可比性，如果将这些<br>数据合并为一个表格里，就方便多啦，这时我们就可以使用union关键字，<br>将各分公司的数据合并为一个视图。</p>
-</blockquote>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/OS_review_1_20190222/" itemprop="url">操作系统复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="操作系统复习日记"><a href="#操作系统复习日记" class="headerlink" title="操作系统复习日记"></a>操作系统复习日记</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/Lucene_learn_1_20190222/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1761,6 +1820,451 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/22/OS_review_1_20190222/" itemprop="url">操作系统复习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="操作系统复习日记"><a href="#操作系统复习日记" class="headerlink" title="操作系统复习日记"></a>操作系统复习日记</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/22/DB_review_1_20190222/" itemprop="url">数据库基础复习（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数据库复习笔记（一）"><a href="#数据库复习笔记（一）" class="headerlink" title="数据库复习笔记（一）"></a>数据库复习笔记（一）</h1><h2 id="1-事务（transaction）"><a href="#1-事务（transaction）" class="headerlink" title="1. 事务（transaction）"></a>1. 事务（transaction）</h2><p><strong>事务</strong>是访问并可能更新数据项的的一个程序执行单元。</p>
+<p>事务具有<strong>ACID</strong>特性：</p>
+<ol>
+<li><p><strong>原子性Atomicity</strong>：事务的所有操作要么<strong>全部正确</strong>反映出来，要么<strong>完全不反应</strong>。</p>
+<blockquote>
+<p>事务如果不成功执行，称为<strong>中止aborted</strong>，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚<strong>rollback</strong>。典型的方法就是维护一个<strong>日志log</strong>。</p>
+</blockquote>
+</li>
+<li><p><strong>一致性Consistency</strong>：事务的一致性指的是在一个事务执行之前和执行之后数据库都必须处于一致性状态。</p>
+<blockquote>
+<p>如果事务成功地完成，那么系统中所有变化将正确地应用，系统处于有效状态。</p>
+<p>如果在事务中出现错误，那么系统中的所有变化将自动地回滚，系统返回到原始状态。</p>
+</blockquote>
+</li>
+<li><p><strong>隔离性Isolation</strong>：尽管多个事务可能并发执行，但是系统保证每个事务都感觉不到系统有其他事务在执行。</p>
+<blockquote>
+<p>指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改它之后的状态，事务不会查看到中间状态的数据。</p>
+</blockquote>
+</li>
+<li><p><strong>持久性Durability</strong>：一个事务一旦完成，它对数据库的改变必须是永久的，即使系统出现故障，也不会因此而失去改动。</p>
+</li>
+</ol>
+<p>在<strong>MySQL</strong>中，事务的ACID由<strong>InnoDB</strong>存储引擎的日志和锁保证的，事务的<strong>隔离性</strong>是通过<strong>数据库锁</strong>的机制实现的，<strong>持久性</strong>通过 <strong>Redo Log（重做日志）</strong>来实现，<strong>原子性和一致性</strong>通过 <strong>Undo Log</strong> 来实现。</p>
+<p><img src="/images/DB/InnoDB_ACID.png" alt></p>
+<blockquote>
+<p><strong>Undo Log</strong> 的原理很简单，为了满足事务的<strong>原子性</strong>，在操作任何数据之前，首先将数据备份到一个地方（这个存储数据备份的地方称为 <strong>Undo Log</strong>）。然后进行数据的修改。</p>
+<p>如果出现了错误或者用户执行了 Rollback 语句，系统可以利用 Undo Log 中的备份将数据恢复到事务开始之前的状态。</p>
+<p>和 Undo Log <strong>相反</strong>，<strong>Redo Log</strong> 记录的是<em>新数据的备份</em>。在事务提交前，只要将 Redo Log 持久化即可，不需要将数据持久化。</p>
+<p>当系统崩溃时，虽然数据没有持久化，<em>但是 Redo Log 已经持久化</em>。系统可以根据 Redo Log 的内容，将所有数据恢复到最新的状态。</p>
+</blockquote>
+<h3 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h3><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
+<p>举个例子，事务A和事务B操纵的是同一个资源，事务A有若干个子事务，事务B也有若干个子事务，事务A和事务B在高并发的情况下，会出现各种各样的问题。总结一下主要就是五种：第一类丢失更新、第二类丢失更新、脏读、不可重复读、幻读。五种之中，第一类丢失更新、第二类丢失更新不重要，不讲了，讲一下脏读、不可重复读和幻读。</p>
+<p><strong>1、脏读</strong></p>
+<blockquote>
+<p>所谓脏读，就是指<strong><u>事务A读到了事务B还没有提交的数据</u></strong>，比如银行取钱，事务A开启事务，此时切换到事务B，事务B开启事务–&gt;取走100元，此时切换回事务A，事务A读取的肯定是数据库里面的原始数据，因为事务B取走了100块钱，并没有提交，数据库里面的账务余额肯定还是原始余额，这就是脏读。</p>
+</blockquote>
+<p><strong>2、不可重复读</strong></p>
+<blockquote>
+<p>所谓不可重复读，就是指<strong><u>在一个事务里面读取了两次某个数据，读出来的数据<em>不一致</em></u></strong>。还是以银行取钱为例，事务A开启事务–&gt;查出银行卡余额为1000元，此时切换到事务B事务B开启事务–&gt;事务B取走100元–&gt;提交，数据库里面余额变为900元，此时切换回事务A，事务A再查一次查出账户余额为900元，这样对事务A而言，在同一个事务内两次读取账户余额数据不一致，这就是不可重复读。</p>
+</blockquote>
+<p><strong>3、幻读</strong></p>
+<blockquote>
+<p>所谓幻读，就是指<strong><u>在一个事务里面的操作中发现了未被操作的数据</u></strong>。比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。<em>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</em></p>
+</blockquote>
+<h3 id="事务隔离级别："><a href="#事务隔离级别：" class="headerlink" title="事务隔离级别："></a>事务隔离级别：</h3><p>事务隔离级别，就是为了解决上面几种问题而诞生的。为什么要有事务隔离级别，因为<strong>事务隔离级别越高，在并发下会产生的问题就越少，但同时付出的性能消耗也将越大</strong>，因此很多时候必须<u>在并发性和性能之间做一个权衡</u>。所以设立了几种事务隔离级别，以便让不同的项目可以根据自己项目的并发情况选择合适的事务隔离级别，对于在事务隔离级别之外会产生的并发问题，在代码中做补偿。</p>
+<p>事务隔离级别有4种，但是像Spring会提供给用户5种，来看一下：</p>
+<p><strong>1、DEFAULT</strong></p>
+<p><strong>默认隔离级别</strong>，每种数据库支持的事务隔离级别不一样，如果Spring配置事务时将isolation设置为这个值的话，那么将使用底层数据库的默认事务隔离级别。顺便说一句，如果使用的MySQL，可以使用”<strong>select @@tx_isolation</strong>“来查看默认的事务隔离级别</p>
+<p><strong>2、未提交读READ_UNCOMMITTED</strong></p>
+<p>未提交读，<strong>即能够读取到没有被提交的数据</strong>，所以很明显这个级别的隔离机制<strong><em>无法解决脏读、不可重复读、幻读中的任何一种</em></strong>，因此很少使用。</p>
+<p><strong>3、已提交读READ_COMMITED</strong></p>
+<p>已提交读，即<strong>能够读到那些已经提交的数据</strong>，<strong><em>自然能够防止脏读，但是无法限制不可重复读和幻读</em></strong>。</p>
+<p><strong>4、可重复读REPEATABLE_READ</strong></p>
+<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决<em>**。</em>是innoDB的默认事务隔离级别。*</p>
+<blockquote>
+<p>READ_COMMITED(RC)和REPEATABLE_READ(RR)是innoDB里面使用范围最广的隔离级别。</p>
+</blockquote>
+<p><strong>5、可串行化SERLALIZABLE</strong></p>
+<p>串行化，最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
+<p><img src="/images/DB/isolation_table.png" alt></p>
+<h3 id="事务隔离技术：MVCC与NEXT-KEY-LOCKING"><a href="#事务隔离技术：MVCC与NEXT-KEY-LOCKING" class="headerlink" title="事务隔离技术：MVCC与NEXT-KEY LOCKING"></a>事务隔离技术：MVCC与NEXT-KEY LOCKING</h3><p><strong>MVCC多版本并发控制（Multiversion Currency Control）</strong>：一般情况下，事务性储存引擎不是只使用表锁，行加锁的处理数据，而是结合了MVCC机制，以处理更多的并发问题。Mvcc处理高并发能力最强，但系统开销比最大（较表锁、行级锁），这是最求高并发付出的代价。</p>
+<blockquote>
+<p><strong>InnoDB实现MVCC的方法是，它存储了每一行的三个额外的隐藏字段:</strong></p>
+<ol>
+<li><p><strong>DB_TRX_ID</strong>：一个6byte的标识，每处理一个事务，其值自动+1<br>#下面提到的“创建时间”和“删除时间”记录的就是这个DB_TRX_ID的值<br>#如insert、update、delete操作时，删除操作用1个bit表示。<br>#<strong>DB_TRX_ID是最重要的一个</strong>，可以通过语句“show engine innodb status”来查找 </p>
+</li>
+<li><p><strong>DB_ROLL_PTR</strong>: 大小是7byte,指向写到rollback segment（回滚段）的一条undo log记录<br> （update操作的话，记录update前的ROW值）</p>
+</li>
+<li><p><strong>DB_ROW_ID</strong>: 大小是6byte,该值随新行插入单调增加</p>
+</li>
+</ol>
+</blockquote>
+<p>MVCC只工作在<strong>REPEATABLE READ</strong>和<strong>READ COMMITED</strong>隔离级别下：</p>
+<blockquote>
+<ol>
+<li>READ UNCOMMITTED ，不适用MVCC读，可以读到其他事务修改甚至未提交的</li>
+<li>READ COMMITTED ，其他事务对数据库的修改,只要已经提交,其修改的结果就是可见的,<br>与这两个事务开始的先后顺序无关，不完全适用于MVCC读，</li>
+<li>REPEATABLE READ，可重复读，完全适用MVCC，只能读取在它开始之前已经提交的事务对数据库的修改,<br>在它开始以后,所有其他事务对数据库的修改对它来说均不可见</li>
+<li>SERIALIZABLE ，完全不适合适用MVCC，这样所有的query都会加锁，再它之后的事务都要等待 </li>
+</ol>
+</blockquote>
+<p><strong>NEXT-KEY LOCKING</strong>：InnoDB中的RR级别作为范围如此广的隔离级别，其通过NEXT-KEY locking技术解决幻读问题，<strong>就是锁住一个范围</strong>：<em>例如：A追求一个女生，使用了NEXT-KEY LOCKING技术，即使得A在追求时要跟女孩说，只要我开始追求你，问了你有没有男朋友，在我结束追求你之前，你不可以答应别人的追求！我要把你脑子里记录男朋友的区域全部锁起来！</em></p>
+<p><img src="/images/DB/nextkeylock.png" alt="幻读问题在RR下的解决"></p>
+<hr>
+<h2 id="2-锁"><a href="#2-锁" class="headerlink" title="2. 锁"></a>2. 锁</h2><p>锁主要为<strong>共享锁</strong>和<strong>排他锁</strong>。</p>
+<p>两段锁协议：两段锁协议规定所有的事务应遵守的规则：<br>　　① 在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁。<br>　　② 在释放一个封锁之后，事务不再申请和获得其它任何封锁。<br>　　即事务的执行分为两个阶段：<br>　　第一阶段是获得封锁的阶段，称为<strong>扩展阶段</strong>。第二阶段是释放封锁的阶段，称为<strong>收缩阶段</strong>。</p>
+<p><strong>悲观锁</strong>：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁。<em>Java里面的同步原语synchronized关键字的实现也是悲观锁。</em></p>
+<p><strong>乐观锁</strong>：顾名思义，就是很乐观，假设认为数据一般情况下不会产生并发冲突，所以在数据进行提交更新的时候，才会正式对数据是否产生并发冲突进行检测，如果发现并发冲突了，则让返回用户错误的信息，让用户决定如何去做，可以使用版本号等机制。乐观锁适用于<strong>多读的应用类型</strong>，这样可以提高吞吐量。</p>
+<blockquote>
+<p>乐观锁的一种实现方式-<strong>CAS(Compare and Swap 比较并交换)</strong>：主要就是两个步骤：<strong>冲突检测</strong>和<strong>数据更新</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>CAS与Synchronized的使用情景：</strong>　</p>
+<ol>
+<li>对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</li>
+<li>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</li>
+</ol>
+</blockquote>
+<p><strong>隐式锁Synchronized</strong>：synchronized是Java的关键字，悲观锁的一种，当它用来修饰一个方法或一个代码块时，能够保证在同一时刻最多只有一个线程执行该代码。因为当调用Synchronized修饰的代码时，并不需要显示的加锁和解锁的过程，所以称之为隐式锁。</p>
+<blockquote>
+<p>synchronized在JVM上实现；针对一个对象。</p>
+</blockquote>
+<p><strong>显式锁Lock</strong>：Lock是一个<strong>接口</strong>，提供了无条件的、可轮询的、定时的、可中断的锁获取操作，所有的加锁和解锁操作方法都是显示的，因而称为显示锁。 主要有以下几个实现类：<em>ReentrantLock</em>（可重入锁）、<em>ReentrantReadWriteLock.ReadLock</em>和<em>ReentrantReadWriteLock.WriteLock</em>。记住，每次上锁，都务必记得解锁。</p>
+<blockquote>
+<p>ReentrantLock和ReentrantReadWriteLock是代码块层面的锁定，而且需要显式的加解锁。</p>
+</blockquote>
+<p><strong>快照读</strong>：读取的是记录数据的可见版本（可能是过期的数据），不用加锁。</p>
+<p><strong>当前读</strong>：读取的是记录数据的最新版本，并且当前读返回的记录都会加上锁，保证其他事务不会再并发的修改这条记录。</p>
+<hr>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。说白了就是<strong>一张数据表的表结构所符合的某种设计标准的级别</strong>。范式级别越高，表的设计就越标准。</p>
+<p><img src="/images/DB/fanshi_relation.png" alt="各范式关系"></p>
+<p><strong>第一范式</strong>：第一范式是数据库表需要符合的最基本条件：表的每一个属性不能是再可分的数据项。</p>
+<p><img src="/images/DB/fanshi_1.jpg" alt></p>
+<p><strong>第二范式</strong>：第二范式就是在第一范式的基础之上消除了非主属性对码的部分依赖 。</p>
+<p><strong>第三范式</strong>：就是在第二范式的基础上再消除了非主属性对码的传递依赖。</p>
+<p><strong>BCNF</strong>：就是在第三范式的基础上消除了主属性对码的部分依赖和传递依赖。</p>
+<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><p><strong>drop，truncate和delete的区别</strong>：</p>
+<blockquote>
+<ol>
+<li>DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。</li>
+</ol>
+<p>​       TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行    是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。</p>
+<ol start="2">
+<li><p>表和索引所占空间。</p>
+<p>当表被TRUNCATE 后，这个表和索引所占用的空间会恢复到初始大小，</p>
+<p>DELETE操作不会减少表或索引所占用的空间。</p>
+</li>
+</ol>
+<p>​       drop语句将表所占用的空间全释放掉。</p>
+<ol start="3">
+<li><p>速度上，一般而言，drop &gt; truncate &gt; delete</p>
+</li>
+<li><p>应用范围。</p>
+<p>TRUNCATE 只能对TABLE；         DELETE可以是table和view</p>
+</li>
+<li><p>TRUNCATE 和DELETE只删除数据， DROP则删除整个表（结构和数据）。</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="视图View"><a href="#视图View" class="headerlink" title="视图View"></a>视图View</h2><p>有时候我们不想用户看到所有的逻辑模型，会使用视图。视图有很多用处，比如一个比较复杂的查询不想每次都写很多语句，就可以写个视图；或者给特定用户开放某些表的读取权限，但要加一些行和列的限制，也可以写个视图。</p>
+<p>视图的好处，可以主要分为四点： </p>
+<ol>
+<li><p>使用视图，可以定制用户数据，<strong>聚焦特定的数据</strong>。  </p>
+<blockquote>
+<p>在实际过程中，公司有不同角色的工作人员，我们以销售公司为例的话，<br>采购人员，可以需要一些与其有关的 数据，而与他无关的数据，对他没<br>有任何意义，我们可以根据这一实际情况，专门为采购人员创建一个视<br>图，以后他在查询数据时，只需select   *   from   view_caigou   就可以啦。 </p>
+</blockquote>
+</li>
+<li><p>使用视图，可以<strong>简化数据操作</strong>。 </p>
+<blockquote>
+<p>我们在使用查询时，在很多时候我们要使用聚合函数，同时还要<br>显示其它字段的信息，可能还会需要关联到其它表，这时写的语句可能<br>会很长很复杂，如果这个动作频繁发生的话，我们可以创建视图，这以后，我<br>们只需要select   *   from   view1就可以啦。 </p>
+</blockquote>
+</li>
+<li><p>使用视图，基表中的数据就有了一定的<strong>安全性</strong> 。</p>
+<blockquote>
+<p>因为视图是虚拟的，物理上是不存在的，只是存储了数据的集合，我们可以<br>将基表中重要的字段信息，可以不通过视图给用户，视图是动态的数据的集<br>合，数据是随着基表的更新而更新。同时，用户对视图，不可以随意的更改<br>和删除，可以保证数据的安全性。 </p>
+</blockquote>
+</li>
+<li><p>可以<strong>合并分离的数据</strong>，创建分区视图。 </p>
+<blockquote>
+<p>随着社会的发展，公司的业务量的不断的扩大，一个大公司，下属都设有很<br>多的分公司，为了管理方便，我们需要统一表的结构，定期查看各公司业务<br>情况，而分别看各个公司的数据很不方便，没有很好的可比性，如果将这些<br>数据合并为一个表格里，就方便多啦，这时我们就可以使用union关键字，<br>将各分公司的数据合并为一个视图。</p>
+</blockquote>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/maven_learn_2_20190221/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1999,567 +2503,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Solr_learn_2_20190221/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/Solr_learn_2_20190221/" itemprop="url">Solr搜索引擎学习（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T11:11:50+08:00">
-                2019-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/Solr/logo.png" alt="solr"></p>
-<h1 id="Solr的学习日记（二）"><a href="#Solr的学习日记（二）" class="headerlink" title="Solr的学习日记（二）"></a>Solr的学习日记（二）</h1><h2 id="Solr索引"><a href="#Solr索引" class="headerlink" title="Solr索引"></a>Solr索引</h2><p>Solr索引可以接受来自许多不同来源的数据，包括XML文件，逗号分隔值（CSV）文件，从数据库中的表中提取的数据以及常用文件格式（如Microsoft Word或PDF）中的文件。</p>
-<p>以下是将数据加载到Solr索引的三种最常用方法：</p>
-<ul>
-<li>使用基于Apache Tika构建的<a href="https://lucene.apache.org/solr/guide/7_6/uploading-data-with-solr-cell-using-apache-tika.html#uploading-data-with-solr-cell-using-apache-tika" target="_blank" rel="noopener">Solr Cell</a>框架来提取二进制文件或结构化文件，如Office，Word，PDF和其他专有格式。</li>
-<li>通过从可以生成此类请求的任何环境向Solr服务器发送HTTP请求来上载XML文件。</li>
-<li>编写自定义Java应用程序以通过Solr的Java客户端API（在<a href="https://lucene.apache.org/solr/guide/7_6/client-apis.html#client-apis" target="_blank" rel="noopener">客户端API</a>中更详细地描述）来提取数据。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Solr_learn_1_20190221/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/Solr_learn_1_20190221/" itemprop="url">Solr搜索引擎学习（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T10:20:31+08:00">
-                2019-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/Solr/logo.png" alt="solr"></p>
-<h1 id="Solr的学习日记（一）"><a href="#Solr的学习日记（一）" class="headerlink" title="Solr的学习日记（一）"></a>Solr的学习日记（一）</h1><h2 id="Solr引擎"><a href="#Solr引擎" class="headerlink" title="Solr引擎"></a>Solr引擎</h2><blockquote>
-<p>一个基于Apache Lucene的开源的快速的企业搜索引擎。</p>
-</blockquote>
-<p>Solr将数据组织在文档<strong>document</strong>和字段<strong>field</strong>里面；schema.xml是用户手动编辑的模式文件。</p>
-<blockquote class="pullquote"><p>Tips: 字符串<code>solr</code>是<code>org.apache.solr.schema</code>或<code>org.apache.solr.analysis</code>的缩写</p>
-</blockquote>
-<p>以下部分描述了Solr如何分解并处理文本数据。有三个主要概念需要理解：<strong>分析器Analuzer</strong>，<strong>标记器Tokenizer</strong>和<strong>过滤器Filter</strong>。</p>
-<ul>
-<li><p><strong>分析器Analyzer</strong></p>
-<blockquote>
-<p>分析器在输入阶段（建索引阶段）和检索阶段使用。分析器可以是单个类，也可以由一系列标记器和过滤器类组成。</p>
-<p>Analyzer检查输入文本，并生成token流。</p>
-</blockquote>
-<p>Analyzer是schema.xml中<code>&lt;filedType&gt;</code>元素的子元素，在同目录的solrconfig.xml中定义。一般而言，只有<code>solr.TextField</code>或<code>solr.SortableTextField</code>类型的字段可以定义一个Analyzer。</p>
-<ol>
-<li><p>可以通过在<code>&lt;filedType&gt;</code>中使用<code>&lt;anlyzer&gt;</code>元素直接指定，如：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"nametext"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--analyzer必须都继承于org.apache.lucene.analysis.Analyzer--&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">class</span>=<span class="string">"org.apache.lucene.analysis.core.WhitespaceAnalyzer"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>还可以通过子元素定义：（内嵌tokenizer和filter）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"nametext"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">analyzer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">"solr.StandardTokenizerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.LowerCaseFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.StopFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.EnglishPorterFilterFactory"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote class="pullquote"><p>请注意：<code>org.apache.solr.analysis</code>此处的类可以使用速记<code>solr.</code>前缀引用。</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>另外，你可以在index和query两个不同的阶段使用不同的analyzer：</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"nametext"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">type</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">"solr.StandardTokenizerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.LowerCaseFilterFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.KeepWordFilterFactory"</span> <span class="attr">words</span>=<span class="string">"keepwords.txt"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.SynonymFilterFactory"</span> <span class="attr">synonyms</span>=<span class="string">"syns.txt"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">type</span>=<span class="string">"query"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tokenizer</span> <span class="attr">class</span>=<span class="string">"solr.StandardTokenizerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"solr.LowerCaseFilterFactory"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">analyzer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Tokenizer</strong></p>
-<blockquote>
-<p>Tokenizer的工作是将文本流分解为标记，其中每个标记（通常）是文本中字符的子序列。</p>
-</blockquote>
-<p>使用Tokenizer可以丢弃输入流中的字符，例如空格或其他分隔符。它们也可以被添加或替换，例如将别名或缩写映射到规范化形式。除了文本值之外，Token还包含各种元数据，例如Token在字段中出现的位置。</p>
-</li>
-</ul>
-<ul>
-<li><p><strong>Filter</strong></p>
-<blockquote>
-<p>Filter检查，过滤Token流。</p>
-</blockquote>
-<p>Filter的工作比Tokenizer简单，与其类似。Filter的输入是不同的Token流，它的作用是选择更改或者舍弃某些token，如将drove改为drive，将Run改为run。</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/maven_learn_1_20190219/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/20/maven_learn_1_20190219/" itemprop="url">Maven学习（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T11:20:20+08:00">
-                2019-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Maven学习过程（一）"><a href="#Maven学习过程（一）" class="headerlink" title="Maven学习过程（一）"></a>Maven学习过程（一）</h2><p><img src="/images/maven/logo.png"></p>
-<p>Maven 提倡使用一个共同的标准目录结构，Maven 使用约定优于配置的原则，大家尽可能的遵守这样的目录结构。如下所示：</p>
-<table>
-<thead>
-<tr>
-<th>目录</th>
-<th>目的</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>${basedir}</td>
-<td>存放pom.xml和所有的子目录</td>
-</tr>
-<tr>
-<td>${basedir}/src/main/java</td>
-<td>项目的java源代码</td>
-</tr>
-<tr>
-<td>${basedir}/src/main/resources</td>
-<td>项目的资源，比如说property文件，springmvc.xml</td>
-</tr>
-<tr>
-<td>${basedir}/src/test/java</td>
-<td>项目的测试类，比如说Junit代码</td>
-</tr>
-<tr>
-<td>${basedir}/src/test/resources</td>
-<td>测试用的资源</td>
-</tr>
-<tr>
-<td>${basedir}/src/main/webapp/WEB-INF</td>
-<td>web应用文件目录，web项目的信息，比如存放web.xml、本地图片、jsp视图页面</td>
-</tr>
-<tr>
-<td>${basedir}/target</td>
-<td>打包输出目录</td>
-</tr>
-<tr>
-<td>${basedir}/target/classes</td>
-<td>编译输出目录</td>
-</tr>
-<tr>
-<td>${basedir}/target/test-classes</td>
-<td>测试编译输出目录</td>
-</tr>
-<tr>
-<td>Test.java</td>
-<td>Maven只会自动运行符合该命名规则的测试类</td>
-</tr>
-<tr>
-<td>~/.m2/repository</td>
-<td>Maven默认的本地仓库目录位置</td>
-</tr>
-</tbody>
-</table>
-<h2 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h2><p>POM( Project Object Model，项目对象模型 ) 是 Maven 工程的基本工作单元，是一个XML文件，包含了项目的基本信息，用于描述项目如何构建，声明项目依赖，等等。</p>
-<p>执行任务或目标时，Maven 会在当前目录中查找 POM。它读取 POM，获取所需的配置信息，然后执行目标。</p>
-<p>POM 中可以指定以下配置：</p>
-<ul>
-<li>项目依赖 dependencies</li>
-<li>插件 plugins</li>
-<li>执行目标 goals</li>
-<li>项目构建 profile</li>
-<li>项目版本 project version</li>
-<li>项目开发者列表 developers</li>
-<li>相关邮件列表信息 mailing list</li>
-</ul>
-<p>所有 POM 文件都需要 根节点<strong>project 元素</strong>和<strong>三个必需字段</strong>：<strong>groupId</strong>，<strong>artifactId</strong>，<strong>version</strong>。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span> = <span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span> = <span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span> = <span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"> 	<span class="comment">&lt;!-- project为工程的根标签 必须设置--&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="comment">&lt;!-- 模型版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--基础设置--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成， 如com.companyname.project-group，maven会将该项目打成的jar包放本地路径：/com/companyname/project-group --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.companyname.project-group<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">&lt;!-- 项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">&lt;!-- 版本号 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Maven项目构建生命周期"><a href="#Maven项目构建生命周期" class="headerlink" title="Maven项目构建生命周期"></a>Maven项目构建生命周期</h2><div align="left"><br>    <img src="/images/maven/shengmingzhouqi.png"><br></div>
-
-
-
-
-<h2 id="Maven本地仓库"><a href="#Maven本地仓库" class="headerlink" title="Maven本地仓库"></a>Maven本地仓库</h2><p>运行 Maven 的时候，Maven 所需要的任何构件都是<strong>直接从本地仓库</strong>获取的。如果本地仓库没有，它会首先尝试从远程仓库/中央仓库下载构件至本地仓库，然后再使用本地仓库的构件。每个用户在自己的用户目录下都有一个路径名为 <strong>.m2/respository/</strong> 的仓库目录。要修改默认位置，在 <strong>%M2_HOME%\conf</strong> 目录中的 Maven 的 <strong>settings.xml</strong> 文件中定义另一个路径。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0 </span></span></span><br><span class="line"><span class="tag"><span class="string">	http://maven.apache.org/xsd/settings-1.0.0.xsd"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>C:/MyLocalRepository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Maven插件"><a href="#Maven插件" class="headerlink" title="Maven插件"></a>Maven插件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-antrun-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">id</span>&gt;</span>id.clean<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">phase</span>&gt;</span>clean<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>run<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tasks</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">echo</span>&gt;</span>clean phase<span class="tag">&lt;/<span class="name">echo</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tasks</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">execution</span>&gt;</span>     </span><br><span class="line">   <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面的例子展示了以下关键概念：</p>
-<ul>
-<li>插件是在 pom.xml 中使用 plugins 元素定义的。</li>
-<li>每个插件可以有多个目标。</li>
-<li>你可以定义阶段，插件会使用它的 phase 元素开始处理。我们已经使用了 <strong>clean</strong> 阶段。</li>
-<li>你可以通过绑定到插件的目标的方式来配置要执行的任务。我们已经绑定了 <strong>echo</strong> 任务到 maven-antrun-plugin 的 <strong>run</strong> 目标。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2610,7 +2553,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2632,7 +2575,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

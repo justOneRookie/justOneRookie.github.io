@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考自CSDN Simon格子的博文。 这里本文杜撰了一个大嘴开饭店的故事，来类比Java IO模型的演变，帮助理解几种模型的功能和特点，IO分为磁盘IO和网络IO，本文讨论的都是网络IO。 爪哇村的大嘴做得一手好菜，原本是和平饭店的厨子，对吃的东西悟性很高，工作之余喜欢研究各种创新菜，最近自创一道麻辣小龙虾，顾客们吃后反响强烈，于是，大嘴想自立门户，专门开店经营小龙虾。 说干就干，为了方便抓虾，">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习日记（二）：Java 网络IO模型">
+<meta property="og:url" content="http://yoursite.com/2019/02/27/java_learn_IOmodel_20190227/index.html">
+<meta property="og:site_name" content="RookieGuy Blog">
+<meta property="og:description" content="参考自CSDN Simon格子的博文。 这里本文杜撰了一个大嘴开饭店的故事，来类比Java IO模型的演变，帮助理解几种模型的功能和特点，IO分为磁盘IO和网络IO，本文讨论的都是网络IO。 爪哇村的大嘴做得一手好菜，原本是和平饭店的厨子，对吃的东西悟性很高，工作之余喜欢研究各种创新菜，最近自创一道麻辣小龙虾，顾客们吃后反响强烈，于是，大嘴想自立门户，专门开店经营小龙虾。 说干就干，为了方便抓虾，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/java_io_model/BIO.png">
+<meta property="og:image" content="http://yoursite.com/images/java_io_model/fake_io.png">
+<meta property="og:image" content="http://yoursite.com/images/java_io_model/reactor.png">
+<meta property="og:image" content="http://yoursite.com/images/java_io_model/AIO.png">
+<meta property="og:image" content="http://yoursite.com/images/java_io_model/IOtable.png">
+<meta property="og:updated_time" content="2019-02-27T11:38:23.015Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java学习日记（二）：Java 网络IO模型">
+<meta name="twitter:description" content="参考自CSDN Simon格子的博文。 这里本文杜撰了一个大嘴开饭店的故事，来类比Java IO模型的演变，帮助理解几种模型的功能和特点，IO分为磁盘IO和网络IO，本文讨论的都是网络IO。 爪哇村的大嘴做得一手好菜，原本是和平饭店的厨子，对吃的东西悟性很高，工作之余喜欢研究各种创新菜，最近自创一道麻辣小龙虾，顾客们吃后反响强烈，于是，大嘴想自立门户，专门开店经营小龙虾。 说干就干，为了方便抓虾，">
+<meta name="twitter:image" content="http://yoursite.com/images/java_io_model/BIO.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/27/java_learn_IOmodel_20190227/">
+
+
+
+
+
+  <title>Java学习日记（二）：Java 网络IO模型 | RookieGuy Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RookieGuy Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">for better myself</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/java_learn_IOmodel_20190227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java学习日记（二）：Java 网络IO模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考自<a href="https://blog.csdn.net/szxiaohe/article/details/81542605" target="_blank" rel="noopener">CSDN Simon格子的博文</a>。</p>
+<p>这里本文杜撰了一个大嘴开饭店的故事，来类比Java IO模型的演变，帮助理解几种模型的功能和特点，IO分为磁盘IO和网络IO，本文讨论的都是网络IO。</p>
+<p>爪哇村的大嘴做得一手好菜，原本是和平饭店的厨子，对吃的东西悟性很高，工作之余喜欢研究各种创新菜，最近自创一道麻辣小龙虾，顾客们吃后反响强烈，于是，大嘴想自立门户，专门开店经营小龙虾。</p>
+<p>说干就干，为了方便抓虾，大嘴将饭店开在了河边，并取名“河底捞”。大嘴虽然姓大，但是野心其实并不大，起初，只是想采取日式料理的做法，店里就他自己一个人，晚上抓虾，白天做成麻辣小龙虾，服务客人。</p>
+<p>计划赶不上变化，饭店开张没几天，来吃小龙虾的人越来越多，到饭点时间，大嘴一个人根本忙不过来，实在没办法，于是大嘴找到隔壁张三、李四和王五的老婆，对这3个人讲，到饭点时到他店里来帮忙，主要是帮他当服务员，负责给客人点餐，上菜，结账，清理桌子。大嘴说，来了客人，我就叫你们仨，服务完客人，你们各回各家。于是，我们的BIO通信模型登场了：</p>
+<p><img src="/images/java_io_model/BIO.png" alt></p>
+<p>来一个客人（Web Brower1），大嘴（Acceptor）就去隔壁叫张三（New Thread1），服务完客人，张三就回家。</p>
+<p>来两个客人（Web Brower2），大嘴就去隔壁叫李四（New Thread2），服务完客人，李四就回家。</p>
+<p>来三个客人（Web Brower3），大嘴就去隔壁叫王五的老婆（New Thread3），服务完客人，王五的老婆就回家。</p>
+<p>经营理念就是<strong>一个服务员全程服务好一个客人（connection per thread）</strong>，客人上桌后，服务员就要站在旁边服务，直到客人用餐完毕。美味的小龙虾和良好的用餐体验，吸引越来越多的村民来大嘴店里用餐。随着客户端数量不断增加，BIO通信模型的问题显露无疑：<strong>每一个新客户端接入时，服务端必须创建一个新的线程处理新接入的客户端链路，一个线程只能处理一个客户端连接，在高性能服务领域，需要面对成千上万个客户端并发连接，这种模型无法满足高性能、高并发接入场景。</strong>采用这种模型，要想满足客人用餐需求，再多来一个客人，大嘴得临时叫上赵六，孙七，周八，吴九，郑十，大嘴能叫过来帮忙的邻居就这么几位，叫完就没有了。后面来的客人，大嘴只好让他们回家，改天再来。</p>
+<p>这样下去显然不行，大嘴又找到隔壁张三、李四和王五的老婆，对这3个人讲：以后我不叫你们了，你们每天直接来我店里上班，换上“河底捞”的统一服装，朝九晚五，我给你们开固定工资，这样就节省了你们来来回回的时间，一开始张三和李四不是特别愿意，说要在家陪老婆，但是很快被王五的老婆说服了。<strong>于是有了采用线程池和任务队列的“伪异步IO模型”。</strong></p>
+<p><strong>当有新客户端接入时，将客户端的Socket封装成一个Task，投递到后端线程池中进行处理，线程池维护一个消息队列和N个活跃线程，对消息队列中的任务进行处理。由于线程池可以设置消息队列的大小和最大线程数，因此，资源是可控的，无论多少个客户端并发访问，也不会导致资源耗尽和宕机。</strong></p>
+<p><img src="/images/java_io_model/fake_io.png" alt></p>
+<p>没客人时，张三、李四和王五的老婆都在店里待命，新来了客人，他们仨陆续上去服务，服务完，继续在店里待命，店门口放了5个凳子，供客人等候。这样改进之后，用户体验有了一定提升，但3个服务员在客人用餐时，还是全程陪在桌旁为其服务，用过餐的都夸“河底捞”的服务好。尤其是钱大爷，特别满意“河底捞”的服务，钱大爷爱喝酒，每次用餐要4个小时，王五的老婆在旁边一会上菜，一会倒酒，一会递热毛巾，基本上一天就服务钱大爷这一个客人。当钱大爷这类人来用餐时，外面排队的5个凳子早早就坐满了人，并且后面再来的客人，大嘴只能劝他们改日再来。</p>
+<p>这就是这种“伪异步IO模型”典型的问题，<strong>当可用线程都被故障服务器阻塞时，后续所有的IO消息都将在队列中排队，线程池采用阻塞队列实现，当队列积满后，后续入队的操作将被阻塞，<em>前端只有一个Accept线程接收客户端接入，它被阻塞在线程池的同步阻塞队列之后，新的客户端请求将被拒绝，客户端会发生大量连接超时</em>。</strong></p>
+<p>大嘴很快意识到，“伪异步IO模型”依然极大地限制了客流量，导致后面来的客人怨声载道，村里的林捕头每天下班过来，想要吃一顿小龙虾，发现门口已经排满了人，根本吃不上。林捕头放出风声，说大嘴长期在河边抓虾，可能会破坏村里的生态环境。于是大嘴紧急召集张三、李四和王五的老婆开会，讨论如何让林捕头能够排上队，吃上小龙虾。</p>
+<p>张三曾经在爪哇村村委会干过一段时间码农，他说他知道有一种<strong>NIO模型（非阻塞IO）</strong>，和现在店里的情况很像。几乎所有的网络连接都会经过<strong>“读取请求内容—&gt;解码—&gt;计算处理—&gt;编码—&gt;回复”</strong>，类似于店里<strong>“接待—&gt;找桌—&gt;点菜—&gt;上菜—&gt;结账—&gt;收拾桌子”，每开一个桌子，我们称为开了一个channel，每个桌上放一个灯，当客人有点菜、上菜、结账等服务需求时，点亮灯，我们会有一个全局的管理者selector，会不断地在各个channel轮询（polling），检测是否有灯点亮，如果有灯亮，则通知专门的服务员来进行服务。这就是IO多路复用，IO多路复用可同时监听多个描述符（socket），一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作，<em>IO多路复用避免阻塞在IO上，原本为多线程来接收多个连接的消息变为单线程保存多个socket的状态后轮询处理</em>。</strong></p>
+<p><strong>这种机制也叫做反应器模式（Reactor），Reactor负责响应IO事件（accept，read，send），当检测到一个新的事件，将其发送给相应的Handler去处理。Reactor为单个线程，需要处理accept连接，同时发送请求到Handler中。由于只有单个线程，所以Handler中的业务需要能够快速处理完。</strong></p>
+<p><img src="/images/java_io_model/reactor.png" alt></p>
+<p>于是，大嘴安排张三专职点菜传菜，李四负责上菜结账，王五的老婆负责其他on call的特殊服务，大嘴则负责盯着各个桌上的灯是否亮着，有灯点亮就叫相应的服务员过来处理。这样改进后，效果显著，虽然饭店已经人满为患，门口竟然没有排队的，生意越来越红火。</p>
+<p>改进流程后，服务效率显著提高，店里的客流量继续增长，三个服务员每天忙得不可开交，但对于来个十桌八桌客人，三个服务员基本可以轻松应付。不过在某些情况下，会突然出现人手急剧短缺的情况，这种情况在林捕头就餐时经常发生。林捕头有选择困难症，每次点菜时，要考虑半个小时，并且不让服务员离开，因为他有很多问题向服务员咨询。结账时，因为要拿去衙门报销，需要开发票，又需要服务员帮忙写发票抬头，打印，最后还不忘找服务员要停车票。</p>
+<p><strong>这个问题正好就是NIO模型的缺点，这种模型由于IO在阻塞时会一直等待，因此在用户负载增加时，性能下降的非常快。server导致阻塞的原因有：</strong></p>
+<p><strong>1、serversocket的accept方法，阻塞等待client连接，直到client连接成功。</strong></p>
+<p><strong>2、线程从socket inputstream读入数据，会进入阻塞状态，直到全部数据读完。</strong></p>
+<p><strong>3、线程向socket outputstream写入数据，会阻塞直到全部数据写完</strong></p>
+<p>既然能发现缺点，就有相应的解决办法，聊过非阻塞IO后， 再来看看异步IO（AIO）。 IO方面的概念很多，阻塞性与异步性是其关键概念。简单而言，<strong>凡是需要由应用程序将数据读写到应用程序内存中的IO，都是同步IO，比如上面的BIO与NIO。相对的，凡是由OS来完成读写的，就是异步IO。</strong>这个说法有些迷惑，举例而言，<strong>在NIO中，当应用程序检测到某个Channel有可读数据时，必须显式发起一个read请求。而在异步IO中，应用程序仅仅需要告诉OS，我需要什么数据，并提供给OS一个Buffer和一个回调。OS会自己检测Channel的可读性，当发现其可读，会自动将数据复制到Buffer中，并通知应用程序任务完成。</strong>异步IO的典型实现是NodeJS。显然，由于将任务进一步下发到了OS，应用程序的可伸缩性及性能会大大增强。并且，比起非阻塞的NIO，异步IO编程更加容易一些, 性能也基本上总是优于它。</p>
+<p>有了这一理论基础，可以继续讲大嘴的故事。</p>
+<p>不到一年，小龙虾生意一发不可收拾，店里的营收越来越可观，王五的老婆也用上了iPhoneX和ipad pro，但王五的老婆一直想买一辆BMW，在得知ipad里面有很多点餐的APP后，她对大嘴说：其实咱们店只需要一个服务员就可以了，张三和李四完全是多余的，把他们俩的钱给我，我一个人可以服务所有客人。大嘴表示怀疑：咱们店一天接待几十桌客人，你一个人怎么忙得过来？</p>
+<p>王五的老婆说，咱们店里所有的工作分为两类：</p>
+<p>1.马上就能干完的，例如接待，找座，下单，清理桌子等</p>
+<p>2.需要等别人干完才能干的活，比如点菜（需要顾客想好吃什么），上菜（需要后厨做好），结账（需要顾客确认账单、买单）等。</p>
+<p>对于第1类工作，我马上干活，对于第2类工作，我也不会等待，我只要告诉别人，你弄完了告诉我一声，我会接着干，然后马上去做第1类工作。比如点菜，我只要给客人一个ipad，给完ipad我就立刻离开，客人点完餐后叫我，我只要点确认下单即可。结账时，我只要给客人一张带二维码的消费清单小票，我就立刻离开，客人确认完消费清单，自己扫描二维码进行支付，结账完毕后，叫我过来确认即可，我顺便把桌子打扫了，如果顾客需要发票，可以去前台凭小票自助打印，不需要服务员参与。</p>
+<p>王五的老婆说的这一套，正是jdk7引入的NIO2模型，又叫异步IO（AIO）。为了说明异步IO，用计算机视角再回顾一下店里的服务流程：</p>
+<p><strong>服务员：线程</strong></p>
+<p><strong>顾客：http请求</strong></p>
+<p><strong>后厨做菜，客人吃饭：耗时的IO操作</strong></p>
+<p><strong>后厨大喊一声上菜：这是一个长时间IO操作完成后所发出的事件</strong></p>
+<p><strong>客人说结账：另外一个长时间IO操作完成后所发出的事件</strong></p>
+<p>第一类工作(迎客，找座，下单) : 在服务器端的业务逻辑代码，能够快速执行。</p>
+<p>第二类工作(上菜，结账) : 同样是能快速执行的代码，但是他们需要等待那些耗时的IO 操作完成才能开始，确切的来说，收到了系统发出的事件以后才开始执行。在AIO中实际上是在回调函数中来执行的：</p>
+<p>下面是AIO服务模式的伪代码：</p>
+<p><img src="/images/java_io_model/AIO.png" alt></p>
+<p>后厨处理（）这个函数接受两个参数，一个是事件名，另外一个是匿名的回调函数，事件发生，回调函数才会执行。客人吃饭（）函数也是类似。</p>
+<p>王五的老婆接着说，我的秘诀就是不等待，耗时的操作全部使用异步方式，别人做完了再通知我。大嘴听了目瞪口呆，原来饭店可以这样开，一旦拥有这种服务效率，明年利润再翻一番不是问题，后年可以赴港交所上市了。</p>
+<p>总结上述几种IO模型，将其功能和特性进行对比：</p>
+<p><img src="/images/java_io_model/IOtable.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/java_interview_20190227/" rel="next" title="Java面试小题">
+                <i class="fa fa-chevron-left"></i> Java面试小题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/27/sort_20190227/" rel="prev" title="常用的一些简单排序算法">
+                常用的一些简单排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">rookieChen</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rookieChen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
