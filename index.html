@@ -259,157 +259,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/sort_20190227/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/27/sort_20190227/" itemprop="url">常用的一些简单排序算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
-                2019-02-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>思想：从某个方向两两相邻比较元素的值，若为逆序，则交换。每一轮冒泡完可以保证在第i个位置的元素是正确的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len-<span class="number">1</span>;i&gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasSwap = <span class="keyword">false</span>; <span class="comment">//判断是否进行过交换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span>;j--)&#123;   </span><br><span class="line">             <span class="keyword">if</span>(a[j]&gt;a[j-<span class="number">1</span>])&#123;</span><br><span class="line">            	swap(a[j], a[j-<span class="number">1</span>]);</span><br><span class="line">            	hasSwap = <span class="keyword">true</span>;</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!hasSwap) <span class="keyword">break</span>;  <span class="comment">//如果一次交换都没有，则表示已经有序，直接结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>思想：依次将待排序的目标插入到已经排好序的序列里，直到所有的序列都排好序</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i-<span class="number">1</span>]&lt;a[i])&#123;  <span class="comment">//如果待排元素比已排最小元素大，则需要进行排序</span></span><br><span class="line">            <span class="keyword">int</span> temp=a[i];  <span class="comment">//保存待排元素</span></span><br><span class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j=i-<span class="number">1</span>;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            	<span class="keyword">if</span>(a[j]&lt;temp)   <span class="comment">//如果这个位置比待排元素小，后移</span></span><br><span class="line">                    a[j+<span class="number">1</span>]=a[j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>；<span class="comment">//否则，表示找到了位置。</span></span><br><span class="line">        	&#125;</span><br><span class="line">            a[j+<span class="number">1</span>]=temp;<span class="comment">//插入到找到的合适的位置。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>思路：从无序区选择一个最大/最小的元素插入到有序区的最后。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> max=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;len;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j]&gt;a[max])</span><br><span class="line">                max=j;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(a[i],a[max]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><p>思想：让序列基本有序，使用<strong>分组插入排序</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,gap,k;</span><br><span class="line">    <span class="keyword">for</span>(gap=len/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap=gap/<span class="number">2</span>)&#123;  <span class="comment">//确定步长</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;gap;i++)&#123;  <span class="comment">//确定分组个数</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(j=i+gap;j&lt;len;j=j+gap)&#123; <span class="comment">//对每个分组进行插入排序</span></span><br><span class="line">                <span class="keyword">if</span>(a[j]&gt;a[j-gap])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = a[j];</span><br><span class="line">                    <span class="keyword">for</span>(k=j-gap;k&gt;=<span class="number">0</span>;k=k-gap)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(a[k]&lt;temp) a[k+gap]=a[k];</span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    a[k+gap]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>思想：分治法，将数组拆分为n个组排序，然后归并。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> end, <span class="keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/java_learn_IOmodel_20190227/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -549,6 +398,157 @@
 <p>王五的老婆接着说，我的秘诀就是不等待，耗时的操作全部使用异步方式，别人做完了再通知我。大嘴听了目瞪口呆，原来饭店可以这样开，一旦拥有这种服务效率，明年利润再翻一番不是问题，后年可以赴港交所上市了。</p>
 <p>总结上述几种IO模型，将其功能和特性进行对比：</p>
 <p><img src="/images/java_io_model/IOtable.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/sort_20190227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/27/sort_20190227/" itemprop="url">常用的一些简单排序算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>思想：从某个方向两两相邻比较元素的值，若为逆序，则交换。每一轮冒泡完可以保证在第i个位置的元素是正确的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len-<span class="number">1</span>;i&gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasSwap = <span class="keyword">false</span>; <span class="comment">//判断是否进行过交换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span>;j--)&#123;   </span><br><span class="line">             <span class="keyword">if</span>(a[j]&gt;a[j-<span class="number">1</span>])&#123;</span><br><span class="line">            	swap(a[j], a[j-<span class="number">1</span>]);</span><br><span class="line">            	hasSwap = <span class="keyword">true</span>;</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!hasSwap) <span class="keyword">break</span>;  <span class="comment">//如果一次交换都没有，则表示已经有序，直接结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>思想：依次将待排序的目标插入到已经排好序的序列里，直到所有的序列都排好序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i-<span class="number">1</span>]&lt;a[i])&#123;  <span class="comment">//如果待排元素比已排最小元素大，则需要进行排序</span></span><br><span class="line">            <span class="keyword">int</span> temp=a[i];  <span class="comment">//保存待排元素</span></span><br><span class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j=i-<span class="number">1</span>;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            	<span class="keyword">if</span>(a[j]&lt;temp)   <span class="comment">//如果这个位置比待排元素小，后移</span></span><br><span class="line">                    a[j+<span class="number">1</span>]=a[j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>；<span class="comment">//否则，表示找到了位置。</span></span><br><span class="line">        	&#125;</span><br><span class="line">            a[j+<span class="number">1</span>]=temp;<span class="comment">//插入到找到的合适的位置。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>思路：从无序区选择一个最大/最小的元素插入到有序区的最后。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> max=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;len;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j]&gt;a[max])</span><br><span class="line">                max=j;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(a[i],a[max]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><p>思想：让序列基本有序，使用<strong>分组插入排序</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,gap,k;</span><br><span class="line">    <span class="keyword">for</span>(gap=len/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap=gap/<span class="number">2</span>)&#123;  <span class="comment">//确定步长</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;gap;i++)&#123;  <span class="comment">//确定分组个数</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(j=i+gap;j&lt;len;j=j+gap)&#123; <span class="comment">//对每个分组进行插入排序</span></span><br><span class="line">                <span class="keyword">if</span>(a[j]&gt;a[j-gap])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = a[j];</span><br><span class="line">                    <span class="keyword">for</span>(k=j-gap;k&gt;=<span class="number">0</span>;k=k-gap)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(a[k]&lt;temp) a[k+gap]=a[k];</span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    a[k+gap]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>思想：分治法，将数组拆分为n个组排序，然后归并。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> end, <span class="keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1382,444 +1382,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/Lucene_learn_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/Lucene_learn_1_20190222/" itemprop="url">Lucene入门学习及介绍（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/lucene/logo.png" alt="logo"></p>
-<p>学习并转载自：<a href="https://www.cnblogs.com/xiaobai1226/p/7652093.html" target="_blank" rel="noopener">博客园高压锅里的小白-Lucene介绍与入门使用</a></p>
-<h1 id="Lucene简介"><a href="#Lucene简介" class="headerlink" title="Lucene简介"></a>Lucene简介</h1><p>　　Lucene是apache软件基金会4 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了<strong>完整的查询引擎和索引引擎</strong>，<strong>部分文本分析引擎（英文与德文两种西方语言）</strong>。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。Lucene是一套用于全文检索和搜寻的开源程式库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程式接口，能够做全文索引和搜寻。在Java开发环境里Lucene是一个成熟的免费开源工具。就其本身而言，Lucene是当前以及最近几年最受欢迎的免费Java信息检索程序库。<u><em>人们经常提到信息检索程序库，虽然与搜索引擎有关，但不应该将信息检索程序库与搜索引擎相混淆。</em></u></p>
-<h3 id="那么先来说一说什么是全文搜索"><a href="#那么先来说一说什么是全文搜索" class="headerlink" title="　　那么先来说一说什么是全文搜索"></a>　　那么先来说一说什么是全文搜索</h3><p>　　说之前先说一说<strong>数据的分类</strong>：　</p>
-<p>　　　　我们生活中的数据总体分为两种：结构化数据和非结构化数据。</p>
-<p>　　　　（1）<strong>结构化数据</strong>：指具有固定格式或有限长度的数据，如数据库，元数据等。</p>
-<p>　　　　（2）<strong>非结构化数据</strong>：指不定长或无固定格式的数据，如邮件，word文档等磁盘上的文件</p>
-<h2 id="结构化数据查询方法"><a href="#结构化数据查询方法" class="headerlink" title="　　结构化数据查询方法"></a>　　结构化数据查询方法</h2><h3 id="数据库搜索"><a href="#数据库搜索" class="headerlink" title="　　数据库搜索"></a>　　数据库搜索</h3><p>　　数据库中的搜索很容易实现，通常都是使用sql语句进行查询，而且能很快的得到查询结果。</p>
-<p>　　为什么数据库搜索很容易？</p>
-<p>　　因为数据库中的数据存储是有规律的，有行有列而且数据格式、数据长度都是固定的。</p>
-<h2 id="非结构化数据查询方法"><a href="#非结构化数据查询方法" class="headerlink" title="　　非结构化数据查询方法"></a>　　非结构化数据查询方法</h2><p>　　<strong>（1）</strong> <strong>顺序扫描法</strong> <strong>(Serial Scanning)</strong></p>
-<p>　　所谓顺序扫描，比如要找内容包含某一个字符串的文件，就是一个文档一个文档的看，对于每一个文档，从头看到尾，如果此文档包含此字符串，则此文档为我们要找的文件，接着看下一个文件，直到扫描完所有的文件。如利用windows的搜索也可以搜索文件内容，只是<strong>相当的慢</strong>。</p>
-<p>　　<strong>（2）</strong> <strong>全文检索</strong> <strong>(Full-text Search)</strong></p>
-<p>　　将非结构化数据中的一部分信息提取出来，重新组织，使其变得有一定结构，然后对此有一定结构的数据进行搜索，从而达到搜索相对较快的目的。这部分从非结构化数据中提取出的然后重新组织的信息，我们称之<strong>索引</strong>。</p>
-<p>　　<strong>这种先建立索引，再对索引进行搜索的过程就叫全文检索(Full-text Search)。</strong></p>
-<p>　　虽然创建索引的过程也是非常耗时的，但是索引一旦创建就可以多次使用，全文检索主要处理的是查询，所以耗时间创建索引是值得的。</p>
-<h3 id="全文检索的应用场景"><a href="#全文检索的应用场景" class="headerlink" title="　　全文检索的应用场景"></a>　　全文检索的应用场景</h3><p>　　对于数据量大、数据结构不固定的数据可采用全文检索方式搜索，比如百度、Google等搜索引擎、论坛站内搜索、电商网站站内搜索等。</p>
-<h1 id="Lucene实现全文检索的流程"><a href="#Lucene实现全文检索的流程" class="headerlink" title="　　Lucene实现全文检索的流程"></a>　　Lucene实现全文检索的流程</h1><h3 id="索引和搜索流程图"><a href="#索引和搜索流程图" class="headerlink" title="　　索引和搜索流程图"></a>　　索引和搜索流程图</h3><p><img src="/images/lucene/index_search.png" alt></p>
-<p>1、绿色表示索引过程，对要搜索的原始内容进行索引构建一个索引库，索引过程包括：</p>
-<p>　　　　确定原始内容即要搜索的内容→采集文档→创建文档→分析文档→索引文档</p>
-<p>　　2、红色表示搜索过程，从索引库中搜索内容，搜索过程包括：</p>
-<p>　　　　用户通过搜索界面→创建查询→执行搜索，从索引库搜索→渲染搜索结果</p>
-<p>　　接下来详细讲解一下这张图片：　</p>
-<h2 id="1，创建索引"><a href="#1，创建索引" class="headerlink" title="　1，创建索引"></a>　1，创建索引</h2><p>　　对文档索引的过程，将用户要搜索的文档内容进行索引，索引存储在索引库（index）中。</p>
-<p>这里我们要搜索的文档是磁盘上的文本文件，根据案例描述：凡是文件名或文件内容包括关键字的文件都要找出来，这里要对文件名和文件内容创建索引。</p>
-<h3 id="1-1-1-获得原始文档"><a href="#1-1-1-获得原始文档" class="headerlink" title="　　1.1.1.   获得原始文档"></a>　　1.1.1.   获得原始文档</h3><p>　　<strong>原始文档</strong>是指要索引和搜索的内容。原始内容包括互联网上的网页、数据库中的数据、磁盘上的文件等。</p>
-<p>　　从互联网上、数据库、文件系统中等获取需要搜索的原始信息，这个过程就是信息采集，信息采集的目的是为了对原始内容进行索引。在Internet上采集信息的软件通常称为爬虫或蜘蛛，也称为网络机器人，爬虫访问互联网上的每一个网页，将获取到的网页内容存储起来。</p>
-<p>​        Lucene不提供信息采集的类库，需要自己编写一个爬虫程序实现信息采集，也可以通过一些开源软件实现信息采集，如下：</p>
-<p>​         （1）<a href="http://lucene.apache.org/nutch" target="_blank" rel="noopener">Nutch</a>：Nutch是apache的一个子项目，包括大规模爬虫工具，能够抓取和分辨web网站数据。</p>
-<p>​         （2）<a href="http://jsoup.org/" target="_blank" rel="noopener">jsoup</a>：jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。</p>
-<p>​         （3）<a href="http://sourceforge.net/projects/archive-crawler/files/" target="_blank" rel="noopener">Heritrix</a>：Heritrix 是一个由 java 开发的、开源的网络爬虫，用户可以使用它来从网上抓取想要的资源。其最出色之处在于它良好的可扩展性，方便用户实现自己的抓取逻辑。</p>
-<p>　　本案例我们要获取磁盘上文件的内容，可以通过文件流来读取文本文件的内容，对于pdf、doc、xls等文件可通过第三方提供的解析工具读取文件内容，比如Apache POI读取doc和xls的文件内容。 </p>
-<h3 id="1-1-2-创建文档对象"><a href="#1-1-2-创建文档对象" class="headerlink" title="1.1.2.   创建文档对象"></a>1.1.2.   创建文档对象</h3><p>　　获取原始内容的目的是为了索引，在索引前需要将原始内容创建成文档（Document），文档中包括一个一个的域（Field），域中存储内容。</p>
-<p>这里我们可以将磁盘上的一个文件当成一个document，Document中包括一些Field（file_name文件名称、file_path文件路径、file_size文件大小、file_content文件内容）:</p>
-<p><img src="/images/lucene/document_stru.png" alt></p>
-<blockquote>
-<p> 注意：（1）每个Document可以有多个Field</p>
-<p>​            （2）不同的Document可以有不同的Field</p>
-<p>​            （3）同一个Document可以有相同的Field（域名和域值都相同）</p>
-<p>​            （4）每个文档都有一个唯一的编号，就是文档id。</p>
-</blockquote>
-<h3 id="1-1-3-分析文档"><a href="#1-1-3-分析文档" class="headerlink" title="1.1.3.   分析文档"></a>1.1.3.   分析文档</h3><p>　　将原始内容创建为包含域（Field）的文档（document），需要再对域中的内容进行分析，分析的过程是经过对原始文档提取单词、将字母转为小写、去除标点符号、去除停用词等过程生成最终的语汇单元，可以将语汇单元理解为一个一个的单词。每个单词叫做一个<strong>Term</strong>，不同的域中拆分出来的相同的单词是不同的term。term中包含两部分一部分是文档的域名，另一部分是单词的内容。</p>
-<h3 id="1-1-4-创建索引"><a href="#1-1-4-创建索引" class="headerlink" title="1.1.4.   创建索引"></a>1.1.4.   创建索引</h3><p>　　对所有文档分析得出的语汇单元进行索引，索引的目的是为了搜索，最终要实现只搜索被索引的语汇单元从而找到Document（文档）。</p>
-<p><img src="/images/lucene/indexDB_stru.png" alt></p>
-<blockquote>
-<p>注意：（1）创建索引是对语汇单元索引，通过词语找文档，这种索引的结构叫<strong>倒排索引结构</strong>。　　　　　       （2）传统方法是根据文件找到该文件的内容，在文件内容中匹配搜索关键字，这种方法是顺序扫描方法，数据量大、搜索慢。</p>
-<p>​         <strong>（3）倒排索引结构</strong>是根据内容（词语）找文档，<strong>倒排索引结构也叫反向索引结构，包括索引和文档两部分，索引即词汇表，它的规模较小，而文档集合较大。</strong>如下图：</p>
-</blockquote>
-<p><img src="/images/lucene/table.png" alt></p>
-<p><strong>创建索引代码实例：</strong></p>
-<p>　　新建一个Java工程，导入相关的jar包</p>
-<p><img src="/images/lucene/dir_jar.png" alt></p>
-<p>编写创建索引代码</p>
-<p>　　使用indexwriter对象创建索引</p>
-<blockquote>
-<p>　　<strong>具体步骤：</strong></p>
-<p>　　第一步：创建一个indexwriter对象。</p>
-<p>　　　　1）指定索引库的存放位置Directory对象</p>
-<p>　　　　2）指定一个分析器，对文档内容进行分析。</p>
-<p>　　第二步：创建document对象。</p>
-<p>　　第三步：创建field对象，将field添加到document对象中。</p>
-<p>　　第四步：使用indexwriter对象将document对象写入索引库，此过程进行索引创建。并将索引和document对象写入索引库。</p>
-<p>　　第五步：关闭IndexWriter对象。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="comment">//创建索引</span></span><br><span class="line"> <span class="number">2</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreateIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line"> <span class="number">3</span>         <span class="comment">//指定索引库的存放位置Directory对象</span></span><br><span class="line"> <span class="number">4</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">5</span>         <span class="comment">//索引库还可以存放到内存中</span></span><br><span class="line"> <span class="number">6</span>         <span class="comment">//Directory directory = new RAMDirectory();</span></span><br><span class="line"> <span class="number">7</span> </span><br><span class="line"> <span class="number">8</span>         <span class="comment">//指定一个标准分析器，对文档内容进行分析</span></span><br><span class="line"> <span class="number">9</span>         Analyzer analyzer = <span class="keyword">new</span> StandardAnalyzer();</span><br><span class="line"><span class="number">10</span>         </span><br><span class="line"><span class="number">11</span>         <span class="comment">//创建indexwriterCofig对象</span></span><br><span class="line"><span class="number">12</span>         <span class="comment">//第一个参数： Lucene的版本信息，可以选择对应的lucene版本也可以使用LATEST</span></span><br><span class="line"><span class="number">13</span>         <span class="comment">//第二根参数：分析器对象</span></span><br><span class="line"><span class="number">14</span>         IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line"><span class="number">15</span>         </span><br><span class="line"><span class="number">16</span>         <span class="comment">//创建一个indexwriter对象</span></span><br><span class="line"><span class="number">17</span>         IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line"><span class="number">18</span>         </span><br><span class="line"><span class="number">19</span>         <span class="comment">//原始文档的路径</span></span><br><span class="line"><span class="number">20</span>         File file = <span class="keyword">new</span> File(<span class="string">"E:\\programme\\searchsource"</span>);</span><br><span class="line"><span class="number">21</span>         File[] fileList = file.listFiles();</span><br><span class="line"><span class="number">22</span>         <span class="keyword">for</span> (File file2 : fileList) &#123;</span><br><span class="line"><span class="number">23</span>             <span class="comment">//创建document对象</span></span><br><span class="line"><span class="number">24</span>             Document document = <span class="keyword">new</span> Document();</span><br><span class="line"><span class="number">25</span>             </span><br><span class="line"><span class="number">26</span>             <span class="comment">//创建field对象，将field添加到document对象中</span></span><br><span class="line"><span class="number">27</span>             </span><br><span class="line"><span class="number">28</span>             <span class="comment">//文件名称</span></span><br><span class="line"><span class="number">29</span>             String fileName = file2.getName();</span><br><span class="line"><span class="number">30</span>             <span class="comment">//创建文件名域</span></span><br><span class="line"><span class="number">31</span>             <span class="comment">//第一个参数：域的名称</span></span><br><span class="line"><span class="number">32</span>             <span class="comment">//第二个参数：域的内容</span></span><br><span class="line"><span class="number">33</span>             <span class="comment">//第三个参数：是否存储</span></span><br><span class="line"><span class="number">34</span>             Field fileNameField = <span class="keyword">new</span> TextField(<span class="string">"fileName"</span>, fileName, Store.YES);</span><br><span class="line"><span class="number">35</span>             </span><br><span class="line"><span class="number">36</span>             <span class="comment">//文件的大小</span></span><br><span class="line"><span class="number">37</span>             <span class="keyword">long</span> fileSize  = FileUtils.sizeOf(file2);</span><br><span class="line"><span class="number">38</span>             <span class="comment">//文件大小域</span></span><br><span class="line"><span class="number">39</span>             Field fileSizeField = <span class="keyword">new</span> LongField(<span class="string">"fileSize"</span>, fileSize, Store.YES);</span><br><span class="line"><span class="number">40</span>             </span><br><span class="line"><span class="number">41</span>             <span class="comment">//文件路径</span></span><br><span class="line"><span class="number">42</span>             String filePath = file2.getPath();</span><br><span class="line"><span class="number">43</span>             <span class="comment">//文件路径域（不分析、不索引、只存储）</span></span><br><span class="line"><span class="number">44</span>             Field filePathField = <span class="keyword">new</span> StoredField(<span class="string">"filePath"</span>, filePath);</span><br><span class="line"><span class="number">45</span>             </span><br><span class="line"><span class="number">46</span>             <span class="comment">//文件内容</span></span><br><span class="line"><span class="number">47</span>             String fileContent = FileUtils.readFileToString(file2);</span><br><span class="line"><span class="number">48</span>             <span class="comment">//String fileContent = FileUtils.readFileToString(file2, "utf-8");</span></span><br><span class="line"><span class="number">49</span>             <span class="comment">//文件内容域</span></span><br><span class="line"><span class="number">50</span>             Field fileContentField = <span class="keyword">new</span> TextField(<span class="string">"fileContent"</span>, fileContent, Store.YES);</span><br><span class="line"><span class="number">51</span>             </span><br><span class="line"><span class="number">52</span>             document.add(fileNameField);</span><br><span class="line"><span class="number">53</span>             document.add(fileSizeField);</span><br><span class="line"><span class="number">54</span>             document.add(filePathField);</span><br><span class="line"><span class="number">55</span>             document.add(fileContentField);</span><br><span class="line"><span class="number">56</span>             <span class="comment">//使用indexwriter对象将document对象写入索引库，此过程进行索引创建。并将索引和document对象写入索引库。</span></span><br><span class="line"><span class="number">57</span>             indexWriter.addDocument(document);</span><br><span class="line"><span class="number">58</span>         &#125;</span><br><span class="line"><span class="number">59</span>         <span class="comment">//关闭IndexWriter对象。</span></span><br><span class="line"><span class="number">60</span>         indexWriter.close();</span><br><span class="line"><span class="number">61</span>     &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Field域的属性概述"><a href="#Field域的属性概述" class="headerlink" title="Field域的属性概述"></a>Field域的属性概述</h2><p>　　<strong>是否分析</strong>：是否对域的内容进行分词处理。前提是我们要对域的内容进行查询。</p>
-<p>　　<strong>是否索引</strong>：将Field分析后的词或整个Field值进行索引，只有索引方可搜索到。</p>
-<p>　　比如：商品名称、商品简介分析后进行索引，订单号、身份证号不用分析但也要索引，这些将来都要作为查询条件。</p>
-<p>　　<strong>是否存储</strong>：将Field值存储在文档中，存储在文档中的Field才可以从Document中获取</p>
-<p>　　比如：商品名称、订单号，凡是将来要从Document中获取的Field都要存储。</p>
-<p>　　<strong>是否存储的标准：是否要将内容展示给用户</strong></p>
-<table>
-<thead>
-<tr>
-<th>Field类</th>
-<th>数据类型</th>
-<th>Analyzed是否分析</th>
-<th>Indexed是否索引</th>
-<th>Stored是否存储</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>StringField(FieldName, FieldValue,Store.YES))</td>
-<td>字符串</td>
-<td>N</td>
-<td>Y</td>
-<td>Y或N</td>
-<td>这个Field用来构建一个字符串Field，但是不会进行分析，会将整个串存储在索引中，比如(订单号,姓名等)是否存储在文档中用Store.YES或Store.NO决定</td>
-</tr>
-<tr>
-<td>LongField(FieldName, FieldValue,Store.YES)</td>
-<td>Long型</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y或N</td>
-<td>这个Field用来构建一个Long数字型Field，进行分析和索引，比如(价格)是否存储在文档中用Store.YES或Store.NO决定</td>
-</tr>
-<tr>
-<td>StoredField(FieldName, FieldValue)</td>
-<td>重载方法，支持多种类型</td>
-<td>N</td>
-<td>N</td>
-<td>Y</td>
-<td>这个Field用来构建不同类型Field不分析，不索引，但要Field存储在文档中</td>
-</tr>
-<tr>
-<td>TextField(FieldName, FieldValue, Store.NO)或TextField(FieldName, reader)</td>
-<td>字符串或流</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y或N</td>
-<td>如果是一个Reader, lucene猜测内容比较多,会采用Unstored的策略.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="2-查询索引"><a href="#2-查询索引" class="headerlink" title="　　2. 查询索引"></a>　　2. 查询索引</h2><p>　　查询索引也是搜索的过程。搜索就是用户输入关键字，从索引（index）中进行搜索的过程。根据关键字搜索索引，根据索引找到对应的文档，从而找到要搜索的内容（这里指磁盘上的文件）。</p>
-<p>​       对要搜索的信息创建Query查询对象，Lucene会根据Query查询对象生成最终的查询语法，类似关系数据库Sql语法一样Lucene也有自己的查询语法，比如：“name:lucene”表示查询Field的name为“lucene”的文档信息。</p>
-<h3 id="2-1-用户查询接口"><a href="#2-1-用户查询接口" class="headerlink" title="　　2.1.   用户查询接口"></a>　　2.1.   用户查询接口</h3><p>　　全文检索系统提供用户搜索的界面供用户提交搜索的关键字，搜索完成展示搜索结果。</p>
-<p>　　比如： 百度搜索</p>
-<p>　　Lucene不提供制作用户搜索界面的功能，需要根据自己的需求开发搜索界面。</p>
-<h3 id="2-2-创建查询"><a href="#2-2-创建查询" class="headerlink" title="　　2.2.   创建查询"></a>　　2.2.   创建查询</h3><p>　　用户输入查询关键字执行搜索之前需要先构建一个查询对象，查询对象中可以指定查询要搜索的Field文档域、查询关键字等，查询对象会生成具体的查询语法，</p>
-<p>　　例如： 语法 “fileName:lucene”表示要搜索Field域的内容为“lucene”的文档</p>
-<h3 id="2-3-执行查询"><a href="#2-3-执行查询" class="headerlink" title="　　2.3.   执行查询"></a>　　2.3.   执行查询</h3><p>　　搜索索引过程：</p>
-<p>　　根据查询语法在倒排索引词典表中分别找出对应搜索词的索引，从而找到索引所链接的文档链表。</p>
-<p>　　比如搜索语法为“fileName:lucene”表示搜索出fileName域中包含Lucene的文档。</p>
-<p>　　搜索过程就是在索引上查找域为fileName，并且关键字为Lucene的term，并根据term找到文档id列表。</p>
-<p>​       可通过两种方法创建查询对象：</p>
-<p>​         1）使用Lucene提供Query子类</p>
-<p>​         Query是一个抽象类，lucene提供了很多查询对象，比如TermQuery项精确查询，NumericRangeQuery数字范围查询等。</p>
-<p>​         如下代码：</p>
-<p>​    　　Query query = <strong>new</strong> TermQuery(<strong>new</strong> Term(“name”, “lucene”));</p>
-<p>​         2）使用QueryParse解析查询表达式</p>
-<p>​         QueryParse会将用户输入的查询表达式解析成Query对象实例。</p>
-<p>​         如下代码：</p>
-<p>​           QueryParser queryParser = <strong>new</strong> QueryParser(“name”, <strong>new</strong> IKAnalyzer());</p>
-<p>​           Query query = queryParser.parse(“name:lucene”);</p>
-<p> 　　</p>
-<blockquote>
-<p>　　首先，演示第一种方法，<strong>使用query的子类查询</strong></p>
-<p>　　<strong>实现步骤</strong></p>
-<p>　　第一步：创建一个Directory对象，也就是索引库存放的位置。</p>
-<p>　　第二步：创建一个indexReader对象，需要指定Directory对象。</p>
-<p>　　第三步：创建一个indexsearcher对象，需要指定IndexReader对象</p>
-<p>　　第四步：创建一个Query的子类对象，指定查询的域和查询的关键词。</p>
-<p>　　第五步：执行查询。</p>
-<p>　　第六步：返回查询结果。遍历查询结果并输出。</p>
-<p>　　第七步：关闭IndexReader对象</p>
-</blockquote>
-<h3 id="MatchAllDocsQuery"><a href="#MatchAllDocsQuery" class="headerlink" title="　　MatchAllDocsQuery"></a>　　MatchAllDocsQuery</h3><p>　　使用MatchAllDocsQuery查询索引目录中的所有文档</p>
-<p>　　<strong>具体代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMatchAllDocsQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建查询条件</span></span><br><span class="line">    <span class="comment">//使用MatchAllDocsQuery查询索引目录中的所有文档</span></span><br><span class="line">    Query query = <span class="keyword">new</span> MatchAllDocsQuery();</span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="TermQuery（精准查询）"><a href="#TermQuery（精准查询）" class="headerlink" title="　　TermQuery（精准查询）"></a>　　TermQuery（精准查询）</h3><p>　　TermQuery，通过项查询，TermQuery不使用分析器所以建议匹配不分词的Field域查询，比如订单号、分类ID号等。</p>
-<p>指定要查询的域和要查询的关键词。</p>
-<p>　　<strong>具体代码：</strong> </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="comment">//搜索索引</span></span><br><span class="line"> <span class="number">2</span>     <span class="meta">@Test</span></span><br><span class="line"> <span class="number">3</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSearchIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line"> <span class="number">4</span>         <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line"> <span class="number">5</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">6</span>         <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line"> <span class="number">7</span>         IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line"> <span class="number">8</span>         <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line"> <span class="number">9</span>         IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line"><span class="number">10</span>         <span class="comment">//创建一个TermQuery（精准查询）对象，指定查询的域与查询的关键词</span></span><br><span class="line"><span class="number">11</span>         <span class="comment">//创建查询</span></span><br><span class="line"><span class="number">12</span>         Query query = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>));</span><br><span class="line"><span class="number">13</span>         <span class="comment">//执行查询</span></span><br><span class="line"><span class="number">14</span>         <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line"><span class="number">15</span>         TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line"><span class="number">16</span>         <span class="comment">//查询结果的总条数</span></span><br><span class="line"><span class="number">17</span>         System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line"><span class="number">18</span>         <span class="comment">//遍历查询结果</span></span><br><span class="line"><span class="number">19</span>         <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line"><span class="number">20</span>         <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line"><span class="number">21</span>         <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line"><span class="number">22</span>             <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line"><span class="number">23</span>             <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line"><span class="number">24</span>             <span class="comment">//根据document的id找到document对象</span></span><br><span class="line"><span class="number">25</span>             Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line"><span class="number">26</span>             <span class="comment">//文件名称</span></span><br><span class="line"><span class="number">27</span>             System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line"><span class="number">28</span>             <span class="comment">//文件内容</span></span><br><span class="line"><span class="number">29</span>             System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line"><span class="number">30</span>             <span class="comment">//文件大小</span></span><br><span class="line"><span class="number">31</span>             System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line"><span class="number">32</span>             <span class="comment">//文件路径</span></span><br><span class="line"><span class="number">33</span>             System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line"><span class="number">34</span>             System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line"><span class="number">35</span>         &#125;</span><br><span class="line"><span class="number">36</span>         <span class="comment">//关闭indexreader对象</span></span><br><span class="line"><span class="number">37</span>         indexReader.close();</span><br><span class="line"><span class="number">38</span>     &#125;</span><br><span class="line"><span class="number">39</span> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="NumericRangeQuery"><a href="#NumericRangeQuery" class="headerlink" title="　　NumericRangeQuery"></a>　　NumericRangeQuery</h3><p>　　可以根据数值范围查询。</p>
-<p>　　<strong>具体代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数值范围查询</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNumericRangeQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建查询</span></span><br><span class="line">    <span class="comment">//参数：</span></span><br><span class="line">    <span class="comment">//1.域名</span></span><br><span class="line">    <span class="comment">//2.最小值</span></span><br><span class="line">    <span class="comment">//3.最大值</span></span><br><span class="line">    <span class="comment">//4.是否包含最小值</span></span><br><span class="line">    <span class="comment">//5.是否包含最大值</span></span><br><span class="line">    Query query = NumericRangeQuery.newLongRange(<span class="string">"fileSize"</span>, <span class="number">41L</span>, <span class="number">2055L</span>, <span class="keyword">true</span>, <span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="BooleanQuery"><a href="#BooleanQuery" class="headerlink" title="　　BooleanQuery"></a>　　BooleanQuery</h3><p>　　可以组合查询条件。</p>
-<p>　　<strong>具体代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//组合条件查询</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testBooleanQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建一个布尔查询对象</span></span><br><span class="line">    BooleanQuery query = <span class="keyword">new</span> BooleanQuery();</span><br><span class="line">    <span class="comment">//创建第一个查询条件</span></span><br><span class="line">    Query query1 = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>));</span><br><span class="line">    Query query2 = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"lucene"</span>));</span><br><span class="line">    <span class="comment">//组合查询条件</span></span><br><span class="line">    query.add(query1, Occur.MUST);</span><br><span class="line">    query.add(query2, Occur.MUST);</span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　　Occur.MUST：必须满足此条件，相当于and</p>
-<p>　　Occur.SHOULD：应该满足，但是不满足也可以，相当于or</p>
-<p>　　Occur.MUST_NOT：必须不满足。相当于not</p>
-<p>　　接着，演示第二种方法：<strong>使用queryparser查询</strong></p>
-<p>　　通过QueryParser也可以创建Query，QueryParser提供一个Parse方法，此方法可以直接根据查询语法来查询。Query对象执行的查询语法可通过System.out.println(query);查询。</p>
-<p>　　这个操作需要使用到分析器。建议创建索引时使用的分析器和查询索引时使用的分析器要一致。</p>
-<p>　　<strong>queryparser</strong></p>
-<p>　　**具体代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryParser</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建queryparser对象</span></span><br><span class="line">    <span class="comment">//第一个参数默认搜索的域</span></span><br><span class="line">    <span class="comment">//第二个参数就是分析器对象</span></span><br><span class="line">    QueryParser queryParser = <span class="keyword">new</span> QueryParser(<span class="string">"fileName"</span>, <span class="keyword">new</span> IKAnalyzer());</span><br><span class="line">    <span class="comment">//使用默认的域,这里用的是语法，下面会详细讲解一下</span></span><br><span class="line">    Query query = queryParser.parse(<span class="string">"apache"</span>);</span><br><span class="line">    <span class="comment">//不使用默认的域，可以自己指定域</span></span><br><span class="line">    <span class="comment">//Query query = queryParser.parse("fileContent:apache");</span></span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="查询语法"><a href="#查询语法" class="headerlink" title="　　查询语法"></a>　　查询语法</h4><p>　　1、基础的查询语法，关键词查询：</p>
-<p>　　　　域名+“：”+搜索的关键字</p>
-<p>　　　　例如：content:java</p>
-<p>　　2、范围查询</p>
-<p>　　　　域名+“:”+[最小值 TO 最大值]</p>
-<p>　　　　例如：size:[1 TO 1000]</p>
-<p>　　　　范围查询在lucene中支持数值类型，不支持字符串类型。在solr中支持字符串类型。</p>
-<p>　　3、组合条件查询</p>
-<p>　　　　1）+条件1 +条件2：两个条件之间是并且的关系and</p>
-<p>　　　　　　例如：+filename:apache +content:apache</p>
-<p>　　　　2）+条件1 条件2：必须满足第一个条件，应该满足第二个条件</p>
-<p>　　　　　　例如：+filename:apache content:apache</p>
-<p>　　　　3）条件1 条件2：两个条件满足其一即可。</p>
-<p>　　　　　　例如：filename:apache content:apache</p>
-<p>　　　　4）-条件1 条件2：必须不满足条件1，要满足条件2</p>
-<p>　　　　　　例如：-filename:apache content:apache</p>
-<table>
-<thead>
-<tr>
-<th>Occur.MUST 查询条件必须满足，相当于and</th>
-<th>+（加号）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Occur.SHOULD 查询条件可选，相当于or</td>
-<td>空（不用符号）</td>
-</tr>
-<tr>
-<td>Occur.MUST_NOT 查询条件不能满足，相当于not非</td>
-<td>-（减号）</td>
-</tr>
-</tbody>
-</table>
-<p>　　第二种写法：</p>
-<p>　　条件1 AND 条件2</p>
-<p>　　条件1 OR 条件2</p>
-<p>　　条件1 NOT 条件2</p>
-<h3 id="MultiFieldQueryParser"><a href="#MultiFieldQueryParser" class="headerlink" title="　　MultiFieldQueryParser"></a>　　MultiFieldQueryParser</h3><p>　　可以指定多个默认搜索域</p>
-<p>　　**具体代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="meta">@Test</span></span><br><span class="line"> <span class="number">2</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMultiFiledQueryParser</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> <span class="number">3</span>         <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line"> <span class="number">4</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">5</span>         <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line"> <span class="number">6</span>         IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line"> <span class="number">7</span>         <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line"> <span class="number">8</span>         IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line"> <span class="number">9</span>         </span><br><span class="line"><span class="number">10</span>         <span class="comment">//可以指定默认搜索的域是多个</span></span><br><span class="line"><span class="number">11</span>         String[] fields = &#123;<span class="string">"fileName"</span>, <span class="string">"fileContent"</span>&#125;;</span><br><span class="line"><span class="number">12</span>         <span class="comment">//创建一个MulitFiledQueryParser对象</span></span><br><span class="line"><span class="number">13</span>         MultiFieldQueryParser queryParser = <span class="keyword">new</span> MultiFieldQueryParser(fields, <span class="keyword">new</span> IKAnalyzer());</span><br><span class="line"><span class="number">14</span>         Query query = queryParser.parse(<span class="string">"apache"</span>);</span><br><span class="line"><span class="number">15</span>         System.out.println(query);</span><br><span class="line"><span class="number">16</span>         <span class="comment">//执行查询</span></span><br><span class="line"><span class="number">17</span> </span><br><span class="line"><span class="number">18</span> </span><br><span class="line"><span class="number">19</span>         <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line"><span class="number">20</span>         TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line"><span class="number">21</span>         </span><br><span class="line"><span class="number">22</span>         <span class="comment">//查询结果的总条数</span></span><br><span class="line"><span class="number">23</span>         System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line"><span class="number">24</span>         <span class="comment">//遍历查询结果</span></span><br><span class="line"><span class="number">25</span>         <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line"><span class="number">26</span>         <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line"><span class="number">27</span>         <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line"><span class="number">28</span>             <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line"><span class="number">29</span>             <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line"><span class="number">30</span>             <span class="comment">//根据document的id找到document对象</span></span><br><span class="line"><span class="number">31</span>             Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line"><span class="number">32</span>             <span class="comment">//文件名称</span></span><br><span class="line"><span class="number">33</span>             System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line"><span class="number">34</span>             <span class="comment">//文件内容</span></span><br><span class="line"><span class="number">35</span>             System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line"><span class="number">36</span>             <span class="comment">//文件大小</span></span><br><span class="line"><span class="number">37</span>             System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line"><span class="number">38</span>             <span class="comment">//文件路径</span></span><br><span class="line"><span class="number">39</span>             System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line"><span class="number">40</span>             System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line"><span class="number">41</span>         &#125;</span><br><span class="line"><span class="number">42</span>         <span class="comment">//关闭indexreader对象</span></span><br><span class="line"><span class="number">43</span>         indexReader.close();</span><br><span class="line"><span class="number">44</span>     &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="IndexSearcher搜索方法"><a href="#IndexSearcher搜索方法" class="headerlink" title="IndexSearcher搜索方法"></a>IndexSearcher搜索方法</h2><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>indexSearcher.search(query, n)</td>
-<td>根据Query搜索，返回评分最高的n条记录</td>
-</tr>
-<tr>
-<td>indexSearcher.search(query, filter, n)</td>
-<td>根据Query搜索，添加过滤策略，返回评分最高的n条记录</td>
-</tr>
-<tr>
-<td>indexSearcher.search(query, n, sort)</td>
-<td>根据Query搜索，添加排序策略，返回评分最高的n条记录</td>
-</tr>
-<tr>
-<td>indexSearcher.search(booleanQuery, filter, n, sort)</td>
-<td>根据Query搜索，添加过滤策略，添加排序策略，返回评分最高的n条记录</td>
-</tr>
-</tbody>
-</table>
-<h2 id="TopDocs"><a href="#TopDocs" class="headerlink" title="　　TopDocs"></a>　　TopDocs</h2><p>　　Lucene搜索结果可通过TopDocs遍历，TopDocs类提供了少量的属性，如下：</p>
-<table>
-<thead>
-<tr>
-<th>方法或属性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>totalHits</td>
-<td>匹配搜索条件的总记录数</td>
-</tr>
-<tr>
-<td>scoreDocs</td>
-<td>顶部匹配记录</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>　　注意：</p>
-<p>　　　　（1）Search方法需要指定匹配记录数量n：indexSearcher.search(query, n)</p>
-<p>　　　　（2）TopDocs.totalHits：是匹配索引库中所有记录的数量</p>
-<p>　　　　（3）TopDocs.scoreDocs：匹配相关度高的前边记录数组，scoreDocs的长度小于等于search方法指定的参数n</p>
-</blockquote>
-<p>　　</p>
-<p>　　<strong>中文分词器 ：</strong></p>
-<p>　　首先，看一看Lucene自带的中文分词器</p>
-<p>　　（1）<strong>StandardAnalyzer</strong>：（标准分词器，也是前面例子中使用的分词器）</p>
-<p>　　　　单字分词：就是按照中文一个字一个字地进行分词。</p>
-<p>　　　　如：“我爱中国”，<br>　　　　效果：“我”、“爱”、“中”、“国”。</p>
-<p>　　（2）<strong>CJKAnalyzer</strong></p>
-<p>　　　　二分法分词：按两个字进行切分。</p>
-<p>　　　　如：“我是中国人”，</p>
-<p>　　　　效果：“我是”、“是中”、“中国”“国人”。</p>
-<p>　　<strong>但上边两个分词器无法满足需求。</strong></p>
-<p>　　（3）SmartChineseAnalyzer</p>
-<p>　　　　对中文支持较好，但扩展性差，扩展词库，禁用词库和同义词库等不好处理</p>
-<p>　　然后，看一看我们开发真正使用的<strong>第三方中文分词器：</strong></p>
-<p>　　我们今天介绍<strong>IK-analyzer</strong>这款第三方中文分词器</p>
-<p>　　<a href="https://code.google.com/p/ik-analyzer/" target="_blank" rel="noopener">IK-analyzer</a>，支持Lucene 4.10从2006年12月推出1.0版开始，IKAnalyzer已经推出了4个大版本。最初，它是以开源项目Luence为应用主体的，结合词典分词和文法分析算法的中文分词组件。从3.0版本开 始，IK发展为面向Java的公用分词组件，独立于Lucene项目，同时提供了对Lucene的默认优化实现。在2012版本中，IK实现了简单的分词 歧义排除算法，标志着IK分词器从单纯的词典分词向模拟语义分词衍化。 但是也就是2012年12月后没有再更新。　</p>
-<p>　　<strong>使用方法：</strong></p>
-<p>　　第一步：把jar包添加到工程中</p>
-<p>　　第二步：把<strong>配置文件</strong>和<strong>扩展词词典</strong>和<strong>停用词词典</strong>添加到classpath下（停用词词典与扩展词词典名称可自行定义，只要在配置文件中配置好就可以了）</p>
-<p><img src="/images/lucene/dic.png" alt></p>
-<p>注意：<strong>扩展词词典</strong>和<strong>停用词词典</strong>文件的格式为UTF-8，注意是<strong>无BOM 的UTF-8 编码</strong>。</p>
-<p>　　配置文件详情</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">comment</span>&gt;</span>IK Analyzer 扩展配置<span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--用户可以在这里配置自己的扩展字典 --&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"ext_dict"</span>&gt;</span>ext.dic;<span class="tag">&lt;/<span class="name">entry</span>&gt;</span> </span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--用户可以在这里配置自己的扩展停止词字典--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"ext_stopwords"</span>&gt;</span>stopword.dic;<span class="tag">&lt;/<span class="name">entry</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这样，创建分析器时，用一下代码就好了:<code>Analyzer analyzer = new IKAnalyzer();</code></p>
-<p>　　<strong>注意：搜索使用的分析器要和索引使用的分析器一致，不然搜索出来结果可能会错乱。</strong></p>
-<h2 id="3-删除索引"><a href="#3-删除索引" class="headerlink" title="　　3. 删除索引"></a>　　3. 删除索引</h2><p>（1）删除全部索引</p>
-<p>　　说明：将索引目录的索引信息全部删除，直接彻底删除，无法恢复。<strong>此方法慎用！！</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="comment">//删除全部索引</span></span><br><span class="line"> <span class="number">2</span>     <span class="meta">@Test</span></span><br><span class="line"> <span class="number">3</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDeleteAllIndex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> <span class="number">4</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">5</span>         Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line"> <span class="number">6</span>         IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line"> <span class="number">7</span>         IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line"> <span class="number">8</span>         <span class="comment">//删除全部索引</span></span><br><span class="line"> <span class="number">9</span>         indexWriter.deleteAll();</span><br><span class="line"><span class="number">10</span>         <span class="comment">//关闭indexwriter</span></span><br><span class="line"><span class="number">11</span>         indexWriter.close();</span><br><span class="line"><span class="number">12</span>     &#125;</span><br></pre></td></tr></table></figure>
-<p>　　（2）指定查询条件删除</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据查询条件删除索引</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteIndexByQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line">    IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line">    <span class="comment">//创建一个查询条件</span></span><br><span class="line">    Query query = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileContent"</span>, <span class="string">"apache"</span>));</span><br><span class="line">    <span class="comment">//根据查询条件删除</span></span><br><span class="line">    indexWriter.deleteDocuments(query);</span><br><span class="line">    <span class="comment">//关闭indexwriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-索引库的修改"><a href="#4-索引库的修改" class="headerlink" title="　　4 索引库的修改"></a>　　4 索引库的修改</h2><p>　　更新的原理就是先删除在添加</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改索引库</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateIndex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line">    IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line">    <span class="comment">//创建一个Document对象</span></span><br><span class="line">    Document document = <span class="keyword">new</span> Document();</span><br><span class="line">    <span class="comment">//向document对象中添加域。</span></span><br><span class="line">    <span class="comment">//不同的document可以有不同的域，同一个document可以有相同的域。</span></span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"fileXXX"</span>, <span class="string">"要更新的文档"</span>, Store.YES));</span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"contentYYY"</span>, <span class="string">"简介 Lucene 是一个基于 Java 的全文信息检索工具包。"</span>, Store.YES));</span><br><span class="line">    indexWriter.updateDocument(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>), document);</span><br><span class="line">    <span class="comment">//关闭indexWriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 　　这样，Lucene的简单介绍使用就完成了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2217,6 +1779,444 @@
 </blockquote>
 </li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/Lucene_learn_1_20190222/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/22/Lucene_learn_1_20190222/" itemprop="url">Lucene入门学习及介绍（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/lucene/logo.png" alt="logo"></p>
+<p>学习并转载自：<a href="https://www.cnblogs.com/xiaobai1226/p/7652093.html" target="_blank" rel="noopener">博客园高压锅里的小白-Lucene介绍与入门使用</a></p>
+<h1 id="Lucene简介"><a href="#Lucene简介" class="headerlink" title="Lucene简介"></a>Lucene简介</h1><p>　　Lucene是apache软件基金会4 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了<strong>完整的查询引擎和索引引擎</strong>，<strong>部分文本分析引擎（英文与德文两种西方语言）</strong>。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。Lucene是一套用于全文检索和搜寻的开源程式库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程式接口，能够做全文索引和搜寻。在Java开发环境里Lucene是一个成熟的免费开源工具。就其本身而言，Lucene是当前以及最近几年最受欢迎的免费Java信息检索程序库。<u><em>人们经常提到信息检索程序库，虽然与搜索引擎有关，但不应该将信息检索程序库与搜索引擎相混淆。</em></u></p>
+<h3 id="那么先来说一说什么是全文搜索"><a href="#那么先来说一说什么是全文搜索" class="headerlink" title="　　那么先来说一说什么是全文搜索"></a>　　那么先来说一说什么是全文搜索</h3><p>　　说之前先说一说<strong>数据的分类</strong>：　</p>
+<p>　　　　我们生活中的数据总体分为两种：结构化数据和非结构化数据。</p>
+<p>　　　　（1）<strong>结构化数据</strong>：指具有固定格式或有限长度的数据，如数据库，元数据等。</p>
+<p>　　　　（2）<strong>非结构化数据</strong>：指不定长或无固定格式的数据，如邮件，word文档等磁盘上的文件</p>
+<h2 id="结构化数据查询方法"><a href="#结构化数据查询方法" class="headerlink" title="　　结构化数据查询方法"></a>　　结构化数据查询方法</h2><h3 id="数据库搜索"><a href="#数据库搜索" class="headerlink" title="　　数据库搜索"></a>　　数据库搜索</h3><p>　　数据库中的搜索很容易实现，通常都是使用sql语句进行查询，而且能很快的得到查询结果。</p>
+<p>　　为什么数据库搜索很容易？</p>
+<p>　　因为数据库中的数据存储是有规律的，有行有列而且数据格式、数据长度都是固定的。</p>
+<h2 id="非结构化数据查询方法"><a href="#非结构化数据查询方法" class="headerlink" title="　　非结构化数据查询方法"></a>　　非结构化数据查询方法</h2><p>　　<strong>（1）</strong> <strong>顺序扫描法</strong> <strong>(Serial Scanning)</strong></p>
+<p>　　所谓顺序扫描，比如要找内容包含某一个字符串的文件，就是一个文档一个文档的看，对于每一个文档，从头看到尾，如果此文档包含此字符串，则此文档为我们要找的文件，接着看下一个文件，直到扫描完所有的文件。如利用windows的搜索也可以搜索文件内容，只是<strong>相当的慢</strong>。</p>
+<p>　　<strong>（2）</strong> <strong>全文检索</strong> <strong>(Full-text Search)</strong></p>
+<p>　　将非结构化数据中的一部分信息提取出来，重新组织，使其变得有一定结构，然后对此有一定结构的数据进行搜索，从而达到搜索相对较快的目的。这部分从非结构化数据中提取出的然后重新组织的信息，我们称之<strong>索引</strong>。</p>
+<p>　　<strong>这种先建立索引，再对索引进行搜索的过程就叫全文检索(Full-text Search)。</strong></p>
+<p>　　虽然创建索引的过程也是非常耗时的，但是索引一旦创建就可以多次使用，全文检索主要处理的是查询，所以耗时间创建索引是值得的。</p>
+<h3 id="全文检索的应用场景"><a href="#全文检索的应用场景" class="headerlink" title="　　全文检索的应用场景"></a>　　全文检索的应用场景</h3><p>　　对于数据量大、数据结构不固定的数据可采用全文检索方式搜索，比如百度、Google等搜索引擎、论坛站内搜索、电商网站站内搜索等。</p>
+<h1 id="Lucene实现全文检索的流程"><a href="#Lucene实现全文检索的流程" class="headerlink" title="　　Lucene实现全文检索的流程"></a>　　Lucene实现全文检索的流程</h1><h3 id="索引和搜索流程图"><a href="#索引和搜索流程图" class="headerlink" title="　　索引和搜索流程图"></a>　　索引和搜索流程图</h3><p><img src="/images/lucene/index_search.png" alt></p>
+<p>1、绿色表示索引过程，对要搜索的原始内容进行索引构建一个索引库，索引过程包括：</p>
+<p>　　　　确定原始内容即要搜索的内容→采集文档→创建文档→分析文档→索引文档</p>
+<p>　　2、红色表示搜索过程，从索引库中搜索内容，搜索过程包括：</p>
+<p>　　　　用户通过搜索界面→创建查询→执行搜索，从索引库搜索→渲染搜索结果</p>
+<p>　　接下来详细讲解一下这张图片：　</p>
+<h2 id="1，创建索引"><a href="#1，创建索引" class="headerlink" title="　1，创建索引"></a>　1，创建索引</h2><p>　　对文档索引的过程，将用户要搜索的文档内容进行索引，索引存储在索引库（index）中。</p>
+<p>这里我们要搜索的文档是磁盘上的文本文件，根据案例描述：凡是文件名或文件内容包括关键字的文件都要找出来，这里要对文件名和文件内容创建索引。</p>
+<h3 id="1-1-1-获得原始文档"><a href="#1-1-1-获得原始文档" class="headerlink" title="　　1.1.1.   获得原始文档"></a>　　1.1.1.   获得原始文档</h3><p>　　<strong>原始文档</strong>是指要索引和搜索的内容。原始内容包括互联网上的网页、数据库中的数据、磁盘上的文件等。</p>
+<p>　　从互联网上、数据库、文件系统中等获取需要搜索的原始信息，这个过程就是信息采集，信息采集的目的是为了对原始内容进行索引。在Internet上采集信息的软件通常称为爬虫或蜘蛛，也称为网络机器人，爬虫访问互联网上的每一个网页，将获取到的网页内容存储起来。</p>
+<p>​        Lucene不提供信息采集的类库，需要自己编写一个爬虫程序实现信息采集，也可以通过一些开源软件实现信息采集，如下：</p>
+<p>​         （1）<a href="http://lucene.apache.org/nutch" target="_blank" rel="noopener">Nutch</a>：Nutch是apache的一个子项目，包括大规模爬虫工具，能够抓取和分辨web网站数据。</p>
+<p>​         （2）<a href="http://jsoup.org/" target="_blank" rel="noopener">jsoup</a>：jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。</p>
+<p>​         （3）<a href="http://sourceforge.net/projects/archive-crawler/files/" target="_blank" rel="noopener">Heritrix</a>：Heritrix 是一个由 java 开发的、开源的网络爬虫，用户可以使用它来从网上抓取想要的资源。其最出色之处在于它良好的可扩展性，方便用户实现自己的抓取逻辑。</p>
+<p>　　本案例我们要获取磁盘上文件的内容，可以通过文件流来读取文本文件的内容，对于pdf、doc、xls等文件可通过第三方提供的解析工具读取文件内容，比如Apache POI读取doc和xls的文件内容。 </p>
+<h3 id="1-1-2-创建文档对象"><a href="#1-1-2-创建文档对象" class="headerlink" title="1.1.2.   创建文档对象"></a>1.1.2.   创建文档对象</h3><p>　　获取原始内容的目的是为了索引，在索引前需要将原始内容创建成文档（Document），文档中包括一个一个的域（Field），域中存储内容。</p>
+<p>这里我们可以将磁盘上的一个文件当成一个document，Document中包括一些Field（file_name文件名称、file_path文件路径、file_size文件大小、file_content文件内容）:</p>
+<p><img src="/images/lucene/document_stru.png" alt></p>
+<blockquote>
+<p> 注意：（1）每个Document可以有多个Field</p>
+<p>​            （2）不同的Document可以有不同的Field</p>
+<p>​            （3）同一个Document可以有相同的Field（域名和域值都相同）</p>
+<p>​            （4）每个文档都有一个唯一的编号，就是文档id。</p>
+</blockquote>
+<h3 id="1-1-3-分析文档"><a href="#1-1-3-分析文档" class="headerlink" title="1.1.3.   分析文档"></a>1.1.3.   分析文档</h3><p>　　将原始内容创建为包含域（Field）的文档（document），需要再对域中的内容进行分析，分析的过程是经过对原始文档提取单词、将字母转为小写、去除标点符号、去除停用词等过程生成最终的语汇单元，可以将语汇单元理解为一个一个的单词。每个单词叫做一个<strong>Term</strong>，不同的域中拆分出来的相同的单词是不同的term。term中包含两部分一部分是文档的域名，另一部分是单词的内容。</p>
+<h3 id="1-1-4-创建索引"><a href="#1-1-4-创建索引" class="headerlink" title="1.1.4.   创建索引"></a>1.1.4.   创建索引</h3><p>　　对所有文档分析得出的语汇单元进行索引，索引的目的是为了搜索，最终要实现只搜索被索引的语汇单元从而找到Document（文档）。</p>
+<p><img src="/images/lucene/indexDB_stru.png" alt></p>
+<blockquote>
+<p>注意：（1）创建索引是对语汇单元索引，通过词语找文档，这种索引的结构叫<strong>倒排索引结构</strong>。　　　　　       （2）传统方法是根据文件找到该文件的内容，在文件内容中匹配搜索关键字，这种方法是顺序扫描方法，数据量大、搜索慢。</p>
+<p>​         <strong>（3）倒排索引结构</strong>是根据内容（词语）找文档，<strong>倒排索引结构也叫反向索引结构，包括索引和文档两部分，索引即词汇表，它的规模较小，而文档集合较大。</strong>如下图：</p>
+</blockquote>
+<p><img src="/images/lucene/table.png" alt></p>
+<p><strong>创建索引代码实例：</strong></p>
+<p>　　新建一个Java工程，导入相关的jar包</p>
+<p><img src="/images/lucene/dir_jar.png" alt></p>
+<p>编写创建索引代码</p>
+<p>　　使用indexwriter对象创建索引</p>
+<blockquote>
+<p>　　<strong>具体步骤：</strong></p>
+<p>　　第一步：创建一个indexwriter对象。</p>
+<p>　　　　1）指定索引库的存放位置Directory对象</p>
+<p>　　　　2）指定一个分析器，对文档内容进行分析。</p>
+<p>　　第二步：创建document对象。</p>
+<p>　　第三步：创建field对象，将field添加到document对象中。</p>
+<p>　　第四步：使用indexwriter对象将document对象写入索引库，此过程进行索引创建。并将索引和document对象写入索引库。</p>
+<p>　　第五步：关闭IndexWriter对象。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="comment">//创建索引</span></span><br><span class="line"> <span class="number">2</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreateIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line"> <span class="number">3</span>         <span class="comment">//指定索引库的存放位置Directory对象</span></span><br><span class="line"> <span class="number">4</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">5</span>         <span class="comment">//索引库还可以存放到内存中</span></span><br><span class="line"> <span class="number">6</span>         <span class="comment">//Directory directory = new RAMDirectory();</span></span><br><span class="line"> <span class="number">7</span> </span><br><span class="line"> <span class="number">8</span>         <span class="comment">//指定一个标准分析器，对文档内容进行分析</span></span><br><span class="line"> <span class="number">9</span>         Analyzer analyzer = <span class="keyword">new</span> StandardAnalyzer();</span><br><span class="line"><span class="number">10</span>         </span><br><span class="line"><span class="number">11</span>         <span class="comment">//创建indexwriterCofig对象</span></span><br><span class="line"><span class="number">12</span>         <span class="comment">//第一个参数： Lucene的版本信息，可以选择对应的lucene版本也可以使用LATEST</span></span><br><span class="line"><span class="number">13</span>         <span class="comment">//第二根参数：分析器对象</span></span><br><span class="line"><span class="number">14</span>         IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line"><span class="number">15</span>         </span><br><span class="line"><span class="number">16</span>         <span class="comment">//创建一个indexwriter对象</span></span><br><span class="line"><span class="number">17</span>         IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line"><span class="number">18</span>         </span><br><span class="line"><span class="number">19</span>         <span class="comment">//原始文档的路径</span></span><br><span class="line"><span class="number">20</span>         File file = <span class="keyword">new</span> File(<span class="string">"E:\\programme\\searchsource"</span>);</span><br><span class="line"><span class="number">21</span>         File[] fileList = file.listFiles();</span><br><span class="line"><span class="number">22</span>         <span class="keyword">for</span> (File file2 : fileList) &#123;</span><br><span class="line"><span class="number">23</span>             <span class="comment">//创建document对象</span></span><br><span class="line"><span class="number">24</span>             Document document = <span class="keyword">new</span> Document();</span><br><span class="line"><span class="number">25</span>             </span><br><span class="line"><span class="number">26</span>             <span class="comment">//创建field对象，将field添加到document对象中</span></span><br><span class="line"><span class="number">27</span>             </span><br><span class="line"><span class="number">28</span>             <span class="comment">//文件名称</span></span><br><span class="line"><span class="number">29</span>             String fileName = file2.getName();</span><br><span class="line"><span class="number">30</span>             <span class="comment">//创建文件名域</span></span><br><span class="line"><span class="number">31</span>             <span class="comment">//第一个参数：域的名称</span></span><br><span class="line"><span class="number">32</span>             <span class="comment">//第二个参数：域的内容</span></span><br><span class="line"><span class="number">33</span>             <span class="comment">//第三个参数：是否存储</span></span><br><span class="line"><span class="number">34</span>             Field fileNameField = <span class="keyword">new</span> TextField(<span class="string">"fileName"</span>, fileName, Store.YES);</span><br><span class="line"><span class="number">35</span>             </span><br><span class="line"><span class="number">36</span>             <span class="comment">//文件的大小</span></span><br><span class="line"><span class="number">37</span>             <span class="keyword">long</span> fileSize  = FileUtils.sizeOf(file2);</span><br><span class="line"><span class="number">38</span>             <span class="comment">//文件大小域</span></span><br><span class="line"><span class="number">39</span>             Field fileSizeField = <span class="keyword">new</span> LongField(<span class="string">"fileSize"</span>, fileSize, Store.YES);</span><br><span class="line"><span class="number">40</span>             </span><br><span class="line"><span class="number">41</span>             <span class="comment">//文件路径</span></span><br><span class="line"><span class="number">42</span>             String filePath = file2.getPath();</span><br><span class="line"><span class="number">43</span>             <span class="comment">//文件路径域（不分析、不索引、只存储）</span></span><br><span class="line"><span class="number">44</span>             Field filePathField = <span class="keyword">new</span> StoredField(<span class="string">"filePath"</span>, filePath);</span><br><span class="line"><span class="number">45</span>             </span><br><span class="line"><span class="number">46</span>             <span class="comment">//文件内容</span></span><br><span class="line"><span class="number">47</span>             String fileContent = FileUtils.readFileToString(file2);</span><br><span class="line"><span class="number">48</span>             <span class="comment">//String fileContent = FileUtils.readFileToString(file2, "utf-8");</span></span><br><span class="line"><span class="number">49</span>             <span class="comment">//文件内容域</span></span><br><span class="line"><span class="number">50</span>             Field fileContentField = <span class="keyword">new</span> TextField(<span class="string">"fileContent"</span>, fileContent, Store.YES);</span><br><span class="line"><span class="number">51</span>             </span><br><span class="line"><span class="number">52</span>             document.add(fileNameField);</span><br><span class="line"><span class="number">53</span>             document.add(fileSizeField);</span><br><span class="line"><span class="number">54</span>             document.add(filePathField);</span><br><span class="line"><span class="number">55</span>             document.add(fileContentField);</span><br><span class="line"><span class="number">56</span>             <span class="comment">//使用indexwriter对象将document对象写入索引库，此过程进行索引创建。并将索引和document对象写入索引库。</span></span><br><span class="line"><span class="number">57</span>             indexWriter.addDocument(document);</span><br><span class="line"><span class="number">58</span>         &#125;</span><br><span class="line"><span class="number">59</span>         <span class="comment">//关闭IndexWriter对象。</span></span><br><span class="line"><span class="number">60</span>         indexWriter.close();</span><br><span class="line"><span class="number">61</span>     &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Field域的属性概述"><a href="#Field域的属性概述" class="headerlink" title="Field域的属性概述"></a>Field域的属性概述</h2><p>　　<strong>是否分析</strong>：是否对域的内容进行分词处理。前提是我们要对域的内容进行查询。</p>
+<p>　　<strong>是否索引</strong>：将Field分析后的词或整个Field值进行索引，只有索引方可搜索到。</p>
+<p>　　比如：商品名称、商品简介分析后进行索引，订单号、身份证号不用分析但也要索引，这些将来都要作为查询条件。</p>
+<p>　　<strong>是否存储</strong>：将Field值存储在文档中，存储在文档中的Field才可以从Document中获取</p>
+<p>　　比如：商品名称、订单号，凡是将来要从Document中获取的Field都要存储。</p>
+<p>　　<strong>是否存储的标准：是否要将内容展示给用户</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field类</th>
+<th>数据类型</th>
+<th>Analyzed是否分析</th>
+<th>Indexed是否索引</th>
+<th>Stored是否存储</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StringField(FieldName, FieldValue,Store.YES))</td>
+<td>字符串</td>
+<td>N</td>
+<td>Y</td>
+<td>Y或N</td>
+<td>这个Field用来构建一个字符串Field，但是不会进行分析，会将整个串存储在索引中，比如(订单号,姓名等)是否存储在文档中用Store.YES或Store.NO决定</td>
+</tr>
+<tr>
+<td>LongField(FieldName, FieldValue,Store.YES)</td>
+<td>Long型</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y或N</td>
+<td>这个Field用来构建一个Long数字型Field，进行分析和索引，比如(价格)是否存储在文档中用Store.YES或Store.NO决定</td>
+</tr>
+<tr>
+<td>StoredField(FieldName, FieldValue)</td>
+<td>重载方法，支持多种类型</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>这个Field用来构建不同类型Field不分析，不索引，但要Field存储在文档中</td>
+</tr>
+<tr>
+<td>TextField(FieldName, FieldValue, Store.NO)或TextField(FieldName, reader)</td>
+<td>字符串或流</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y或N</td>
+<td>如果是一个Reader, lucene猜测内容比较多,会采用Unstored的策略.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-查询索引"><a href="#2-查询索引" class="headerlink" title="　　2. 查询索引"></a>　　2. 查询索引</h2><p>　　查询索引也是搜索的过程。搜索就是用户输入关键字，从索引（index）中进行搜索的过程。根据关键字搜索索引，根据索引找到对应的文档，从而找到要搜索的内容（这里指磁盘上的文件）。</p>
+<p>​       对要搜索的信息创建Query查询对象，Lucene会根据Query查询对象生成最终的查询语法，类似关系数据库Sql语法一样Lucene也有自己的查询语法，比如：“name:lucene”表示查询Field的name为“lucene”的文档信息。</p>
+<h3 id="2-1-用户查询接口"><a href="#2-1-用户查询接口" class="headerlink" title="　　2.1.   用户查询接口"></a>　　2.1.   用户查询接口</h3><p>　　全文检索系统提供用户搜索的界面供用户提交搜索的关键字，搜索完成展示搜索结果。</p>
+<p>　　比如： 百度搜索</p>
+<p>　　Lucene不提供制作用户搜索界面的功能，需要根据自己的需求开发搜索界面。</p>
+<h3 id="2-2-创建查询"><a href="#2-2-创建查询" class="headerlink" title="　　2.2.   创建查询"></a>　　2.2.   创建查询</h3><p>　　用户输入查询关键字执行搜索之前需要先构建一个查询对象，查询对象中可以指定查询要搜索的Field文档域、查询关键字等，查询对象会生成具体的查询语法，</p>
+<p>　　例如： 语法 “fileName:lucene”表示要搜索Field域的内容为“lucene”的文档</p>
+<h3 id="2-3-执行查询"><a href="#2-3-执行查询" class="headerlink" title="　　2.3.   执行查询"></a>　　2.3.   执行查询</h3><p>　　搜索索引过程：</p>
+<p>　　根据查询语法在倒排索引词典表中分别找出对应搜索词的索引，从而找到索引所链接的文档链表。</p>
+<p>　　比如搜索语法为“fileName:lucene”表示搜索出fileName域中包含Lucene的文档。</p>
+<p>　　搜索过程就是在索引上查找域为fileName，并且关键字为Lucene的term，并根据term找到文档id列表。</p>
+<p>​       可通过两种方法创建查询对象：</p>
+<p>​         1）使用Lucene提供Query子类</p>
+<p>​         Query是一个抽象类，lucene提供了很多查询对象，比如TermQuery项精确查询，NumericRangeQuery数字范围查询等。</p>
+<p>​         如下代码：</p>
+<p>​    　　Query query = <strong>new</strong> TermQuery(<strong>new</strong> Term(“name”, “lucene”));</p>
+<p>​         2）使用QueryParse解析查询表达式</p>
+<p>​         QueryParse会将用户输入的查询表达式解析成Query对象实例。</p>
+<p>​         如下代码：</p>
+<p>​           QueryParser queryParser = <strong>new</strong> QueryParser(“name”, <strong>new</strong> IKAnalyzer());</p>
+<p>​           Query query = queryParser.parse(“name:lucene”);</p>
+<p> 　　</p>
+<blockquote>
+<p>　　首先，演示第一种方法，<strong>使用query的子类查询</strong></p>
+<p>　　<strong>实现步骤</strong></p>
+<p>　　第一步：创建一个Directory对象，也就是索引库存放的位置。</p>
+<p>　　第二步：创建一个indexReader对象，需要指定Directory对象。</p>
+<p>　　第三步：创建一个indexsearcher对象，需要指定IndexReader对象</p>
+<p>　　第四步：创建一个Query的子类对象，指定查询的域和查询的关键词。</p>
+<p>　　第五步：执行查询。</p>
+<p>　　第六步：返回查询结果。遍历查询结果并输出。</p>
+<p>　　第七步：关闭IndexReader对象</p>
+</blockquote>
+<h3 id="MatchAllDocsQuery"><a href="#MatchAllDocsQuery" class="headerlink" title="　　MatchAllDocsQuery"></a>　　MatchAllDocsQuery</h3><p>　　使用MatchAllDocsQuery查询索引目录中的所有文档</p>
+<p>　　<strong>具体代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMatchAllDocsQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建查询条件</span></span><br><span class="line">    <span class="comment">//使用MatchAllDocsQuery查询索引目录中的所有文档</span></span><br><span class="line">    Query query = <span class="keyword">new</span> MatchAllDocsQuery();</span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="TermQuery（精准查询）"><a href="#TermQuery（精准查询）" class="headerlink" title="　　TermQuery（精准查询）"></a>　　TermQuery（精准查询）</h3><p>　　TermQuery，通过项查询，TermQuery不使用分析器所以建议匹配不分词的Field域查询，比如订单号、分类ID号等。</p>
+<p>指定要查询的域和要查询的关键词。</p>
+<p>　　<strong>具体代码：</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="comment">//搜索索引</span></span><br><span class="line"> <span class="number">2</span>     <span class="meta">@Test</span></span><br><span class="line"> <span class="number">3</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSearchIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line"> <span class="number">4</span>         <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line"> <span class="number">5</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">6</span>         <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line"> <span class="number">7</span>         IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line"> <span class="number">8</span>         <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line"> <span class="number">9</span>         IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line"><span class="number">10</span>         <span class="comment">//创建一个TermQuery（精准查询）对象，指定查询的域与查询的关键词</span></span><br><span class="line"><span class="number">11</span>         <span class="comment">//创建查询</span></span><br><span class="line"><span class="number">12</span>         Query query = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>));</span><br><span class="line"><span class="number">13</span>         <span class="comment">//执行查询</span></span><br><span class="line"><span class="number">14</span>         <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line"><span class="number">15</span>         TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line"><span class="number">16</span>         <span class="comment">//查询结果的总条数</span></span><br><span class="line"><span class="number">17</span>         System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line"><span class="number">18</span>         <span class="comment">//遍历查询结果</span></span><br><span class="line"><span class="number">19</span>         <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line"><span class="number">20</span>         <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line"><span class="number">21</span>         <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line"><span class="number">22</span>             <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line"><span class="number">23</span>             <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line"><span class="number">24</span>             <span class="comment">//根据document的id找到document对象</span></span><br><span class="line"><span class="number">25</span>             Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line"><span class="number">26</span>             <span class="comment">//文件名称</span></span><br><span class="line"><span class="number">27</span>             System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line"><span class="number">28</span>             <span class="comment">//文件内容</span></span><br><span class="line"><span class="number">29</span>             System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line"><span class="number">30</span>             <span class="comment">//文件大小</span></span><br><span class="line"><span class="number">31</span>             System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line"><span class="number">32</span>             <span class="comment">//文件路径</span></span><br><span class="line"><span class="number">33</span>             System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line"><span class="number">34</span>             System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line"><span class="number">35</span>         &#125;</span><br><span class="line"><span class="number">36</span>         <span class="comment">//关闭indexreader对象</span></span><br><span class="line"><span class="number">37</span>         indexReader.close();</span><br><span class="line"><span class="number">38</span>     &#125;</span><br><span class="line"><span class="number">39</span> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="NumericRangeQuery"><a href="#NumericRangeQuery" class="headerlink" title="　　NumericRangeQuery"></a>　　NumericRangeQuery</h3><p>　　可以根据数值范围查询。</p>
+<p>　　<strong>具体代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数值范围查询</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNumericRangeQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建查询</span></span><br><span class="line">    <span class="comment">//参数：</span></span><br><span class="line">    <span class="comment">//1.域名</span></span><br><span class="line">    <span class="comment">//2.最小值</span></span><br><span class="line">    <span class="comment">//3.最大值</span></span><br><span class="line">    <span class="comment">//4.是否包含最小值</span></span><br><span class="line">    <span class="comment">//5.是否包含最大值</span></span><br><span class="line">    Query query = NumericRangeQuery.newLongRange(<span class="string">"fileSize"</span>, <span class="number">41L</span>, <span class="number">2055L</span>, <span class="keyword">true</span>, <span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="BooleanQuery"><a href="#BooleanQuery" class="headerlink" title="　　BooleanQuery"></a>　　BooleanQuery</h3><p>　　可以组合查询条件。</p>
+<p>　　<strong>具体代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//组合条件查询</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testBooleanQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建一个布尔查询对象</span></span><br><span class="line">    BooleanQuery query = <span class="keyword">new</span> BooleanQuery();</span><br><span class="line">    <span class="comment">//创建第一个查询条件</span></span><br><span class="line">    Query query1 = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>));</span><br><span class="line">    Query query2 = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"lucene"</span>));</span><br><span class="line">    <span class="comment">//组合查询条件</span></span><br><span class="line">    query.add(query1, Occur.MUST);</span><br><span class="line">    query.add(query2, Occur.MUST);</span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　Occur.MUST：必须满足此条件，相当于and</p>
+<p>　　Occur.SHOULD：应该满足，但是不满足也可以，相当于or</p>
+<p>　　Occur.MUST_NOT：必须不满足。相当于not</p>
+<p>　　接着，演示第二种方法：<strong>使用queryparser查询</strong></p>
+<p>　　通过QueryParser也可以创建Query，QueryParser提供一个Parse方法，此方法可以直接根据查询语法来查询。Query对象执行的查询语法可通过System.out.println(query);查询。</p>
+<p>　　这个操作需要使用到分析器。建议创建索引时使用的分析器和查询索引时使用的分析器要一致。</p>
+<p>　　<strong>queryparser</strong></p>
+<p>　　**具体代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryParser</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line">    IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line">    <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line">    IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建queryparser对象</span></span><br><span class="line">    <span class="comment">//第一个参数默认搜索的域</span></span><br><span class="line">    <span class="comment">//第二个参数就是分析器对象</span></span><br><span class="line">    QueryParser queryParser = <span class="keyword">new</span> QueryParser(<span class="string">"fileName"</span>, <span class="keyword">new</span> IKAnalyzer());</span><br><span class="line">    <span class="comment">//使用默认的域,这里用的是语法，下面会详细讲解一下</span></span><br><span class="line">    Query query = queryParser.parse(<span class="string">"apache"</span>);</span><br><span class="line">    <span class="comment">//不使用默认的域，可以自己指定域</span></span><br><span class="line">    <span class="comment">//Query query = queryParser.parse("fileContent:apache");</span></span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line">    TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询结果的总条数</span></span><br><span class="line">    System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line">    <span class="comment">//遍历查询结果</span></span><br><span class="line">    <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line">    <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line">        <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line">        <span class="comment">//根据document的id找到document对象</span></span><br><span class="line">        Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">        <span class="comment">//文件名称</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line">        <span class="comment">//文件内容</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line">        <span class="comment">//文件大小</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line">        <span class="comment">//文件路径</span></span><br><span class="line">        System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line">        System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭indexreader对象</span></span><br><span class="line">    indexReader.close();        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询语法"><a href="#查询语法" class="headerlink" title="　　查询语法"></a>　　查询语法</h4><p>　　1、基础的查询语法，关键词查询：</p>
+<p>　　　　域名+“：”+搜索的关键字</p>
+<p>　　　　例如：content:java</p>
+<p>　　2、范围查询</p>
+<p>　　　　域名+“:”+[最小值 TO 最大值]</p>
+<p>　　　　例如：size:[1 TO 1000]</p>
+<p>　　　　范围查询在lucene中支持数值类型，不支持字符串类型。在solr中支持字符串类型。</p>
+<p>　　3、组合条件查询</p>
+<p>　　　　1）+条件1 +条件2：两个条件之间是并且的关系and</p>
+<p>　　　　　　例如：+filename:apache +content:apache</p>
+<p>　　　　2）+条件1 条件2：必须满足第一个条件，应该满足第二个条件</p>
+<p>　　　　　　例如：+filename:apache content:apache</p>
+<p>　　　　3）条件1 条件2：两个条件满足其一即可。</p>
+<p>　　　　　　例如：filename:apache content:apache</p>
+<p>　　　　4）-条件1 条件2：必须不满足条件1，要满足条件2</p>
+<p>　　　　　　例如：-filename:apache content:apache</p>
+<table>
+<thead>
+<tr>
+<th>Occur.MUST 查询条件必须满足，相当于and</th>
+<th>+（加号）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Occur.SHOULD 查询条件可选，相当于or</td>
+<td>空（不用符号）</td>
+</tr>
+<tr>
+<td>Occur.MUST_NOT 查询条件不能满足，相当于not非</td>
+<td>-（减号）</td>
+</tr>
+</tbody>
+</table>
+<p>　　第二种写法：</p>
+<p>　　条件1 AND 条件2</p>
+<p>　　条件1 OR 条件2</p>
+<p>　　条件1 NOT 条件2</p>
+<h3 id="MultiFieldQueryParser"><a href="#MultiFieldQueryParser" class="headerlink" title="　　MultiFieldQueryParser"></a>　　MultiFieldQueryParser</h3><p>　　可以指定多个默认搜索域</p>
+<p>　　**具体代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="meta">@Test</span></span><br><span class="line"> <span class="number">2</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMultiFiledQueryParser</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> <span class="number">3</span>         <span class="comment">//创建一个Directory对象，指定索引库存放的路径</span></span><br><span class="line"> <span class="number">4</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">5</span>         <span class="comment">//创建IndexReader对象，需要指定Directory对象</span></span><br><span class="line"> <span class="number">6</span>         IndexReader indexReader = DirectoryReader.open(directory);</span><br><span class="line"> <span class="number">7</span>         <span class="comment">//创建Indexsearcher对象，需要指定IndexReader对象</span></span><br><span class="line"> <span class="number">8</span>         IndexSearcher indexSearcher = <span class="keyword">new</span> IndexSearcher(indexReader);</span><br><span class="line"> <span class="number">9</span>         </span><br><span class="line"><span class="number">10</span>         <span class="comment">//可以指定默认搜索的域是多个</span></span><br><span class="line"><span class="number">11</span>         String[] fields = &#123;<span class="string">"fileName"</span>, <span class="string">"fileContent"</span>&#125;;</span><br><span class="line"><span class="number">12</span>         <span class="comment">//创建一个MulitFiledQueryParser对象</span></span><br><span class="line"><span class="number">13</span>         MultiFieldQueryParser queryParser = <span class="keyword">new</span> MultiFieldQueryParser(fields, <span class="keyword">new</span> IKAnalyzer());</span><br><span class="line"><span class="number">14</span>         Query query = queryParser.parse(<span class="string">"apache"</span>);</span><br><span class="line"><span class="number">15</span>         System.out.println(query);</span><br><span class="line"><span class="number">16</span>         <span class="comment">//执行查询</span></span><br><span class="line"><span class="number">17</span> </span><br><span class="line"><span class="number">18</span> </span><br><span class="line"><span class="number">19</span>         <span class="comment">//第一个参数是查询对象，第二个参数是查询结果返回的最大值</span></span><br><span class="line"><span class="number">20</span>         TopDocs topDocs = indexSearcher.search(query, <span class="number">10</span>);</span><br><span class="line"><span class="number">21</span>         </span><br><span class="line"><span class="number">22</span>         <span class="comment">//查询结果的总条数</span></span><br><span class="line"><span class="number">23</span>         System.out.println(<span class="string">"查询结果的总条数："</span>+ topDocs.totalHits);</span><br><span class="line"><span class="number">24</span>         <span class="comment">//遍历查询结果</span></span><br><span class="line"><span class="number">25</span>         <span class="comment">//topDocs.scoreDocs存储了document对象的id</span></span><br><span class="line"><span class="number">26</span>         <span class="comment">//ScoreDoc[] scoreDocs = topDocs.scoreDocs;</span></span><br><span class="line"><span class="number">27</span>         <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line"><span class="number">28</span>             <span class="comment">//scoreDoc.doc属性就是document对象的id</span></span><br><span class="line"><span class="number">29</span>             <span class="comment">//int doc = scoreDoc.doc;</span></span><br><span class="line"><span class="number">30</span>             <span class="comment">//根据document的id找到document对象</span></span><br><span class="line"><span class="number">31</span>             Document document = indexSearcher.doc(scoreDoc.doc);</span><br><span class="line"><span class="number">32</span>             <span class="comment">//文件名称</span></span><br><span class="line"><span class="number">33</span>             System.out.println(document.get(<span class="string">"fileName"</span>));</span><br><span class="line"><span class="number">34</span>             <span class="comment">//文件内容</span></span><br><span class="line"><span class="number">35</span>             System.out.println(document.get(<span class="string">"fileContent"</span>));</span><br><span class="line"><span class="number">36</span>             <span class="comment">//文件大小</span></span><br><span class="line"><span class="number">37</span>             System.out.println(document.get(<span class="string">"fileSize"</span>));</span><br><span class="line"><span class="number">38</span>             <span class="comment">//文件路径</span></span><br><span class="line"><span class="number">39</span>             System.out.println(document.get(<span class="string">"filePath"</span>));</span><br><span class="line"><span class="number">40</span>             System.out.println(<span class="string">"----------------------------------"</span>);</span><br><span class="line"><span class="number">41</span>         &#125;</span><br><span class="line"><span class="number">42</span>         <span class="comment">//关闭indexreader对象</span></span><br><span class="line"><span class="number">43</span>         indexReader.close();</span><br><span class="line"><span class="number">44</span>     &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="IndexSearcher搜索方法"><a href="#IndexSearcher搜索方法" class="headerlink" title="IndexSearcher搜索方法"></a>IndexSearcher搜索方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>indexSearcher.search(query, n)</td>
+<td>根据Query搜索，返回评分最高的n条记录</td>
+</tr>
+<tr>
+<td>indexSearcher.search(query, filter, n)</td>
+<td>根据Query搜索，添加过滤策略，返回评分最高的n条记录</td>
+</tr>
+<tr>
+<td>indexSearcher.search(query, n, sort)</td>
+<td>根据Query搜索，添加排序策略，返回评分最高的n条记录</td>
+</tr>
+<tr>
+<td>indexSearcher.search(booleanQuery, filter, n, sort)</td>
+<td>根据Query搜索，添加过滤策略，添加排序策略，返回评分最高的n条记录</td>
+</tr>
+</tbody>
+</table>
+<h2 id="TopDocs"><a href="#TopDocs" class="headerlink" title="　　TopDocs"></a>　　TopDocs</h2><p>　　Lucene搜索结果可通过TopDocs遍历，TopDocs类提供了少量的属性，如下：</p>
+<table>
+<thead>
+<tr>
+<th>方法或属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>totalHits</td>
+<td>匹配搜索条件的总记录数</td>
+</tr>
+<tr>
+<td>scoreDocs</td>
+<td>顶部匹配记录</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>　　注意：</p>
+<p>　　　　（1）Search方法需要指定匹配记录数量n：indexSearcher.search(query, n)</p>
+<p>　　　　（2）TopDocs.totalHits：是匹配索引库中所有记录的数量</p>
+<p>　　　　（3）TopDocs.scoreDocs：匹配相关度高的前边记录数组，scoreDocs的长度小于等于search方法指定的参数n</p>
+</blockquote>
+<p>　　</p>
+<p>　　<strong>中文分词器 ：</strong></p>
+<p>　　首先，看一看Lucene自带的中文分词器</p>
+<p>　　（1）<strong>StandardAnalyzer</strong>：（标准分词器，也是前面例子中使用的分词器）</p>
+<p>　　　　单字分词：就是按照中文一个字一个字地进行分词。</p>
+<p>　　　　如：“我爱中国”，<br>　　　　效果：“我”、“爱”、“中”、“国”。</p>
+<p>　　（2）<strong>CJKAnalyzer</strong></p>
+<p>　　　　二分法分词：按两个字进行切分。</p>
+<p>　　　　如：“我是中国人”，</p>
+<p>　　　　效果：“我是”、“是中”、“中国”“国人”。</p>
+<p>　　<strong>但上边两个分词器无法满足需求。</strong></p>
+<p>　　（3）SmartChineseAnalyzer</p>
+<p>　　　　对中文支持较好，但扩展性差，扩展词库，禁用词库和同义词库等不好处理</p>
+<p>　　然后，看一看我们开发真正使用的<strong>第三方中文分词器：</strong></p>
+<p>　　我们今天介绍<strong>IK-analyzer</strong>这款第三方中文分词器</p>
+<p>　　<a href="https://code.google.com/p/ik-analyzer/" target="_blank" rel="noopener">IK-analyzer</a>，支持Lucene 4.10从2006年12月推出1.0版开始，IKAnalyzer已经推出了4个大版本。最初，它是以开源项目Luence为应用主体的，结合词典分词和文法分析算法的中文分词组件。从3.0版本开 始，IK发展为面向Java的公用分词组件，独立于Lucene项目，同时提供了对Lucene的默认优化实现。在2012版本中，IK实现了简单的分词 歧义排除算法，标志着IK分词器从单纯的词典分词向模拟语义分词衍化。 但是也就是2012年12月后没有再更新。　</p>
+<p>　　<strong>使用方法：</strong></p>
+<p>　　第一步：把jar包添加到工程中</p>
+<p>　　第二步：把<strong>配置文件</strong>和<strong>扩展词词典</strong>和<strong>停用词词典</strong>添加到classpath下（停用词词典与扩展词词典名称可自行定义，只要在配置文件中配置好就可以了）</p>
+<p><img src="/images/lucene/dic.png" alt></p>
+<p>注意：<strong>扩展词词典</strong>和<strong>停用词词典</strong>文件的格式为UTF-8，注意是<strong>无BOM 的UTF-8 编码</strong>。</p>
+<p>　　配置文件详情</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">comment</span>&gt;</span>IK Analyzer 扩展配置<span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--用户可以在这里配置自己的扩展字典 --&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"ext_dict"</span>&gt;</span>ext.dic;<span class="tag">&lt;/<span class="name">entry</span>&gt;</span> </span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--用户可以在这里配置自己的扩展停止词字典--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"ext_stopwords"</span>&gt;</span>stopword.dic;<span class="tag">&lt;/<span class="name">entry</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样，创建分析器时，用一下代码就好了:<code>Analyzer analyzer = new IKAnalyzer();</code></p>
+<p>　　<strong>注意：搜索使用的分析器要和索引使用的分析器一致，不然搜索出来结果可能会错乱。</strong></p>
+<h2 id="3-删除索引"><a href="#3-删除索引" class="headerlink" title="　　3. 删除索引"></a>　　3. 删除索引</h2><p>（1）删除全部索引</p>
+<p>　　说明：将索引目录的索引信息全部删除，直接彻底删除，无法恢复。<strong>此方法慎用！！</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>     <span class="comment">//删除全部索引</span></span><br><span class="line"> <span class="number">2</span>     <span class="meta">@Test</span></span><br><span class="line"> <span class="number">3</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDeleteAllIndex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> <span class="number">4</span>         Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line"> <span class="number">5</span>         Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line"> <span class="number">6</span>         IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line"> <span class="number">7</span>         IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line"> <span class="number">8</span>         <span class="comment">//删除全部索引</span></span><br><span class="line"> <span class="number">9</span>         indexWriter.deleteAll();</span><br><span class="line"><span class="number">10</span>         <span class="comment">//关闭indexwriter</span></span><br><span class="line"><span class="number">11</span>         indexWriter.close();</span><br><span class="line"><span class="number">12</span>     &#125;</span><br></pre></td></tr></table></figure>
+<p>　　（2）指定查询条件删除</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据查询条件删除索引</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteIndexByQuery</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line">    IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line">    <span class="comment">//创建一个查询条件</span></span><br><span class="line">    Query query = <span class="keyword">new</span> TermQuery(<span class="keyword">new</span> Term(<span class="string">"fileContent"</span>, <span class="string">"apache"</span>));</span><br><span class="line">    <span class="comment">//根据查询条件删除</span></span><br><span class="line">    indexWriter.deleteDocuments(query);</span><br><span class="line">    <span class="comment">//关闭indexwriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-索引库的修改"><a href="#4-索引库的修改" class="headerlink" title="　　4 索引库的修改"></a>　　4 索引库的修改</h2><p>　　更新的原理就是先删除在添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改索引库</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateIndex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line">    IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line">    <span class="comment">//创建一个Document对象</span></span><br><span class="line">    Document document = <span class="keyword">new</span> Document();</span><br><span class="line">    <span class="comment">//向document对象中添加域。</span></span><br><span class="line">    <span class="comment">//不同的document可以有不同的域，同一个document可以有相同的域。</span></span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"fileXXX"</span>, <span class="string">"要更新的文档"</span>, Store.YES));</span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"contentYYY"</span>, <span class="string">"简介 Lucene 是一个基于 Java 的全文信息检索工具包。"</span>, Store.YES));</span><br><span class="line">    indexWriter.updateDocument(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>), document);</span><br><span class="line">    <span class="comment">//关闭indexWriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 　　这样，Lucene的简单介绍使用就完成了。</p>
 
           
         
