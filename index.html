@@ -261,6 +261,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/jzOffer_1_20190302/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/blog_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/02/jzOffer_1_20190302/" itemprop="url">剑指offer刷题日记（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-02T00:00:00+08:00">
+                2019-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、二维数组中的查找"><a href="#一、二维数组中的查找" class="headerlink" title="一、二维数组中的查找"></a>一、二维数组中的查找</h1><p><em>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</em></p>
+<p><strong>时间限制：1秒 空间限制：32768K</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自己写的渣渣算法，从左上角开始</span></span><br><span class="line"><span class="comment">运行时间：212ms</span></span><br><span class="line"><span class="comment">占用内存：16584k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> target, <span class="keyword">int</span> [][] array)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> row=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> col=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> r_len = array[<span class="number">0</span>].length; <span class="comment">//一行的长度</span></span><br><span class="line">        <span class="keyword">int</span> c_len = array.length;  <span class="comment">//一列的长度</span></span><br><span class="line">	    <span class="keyword">if</span>(c_len==<span class="number">0</span> || r_len==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(array[<span class="number">0</span>][<span class="number">0</span>]&gt;target) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(array[c_len-<span class="number">1</span>][r_len-<span class="number">1</span>]&lt;target) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//找到大于等于target的第m行第n列的元素</span></span><br><span class="line">        <span class="keyword">while</span>(array[row][col]&lt;target &amp;&amp; col&lt;r_len-<span class="number">1</span>) col++;</span><br><span class="line">        <span class="keyword">while</span>(array[row][col]&lt;target &amp;&amp; row&lt;c_len-<span class="number">1</span>) row++;</span><br><span class="line">        <span class="comment">//如果找到，直接返回</span></span><br><span class="line">        <span class="keyword">if</span>(array[row][col]==target) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(array[row][col]&gt;target &amp;&amp; col&gt;<span class="number">0</span>) col--;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(array[row][col]&lt;target &amp;&amp; row&lt;c_len-<span class="number">1</span>) row++;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(col==<span class="number">0</span> &amp;&amp; row==c_len-<span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(array[row][col]!=target) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>逻辑混乱，步骤多余，下面请看<a href="https://www.nowcoder.com/3478246" target="_blank" rel="noopener">牛客网</a>大牛的解法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">牛客大牛的解法，从左下角开始。</span></span><br><span class="line"><span class="comment">运行时间：10ms</span></span><br><span class="line"><span class="comment">占用内存：1388k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Find</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; <span class="built_in">array</span>,<span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rowCount = <span class="built_in">array</span>.size();</span><br><span class="line">        <span class="keyword">int</span> colCount = <span class="built_in">array</span>[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">int</span> i,j;</span><br><span class="line">        <span class="keyword">for</span>(i=rowCount<span class="number">-1</span>,j=<span class="number">0</span>;i&gt;=<span class="number">0</span>&amp;&amp;j&lt;colCount;)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(target == <span class="built_in">array</span>[i][j])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(target &lt; <span class="built_in">array</span>[i][j])</span><br><span class="line">            &#123;</span><br><span class="line">                i--;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(target &gt; <span class="built_in">array</span>[i][j])</span><br><span class="line">            &#123;</span><br><span class="line">                j++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="二、替换空格"><a href="#二、替换空格" class="headerlink" title="二、替换空格"></a>二、替换空格</h1><p><em>请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。</em></p>
+<p><strong>时间限制：1秒 空间限制：32768K</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自己的渣渣解法，使用了replace()函数</span></span><br><span class="line"><span class="comment">运行时间：19ms</span></span><br><span class="line"><span class="comment">占用内存：9480k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">replaceSpace</span><span class="params">(StringBuffer str)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> i=-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">            i=str.indexOf(<span class="string">" "</span>);</span><br><span class="line">            <span class="keyword">if</span>(i==-<span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">            str.replace(i,i+<span class="number">1</span>,<span class="string">"%20"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不使用replace()函数：牛客网大大的解法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">链接：https://www.nowcoder.com/questionTerminal/4060ac7e3e404ad1a894ef3e17650423</span></span><br><span class="line"><span class="comment">来源：牛客网</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">问题1：替换字符串，是在原来的字符串上做替换，还是新开辟一个字符串做替换！</span></span><br><span class="line"><span class="comment">问题2：在当前字符串替换，怎么替换才更有效率（不考虑java里现有的replace方法）。</span></span><br><span class="line"><span class="comment">      从前往后替换，后面的字符要不断往后移动，要多次移动，所以效率低下</span></span><br><span class="line"><span class="comment">      从后往前，先计算需要多少空间，然后从后往前移动，则每个字符只为移动一次，这样效率更高一点。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">replaceSpace</span><span class="params">(StringBuffer str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> spacenum = <span class="number">0</span>;<span class="comment">//spacenum为计算空格数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(str.charAt(i)==<span class="string">' '</span>)</span><br><span class="line">                spacenum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> indexold = str.length()-<span class="number">1</span>; <span class="comment">//indexold为为替换前的str下标</span></span><br><span class="line">        <span class="keyword">int</span> newlength = str.length() + spacenum*<span class="number">2</span>;<span class="comment">//计算空格转换成%20之后的str长度</span></span><br><span class="line">        <span class="keyword">int</span> indexnew = newlength-<span class="number">1</span>;<span class="comment">//indexold为为把空格替换为%20后的str下标</span></span><br><span class="line">        str.setLength(newlength);<span class="comment">//使str的长度扩大到转换成%20之后的长度,防止下标越界</span></span><br><span class="line">        <span class="keyword">for</span>(;indexold&gt;=<span class="number">0</span> &amp;&amp; indexold&lt;newlength;--indexold)&#123; </span><br><span class="line">                <span class="keyword">if</span>(str.charAt(indexold) == <span class="string">' '</span>)&#123;  <span class="comment">//</span></span><br><span class="line">                str.setCharAt(indexnew--, <span class="string">'0'</span>);</span><br><span class="line">                str.setCharAt(indexnew--, <span class="string">'2'</span>);</span><br><span class="line">                str.setCharAt(indexnew--, <span class="string">'%'</span>);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    str.setCharAt(indexnew--, str.charAt(indexold));</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三、从尾到头打印链表"><a href="#三、从尾到头打印链表" class="headerlink" title="三、从尾到头打印链表"></a>三、从尾到头打印链表</h1><p><em>输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。</em></p>
+<p><strong>时间限制：1秒 空间限制：32768K</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自己的渣渣解法，使用递归</span></span><br><span class="line"><span class="comment">运行时间：16ms</span></span><br><span class="line"><span class="comment">占用内存：9392k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*    public class ListNode &#123;</span></span><br><span class="line"><span class="comment">*        int val;</span></span><br><span class="line"><span class="comment">*        ListNode next = null;</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*        ListNode(int val) &#123;</span></span><br><span class="line"><span class="comment">*            this.val = val;</span></span><br><span class="line"><span class="comment">*        &#125;</span></span><br><span class="line"><span class="comment">*    &#125;</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getValue</span><span class="params">(ListNode i, ArrayList&lt;Integer&gt; a)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        getValue(i.next, a);</span><br><span class="line">        a.add(i.val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">printListFromTailToHead</span><span class="params">(ListNode listNode)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        getValue(listNode, arrayList);</span><br><span class="line">        <span class="keyword">return</span> arrayList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>牛客大牛的解法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//运行时间：3ms</span></span><br><span class="line"><span class="comment">//占用内存：376k</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*  struct ListNode &#123;</span></span><br><span class="line"><span class="comment">*        int val;</span></span><br><span class="line"><span class="comment">*        struct ListNode *next;</span></span><br><span class="line"><span class="comment">*        ListNode(int x) :</span></span><br><span class="line"><span class="comment">*              val(x), next(NULL) &#123;</span></span><br><span class="line"><span class="comment">*        &#125;</span></span><br><span class="line"><span class="comment">*  &#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; printListFromTailToHead(ListNode* head) &#123;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; value;</span><br><span class="line">        <span class="keyword">if</span>(head != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            value.insert(value.begin(),head-&gt;val);</span><br><span class="line">            <span class="keyword">if</span>(head-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tempVec = printListFromTailToHead(head-&gt;next);</span><br><span class="line">                <span class="keyword">if</span>(tempVec.size()&gt;<span class="number">0</span>)</span><br><span class="line">                value.insert(value.begin(),tempVec.begin(),tempVec.end());  </span><br><span class="line">            &#125;         </span><br><span class="line">             </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/Linux_learn_1_20190301/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1576,6 +1732,310 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/blog_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/22/DB_review_1_20190222/" itemprop="url">数据库基础复习（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数据库复习笔记（一）"><a href="#数据库复习笔记（一）" class="headerlink" title="数据库复习笔记（一）"></a>数据库复习笔记（一）</h1><h2 id="1-事务（transaction）"><a href="#1-事务（transaction）" class="headerlink" title="1. 事务（transaction）"></a>1. 事务（transaction）</h2><p><strong>事务</strong>是访问并可能更新数据项的的一个程序执行单元。</p>
+<p>事务具有<strong>ACID</strong>特性：</p>
+<ol>
+<li><p><strong>原子性Atomicity</strong>：事务的所有操作要么<strong>全部正确</strong>反映出来，要么<strong>完全不反应</strong>。</p>
+<blockquote>
+<p>事务如果不成功执行，称为<strong>中止aborted</strong>，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚<strong>rollback</strong>。典型的方法就是维护一个<strong>日志log</strong>。</p>
+</blockquote>
+</li>
+<li><p><strong>一致性Consistency</strong>：事务的一致性指的是在一个事务执行之前和执行之后数据库都必须处于一致性状态。</p>
+<blockquote>
+<p>如果事务成功地完成，那么系统中所有变化将正确地应用，系统处于有效状态。</p>
+<p>如果在事务中出现错误，那么系统中的所有变化将自动地回滚，系统返回到原始状态。</p>
+</blockquote>
+</li>
+<li><p><strong>隔离性Isolation</strong>：尽管多个事务可能并发执行，但是系统保证每个事务都感觉不到系统有其他事务在执行。</p>
+<blockquote>
+<p>指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改它之后的状态，事务不会查看到中间状态的数据。</p>
+</blockquote>
+</li>
+<li><p><strong>持久性Durability</strong>：一个事务一旦完成，它对数据库的改变必须是永久的，即使系统出现故障，也不会因此而失去改动。</p>
+</li>
+</ol>
+<p>在<strong>MySQL</strong>中，事务的ACID由<strong>InnoDB</strong>存储引擎的日志和锁保证的，事务的<strong>隔离性</strong>是通过<strong>数据库锁</strong>的机制实现的，<strong>持久性</strong>通过 <strong>Redo Log（重做日志）</strong>来实现，<strong>原子性和一致性</strong>通过 <strong>Undo Log</strong> 来实现。</p>
+<p><img src="/images/DB/InnoDB_ACID.png" alt></p>
+<blockquote>
+<p><strong>Undo Log</strong> 的原理很简单，为了满足事务的<strong>原子性</strong>，在操作任何数据之前，首先将数据备份到一个地方（这个存储数据备份的地方称为 <strong>Undo Log</strong>）。然后进行数据的修改。</p>
+<p>如果出现了错误或者用户执行了 Rollback 语句，系统可以利用 Undo Log 中的备份将数据恢复到事务开始之前的状态。</p>
+<p>和 Undo Log <strong>相反</strong>，<strong>Redo Log</strong> 记录的是<em>新数据的备份</em>。在事务提交前，只要将 Redo Log 持久化即可，不需要将数据持久化。</p>
+<p>当系统崩溃时，虽然数据没有持久化，<em>但是 Redo Log 已经持久化</em>。系统可以根据 Redo Log 的内容，将所有数据恢复到最新的状态。</p>
+</blockquote>
+<h3 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h3><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
+<p>举个例子，事务A和事务B操纵的是同一个资源，事务A有若干个子事务，事务B也有若干个子事务，事务A和事务B在高并发的情况下，会出现各种各样的问题。总结一下主要就是五种：第一类丢失更新、第二类丢失更新、脏读、不可重复读、幻读。五种之中，第一类丢失更新、第二类丢失更新不重要，不讲了，讲一下脏读、不可重复读和幻读。</p>
+<p><strong>1、脏读</strong></p>
+<blockquote>
+<p>所谓脏读，就是指<strong><u>事务A读到了事务B还没有提交的数据</u></strong>，比如银行取钱，事务A开启事务，此时切换到事务B，事务B开启事务–&gt;取走100元，此时切换回事务A，事务A读取的肯定是数据库里面的原始数据，因为事务B取走了100块钱，并没有提交，数据库里面的账务余额肯定还是原始余额，这就是脏读。</p>
+</blockquote>
+<p><strong>2、不可重复读</strong></p>
+<blockquote>
+<p>所谓不可重复读，就是指<strong><u>在一个事务里面读取了两次某个数据，读出来的数据<em>不一致</em></u></strong>。还是以银行取钱为例，事务A开启事务–&gt;查出银行卡余额为1000元，此时切换到事务B事务B开启事务–&gt;事务B取走100元–&gt;提交，数据库里面余额变为900元，此时切换回事务A，事务A再查一次查出账户余额为900元，这样对事务A而言，在同一个事务内两次读取账户余额数据不一致，这就是不可重复读。</p>
+</blockquote>
+<p><strong>3、幻读</strong></p>
+<blockquote>
+<p>所谓幻读，就是指<strong><u>在一个事务里面的操作中发现了未被操作的数据</u></strong>。比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。<em>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</em></p>
+</blockquote>
+<h3 id="事务隔离级别："><a href="#事务隔离级别：" class="headerlink" title="事务隔离级别："></a>事务隔离级别：</h3><p>事务隔离级别，就是为了解决上面几种问题而诞生的。为什么要有事务隔离级别，因为<strong>事务隔离级别越高，在并发下会产生的问题就越少，但同时付出的性能消耗也将越大</strong>，因此很多时候必须<u>在并发性和性能之间做一个权衡</u>。所以设立了几种事务隔离级别，以便让不同的项目可以根据自己项目的并发情况选择合适的事务隔离级别，对于在事务隔离级别之外会产生的并发问题，在代码中做补偿。</p>
+<p>事务隔离级别有4种，但是像Spring会提供给用户5种，来看一下：</p>
+<p><strong>1、DEFAULT</strong></p>
+<p><strong>默认隔离级别</strong>，每种数据库支持的事务隔离级别不一样，如果Spring配置事务时将isolation设置为这个值的话，那么将使用底层数据库的默认事务隔离级别。顺便说一句，如果使用的MySQL，可以使用”<strong>select @@tx_isolation</strong>“来查看默认的事务隔离级别</p>
+<p><strong>2、未提交读READ_UNCOMMITTED</strong></p>
+<p>未提交读，<strong>即能够读取到没有被提交的数据</strong>，所以很明显这个级别的隔离机制<strong><em>无法解决脏读、不可重复读、幻读中的任何一种</em></strong>，因此很少使用。</p>
+<p><strong>3、已提交读READ_COMMITED</strong></p>
+<p>已提交读，即<strong>能够读到那些已经提交的数据</strong>，<strong><em>自然能够防止脏读，但是无法限制不可重复读和幻读</em></strong>。</p>
+<p><strong>4、可重复读REPEATABLE_READ</strong></p>
+<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决<em>**。</em>是innoDB的默认事务隔离级别。*</p>
+<blockquote>
+<p>READ_COMMITED(RC)和REPEATABLE_READ(RR)是innoDB里面使用范围最广的隔离级别。</p>
+</blockquote>
+<p><strong>5、可串行化SERLALIZABLE</strong></p>
+<p>串行化，最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
+<p><img src="/images/DB/isolation_table.png" alt></p>
+<h3 id="事务隔离技术：MVCC与NEXT-KEY-LOCKING"><a href="#事务隔离技术：MVCC与NEXT-KEY-LOCKING" class="headerlink" title="事务隔离技术：MVCC与NEXT-KEY LOCKING"></a>事务隔离技术：MVCC与NEXT-KEY LOCKING</h3><p><strong>MVCC多版本并发控制（Multiversion Currency Control）</strong>：一般情况下，事务性储存引擎不是只使用表锁，行加锁的处理数据，而是结合了MVCC机制，以处理更多的并发问题。Mvcc处理高并发能力最强，但系统开销比最大（较表锁、行级锁），这是最求高并发付出的代价。</p>
+<blockquote>
+<p><strong>InnoDB实现MVCC的方法是，它存储了每一行的三个额外的隐藏字段:</strong></p>
+<ol>
+<li><p><strong>DB_TRX_ID</strong>：一个6byte的标识，每处理一个事务，其值自动+1<br>#下面提到的“创建时间”和“删除时间”记录的就是这个DB_TRX_ID的值<br>#如insert、update、delete操作时，删除操作用1个bit表示。<br>#<strong>DB_TRX_ID是最重要的一个</strong>，可以通过语句“show engine innodb status”来查找 </p>
+</li>
+<li><p><strong>DB_ROLL_PTR</strong>: 大小是7byte,指向写到rollback segment（回滚段）的一条undo log记录<br> （update操作的话，记录update前的ROW值）</p>
+</li>
+<li><p><strong>DB_ROW_ID</strong>: 大小是6byte,该值随新行插入单调增加</p>
+</li>
+</ol>
+</blockquote>
+<p>MVCC只工作在<strong>REPEATABLE READ</strong>和<strong>READ COMMITED</strong>隔离级别下：</p>
+<blockquote>
+<ol>
+<li>READ UNCOMMITTED ，不适用MVCC读，可以读到其他事务修改甚至未提交的</li>
+<li>READ COMMITTED ，其他事务对数据库的修改,只要已经提交,其修改的结果就是可见的,<br>与这两个事务开始的先后顺序无关，不完全适用于MVCC读，</li>
+<li>REPEATABLE READ，可重复读，完全适用MVCC，只能读取在它开始之前已经提交的事务对数据库的修改,<br>在它开始以后,所有其他事务对数据库的修改对它来说均不可见</li>
+<li>SERIALIZABLE ，完全不适合适用MVCC，这样所有的query都会加锁，再它之后的事务都要等待 </li>
+</ol>
+</blockquote>
+<p><strong>NEXT-KEY LOCKING</strong>：InnoDB中的RR级别作为范围如此广的隔离级别，其通过NEXT-KEY locking技术解决幻读问题，<strong>就是锁住一个范围</strong>：<em>例如：A追求一个女生，使用了NEXT-KEY LOCKING技术，即使得A在追求时要跟女孩说，只要我开始追求你，问了你有没有男朋友，在我结束追求你之前，你不可以答应别人的追求！我要把你脑子里记录男朋友的区域全部锁起来！</em></p>
+<p><img src="/images/DB/nextkeylock.png" alt="幻读问题在RR下的解决"></p>
+<hr>
+<h2 id="2-锁"><a href="#2-锁" class="headerlink" title="2. 锁"></a>2. 锁</h2><p>锁主要为<strong>共享锁</strong>和<strong>排他锁</strong>。</p>
+<p>两段锁协议：两段锁协议规定所有的事务应遵守的规则：<br>　　① 在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁。<br>　　② 在释放一个封锁之后，事务不再申请和获得其它任何封锁。<br>　　即事务的执行分为两个阶段：<br>　　第一阶段是获得封锁的阶段，称为<strong>扩展阶段</strong>。第二阶段是释放封锁的阶段，称为<strong>收缩阶段</strong>。</p>
+<p><strong>悲观锁</strong>：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁。<em>Java里面的同步原语synchronized关键字的实现也是悲观锁。</em></p>
+<p><strong>乐观锁</strong>：顾名思义，就是很乐观，假设认为数据一般情况下不会产生并发冲突，所以在数据进行提交更新的时候，才会正式对数据是否产生并发冲突进行检测，如果发现并发冲突了，则让返回用户错误的信息，让用户决定如何去做，可以使用版本号等机制。乐观锁适用于<strong>多读的应用类型</strong>，这样可以提高吞吐量。</p>
+<blockquote>
+<p>乐观锁的一种实现方式-<strong>CAS(Compare and Swap 比较并交换)</strong>：主要就是两个步骤：<strong>冲突检测</strong>和<strong>数据更新</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>CAS与Synchronized的使用情景：</strong>　</p>
+<ol>
+<li>对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</li>
+<li>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</li>
+</ol>
+</blockquote>
+<p><strong>隐式锁Synchronized</strong>：synchronized是Java的关键字，悲观锁的一种，当它用来修饰一个方法或一个代码块时，能够保证在同一时刻最多只有一个线程执行该代码。因为当调用Synchronized修饰的代码时，并不需要显示的加锁和解锁的过程，所以称之为隐式锁。</p>
+<blockquote>
+<p>synchronized在JVM上实现；针对一个对象。</p>
+</blockquote>
+<p><strong>显式锁Lock</strong>：Lock是一个<strong>接口</strong>，提供了无条件的、可轮询的、定时的、可中断的锁获取操作，所有的加锁和解锁操作方法都是显示的，因而称为显示锁。 主要有以下几个实现类：<em>ReentrantLock</em>（可重入锁）、<em>ReentrantReadWriteLock.ReadLock</em>和<em>ReentrantReadWriteLock.WriteLock</em>。记住，每次上锁，都务必记得解锁。</p>
+<blockquote>
+<p>ReentrantLock和ReentrantReadWriteLock是代码块层面的锁定，而且需要显式的加解锁。</p>
+</blockquote>
+<p><strong>快照读</strong>：读取的是记录数据的可见版本（可能是过期的数据），不用加锁。</p>
+<p><strong>当前读</strong>：读取的是记录数据的最新版本，并且当前读返回的记录都会加上锁，保证其他事务不会再并发的修改这条记录。</p>
+<hr>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。说白了就是<strong>一张数据表的表结构所符合的某种设计标准的级别</strong>。范式级别越高，表的设计就越标准。</p>
+<p><img src="/images/DB/fanshi_relation.png" alt="各范式关系"></p>
+<p><strong>第一范式</strong>：第一范式是数据库表需要符合的最基本条件：表的每一个属性不能是再可分的数据项。</p>
+<p><img src="/images/DB/fanshi_1.jpg" alt></p>
+<p><strong>第二范式</strong>：第二范式就是在第一范式的基础之上消除了非主属性对码的部分依赖 。</p>
+<p><strong>第三范式</strong>：就是在第二范式的基础上再消除了非主属性对码的传递依赖。</p>
+<p><strong>BCNF</strong>：就是在第三范式的基础上消除了主属性对码的部分依赖和传递依赖。</p>
+<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><p><strong>drop，truncate和delete的区别</strong>：</p>
+<blockquote>
+<ol>
+<li>DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。</li>
+</ol>
+<p>​       TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行    是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。</p>
+<ol start="2">
+<li><p>表和索引所占空间。</p>
+<p>当表被TRUNCATE 后，这个表和索引所占用的空间会恢复到初始大小，</p>
+<p>DELETE操作不会减少表或索引所占用的空间。</p>
+</li>
+</ol>
+<p>​       drop语句将表所占用的空间全释放掉。</p>
+<ol start="3">
+<li><p>速度上，一般而言，drop &gt; truncate &gt; delete</p>
+</li>
+<li><p>应用范围。</p>
+<p>TRUNCATE 只能对TABLE；         DELETE可以是table和view</p>
+</li>
+<li><p>TRUNCATE 和DELETE只删除数据， DROP则删除整个表（结构和数据）。</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="视图View"><a href="#视图View" class="headerlink" title="视图View"></a>视图View</h2><p>有时候我们不想用户看到所有的逻辑模型，会使用视图。视图有很多用处，比如一个比较复杂的查询不想每次都写很多语句，就可以写个视图；或者给特定用户开放某些表的读取权限，但要加一些行和列的限制，也可以写个视图。</p>
+<p>视图的好处，可以主要分为四点： </p>
+<ol>
+<li><p>使用视图，可以定制用户数据，<strong>聚焦特定的数据</strong>。  </p>
+<blockquote>
+<p>在实际过程中，公司有不同角色的工作人员，我们以销售公司为例的话，<br>采购人员，可以需要一些与其有关的 数据，而与他无关的数据，对他没<br>有任何意义，我们可以根据这一实际情况，专门为采购人员创建一个视<br>图，以后他在查询数据时，只需select   *   from   view_caigou   就可以啦。 </p>
+</blockquote>
+</li>
+<li><p>使用视图，可以<strong>简化数据操作</strong>。 </p>
+<blockquote>
+<p>我们在使用查询时，在很多时候我们要使用聚合函数，同时还要<br>显示其它字段的信息，可能还会需要关联到其它表，这时写的语句可能<br>会很长很复杂，如果这个动作频繁发生的话，我们可以创建视图，这以后，我<br>们只需要select   *   from   view1就可以啦。 </p>
+</blockquote>
+</li>
+<li><p>使用视图，基表中的数据就有了一定的<strong>安全性</strong> 。</p>
+<blockquote>
+<p>因为视图是虚拟的，物理上是不存在的，只是存储了数据的集合，我们可以<br>将基表中重要的字段信息，可以不通过视图给用户，视图是动态的数据的集<br>合，数据是随着基表的更新而更新。同时，用户对视图，不可以随意的更改<br>和删除，可以保证数据的安全性。 </p>
+</blockquote>
+</li>
+<li><p>可以<strong>合并分离的数据</strong>，创建分区视图。 </p>
+<blockquote>
+<p>随着社会的发展，公司的业务量的不断的扩大，一个大公司，下属都设有很<br>多的分公司，为了管理方便，我们需要统一表的结构，定期查看各公司业务<br>情况，而分别看各个公司的数据很不方便，没有很好的可比性，如果将这些<br>数据合并为一个表格里，就方便多啦，这时我们就可以使用union关键字，<br>将各分公司的数据合并为一个视图。</p>
+</blockquote>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/Lucene_learn_1_20190222/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2001,588 +2461,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/blog_logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/DB_review_1_20190222/" itemprop="url">数据库基础复习（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据库复习笔记（一）"><a href="#数据库复习笔记（一）" class="headerlink" title="数据库复习笔记（一）"></a>数据库复习笔记（一）</h1><h2 id="1-事务（transaction）"><a href="#1-事务（transaction）" class="headerlink" title="1. 事务（transaction）"></a>1. 事务（transaction）</h2><p><strong>事务</strong>是访问并可能更新数据项的的一个程序执行单元。</p>
-<p>事务具有<strong>ACID</strong>特性：</p>
-<ol>
-<li><p><strong>原子性Atomicity</strong>：事务的所有操作要么<strong>全部正确</strong>反映出来，要么<strong>完全不反应</strong>。</p>
-<blockquote>
-<p>事务如果不成功执行，称为<strong>中止aborted</strong>，为了确保原子性，中止事务必须对数据库的状态不造成影响，于是使用回滚<strong>rollback</strong>。典型的方法就是维护一个<strong>日志log</strong>。</p>
-</blockquote>
-</li>
-<li><p><strong>一致性Consistency</strong>：事务的一致性指的是在一个事务执行之前和执行之后数据库都必须处于一致性状态。</p>
-<blockquote>
-<p>如果事务成功地完成，那么系统中所有变化将正确地应用，系统处于有效状态。</p>
-<p>如果在事务中出现错误，那么系统中的所有变化将自动地回滚，系统返回到原始状态。</p>
-</blockquote>
-</li>
-<li><p><strong>隔离性Isolation</strong>：尽管多个事务可能并发执行，但是系统保证每个事务都感觉不到系统有其他事务在执行。</p>
-<blockquote>
-<p>指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。由并发事务所做的修改必须与任何其他并发事务所做的修改隔离。事务查看数据更新时，数据所处的状态要么是另一事务修改它之前的状态，要么是另一事务修改它之后的状态，事务不会查看到中间状态的数据。</p>
-</blockquote>
-</li>
-<li><p><strong>持久性Durability</strong>：一个事务一旦完成，它对数据库的改变必须是永久的，即使系统出现故障，也不会因此而失去改动。</p>
-</li>
-</ol>
-<p>在<strong>MySQL</strong>中，事务的ACID由<strong>InnoDB</strong>存储引擎的日志和锁保证的，事务的<strong>隔离性</strong>是通过<strong>数据库锁</strong>的机制实现的，<strong>持久性</strong>通过 <strong>Redo Log（重做日志）</strong>来实现，<strong>原子性和一致性</strong>通过 <strong>Undo Log</strong> 来实现。</p>
-<p><img src="/images/DB/InnoDB_ACID.png" alt></p>
-<blockquote>
-<p><strong>Undo Log</strong> 的原理很简单，为了满足事务的<strong>原子性</strong>，在操作任何数据之前，首先将数据备份到一个地方（这个存储数据备份的地方称为 <strong>Undo Log</strong>）。然后进行数据的修改。</p>
-<p>如果出现了错误或者用户执行了 Rollback 语句，系统可以利用 Undo Log 中的备份将数据恢复到事务开始之前的状态。</p>
-<p>和 Undo Log <strong>相反</strong>，<strong>Redo Log</strong> 记录的是<em>新数据的备份</em>。在事务提交前，只要将 Redo Log 持久化即可，不需要将数据持久化。</p>
-<p>当系统崩溃时，虽然数据没有持久化，<em>但是 Redo Log 已经持久化</em>。系统可以根据 Redo Log 的内容，将所有数据恢复到最新的状态。</p>
-</blockquote>
-<h3 id="关于隔离性："><a href="#关于隔离性：" class="headerlink" title="关于隔离性："></a>关于隔离性：</h3><p><strong>首先，先介绍并发下事务会产生的问题：</strong></p>
-<p>举个例子，事务A和事务B操纵的是同一个资源，事务A有若干个子事务，事务B也有若干个子事务，事务A和事务B在高并发的情况下，会出现各种各样的问题。总结一下主要就是五种：第一类丢失更新、第二类丢失更新、脏读、不可重复读、幻读。五种之中，第一类丢失更新、第二类丢失更新不重要，不讲了，讲一下脏读、不可重复读和幻读。</p>
-<p><strong>1、脏读</strong></p>
-<blockquote>
-<p>所谓脏读，就是指<strong><u>事务A读到了事务B还没有提交的数据</u></strong>，比如银行取钱，事务A开启事务，此时切换到事务B，事务B开启事务–&gt;取走100元，此时切换回事务A，事务A读取的肯定是数据库里面的原始数据，因为事务B取走了100块钱，并没有提交，数据库里面的账务余额肯定还是原始余额，这就是脏读。</p>
-</blockquote>
-<p><strong>2、不可重复读</strong></p>
-<blockquote>
-<p>所谓不可重复读，就是指<strong><u>在一个事务里面读取了两次某个数据，读出来的数据<em>不一致</em></u></strong>。还是以银行取钱为例，事务A开启事务–&gt;查出银行卡余额为1000元，此时切换到事务B事务B开启事务–&gt;事务B取走100元–&gt;提交，数据库里面余额变为900元，此时切换回事务A，事务A再查一次查出账户余额为900元，这样对事务A而言，在同一个事务内两次读取账户余额数据不一致，这就是不可重复读。</p>
-</blockquote>
-<p><strong>3、幻读</strong></p>
-<blockquote>
-<p>所谓幻读，就是指<strong><u>在一个事务里面的操作中发现了未被操作的数据</u></strong>。比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。<em>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</em></p>
-</blockquote>
-<h3 id="事务隔离级别："><a href="#事务隔离级别：" class="headerlink" title="事务隔离级别："></a>事务隔离级别：</h3><p>事务隔离级别，就是为了解决上面几种问题而诞生的。为什么要有事务隔离级别，因为<strong>事务隔离级别越高，在并发下会产生的问题就越少，但同时付出的性能消耗也将越大</strong>，因此很多时候必须<u>在并发性和性能之间做一个权衡</u>。所以设立了几种事务隔离级别，以便让不同的项目可以根据自己项目的并发情况选择合适的事务隔离级别，对于在事务隔离级别之外会产生的并发问题，在代码中做补偿。</p>
-<p>事务隔离级别有4种，但是像Spring会提供给用户5种，来看一下：</p>
-<p><strong>1、DEFAULT</strong></p>
-<p><strong>默认隔离级别</strong>，每种数据库支持的事务隔离级别不一样，如果Spring配置事务时将isolation设置为这个值的话，那么将使用底层数据库的默认事务隔离级别。顺便说一句，如果使用的MySQL，可以使用”<strong>select @@tx_isolation</strong>“来查看默认的事务隔离级别</p>
-<p><strong>2、未提交读READ_UNCOMMITTED</strong></p>
-<p>未提交读，<strong>即能够读取到没有被提交的数据</strong>，所以很明显这个级别的隔离机制<strong><em>无法解决脏读、不可重复读、幻读中的任何一种</em></strong>，因此很少使用。</p>
-<p><strong>3、已提交读READ_COMMITED</strong></p>
-<p>已提交读，即<strong>能够读到那些已经提交的数据</strong>，<strong><em>自然能够防止脏读，但是无法限制不可重复读和幻读</em></strong>。</p>
-<p><strong>4、可重复读REPEATABLE_READ</strong></p>
-<p>重复读取，即在<strong>数据读出来之后加锁</strong>，类似”select <em> from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，**</em>这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决<em>**。</em>是innoDB的默认事务隔离级别。*</p>
-<blockquote>
-<p>READ_COMMITED(RC)和REPEATABLE_READ(RR)是innoDB里面使用范围最广的隔离级别。</p>
-</blockquote>
-<p><strong>5、可串行化SERLALIZABLE</strong></p>
-<p>串行化，最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
-<p><img src="/images/DB/isolation_table.png" alt></p>
-<h3 id="事务隔离技术：MVCC与NEXT-KEY-LOCKING"><a href="#事务隔离技术：MVCC与NEXT-KEY-LOCKING" class="headerlink" title="事务隔离技术：MVCC与NEXT-KEY LOCKING"></a>事务隔离技术：MVCC与NEXT-KEY LOCKING</h3><p><strong>MVCC多版本并发控制（Multiversion Currency Control）</strong>：一般情况下，事务性储存引擎不是只使用表锁，行加锁的处理数据，而是结合了MVCC机制，以处理更多的并发问题。Mvcc处理高并发能力最强，但系统开销比最大（较表锁、行级锁），这是最求高并发付出的代价。</p>
-<blockquote>
-<p><strong>InnoDB实现MVCC的方法是，它存储了每一行的三个额外的隐藏字段:</strong></p>
-<ol>
-<li><p><strong>DB_TRX_ID</strong>：一个6byte的标识，每处理一个事务，其值自动+1<br>#下面提到的“创建时间”和“删除时间”记录的就是这个DB_TRX_ID的值<br>#如insert、update、delete操作时，删除操作用1个bit表示。<br>#<strong>DB_TRX_ID是最重要的一个</strong>，可以通过语句“show engine innodb status”来查找 </p>
-</li>
-<li><p><strong>DB_ROLL_PTR</strong>: 大小是7byte,指向写到rollback segment（回滚段）的一条undo log记录<br> （update操作的话，记录update前的ROW值）</p>
-</li>
-<li><p><strong>DB_ROW_ID</strong>: 大小是6byte,该值随新行插入单调增加</p>
-</li>
-</ol>
-</blockquote>
-<p>MVCC只工作在<strong>REPEATABLE READ</strong>和<strong>READ COMMITED</strong>隔离级别下：</p>
-<blockquote>
-<ol>
-<li>READ UNCOMMITTED ，不适用MVCC读，可以读到其他事务修改甚至未提交的</li>
-<li>READ COMMITTED ，其他事务对数据库的修改,只要已经提交,其修改的结果就是可见的,<br>与这两个事务开始的先后顺序无关，不完全适用于MVCC读，</li>
-<li>REPEATABLE READ，可重复读，完全适用MVCC，只能读取在它开始之前已经提交的事务对数据库的修改,<br>在它开始以后,所有其他事务对数据库的修改对它来说均不可见</li>
-<li>SERIALIZABLE ，完全不适合适用MVCC，这样所有的query都会加锁，再它之后的事务都要等待 </li>
-</ol>
-</blockquote>
-<p><strong>NEXT-KEY LOCKING</strong>：InnoDB中的RR级别作为范围如此广的隔离级别，其通过NEXT-KEY locking技术解决幻读问题，<strong>就是锁住一个范围</strong>：<em>例如：A追求一个女生，使用了NEXT-KEY LOCKING技术，即使得A在追求时要跟女孩说，只要我开始追求你，问了你有没有男朋友，在我结束追求你之前，你不可以答应别人的追求！我要把你脑子里记录男朋友的区域全部锁起来！</em></p>
-<p><img src="/images/DB/nextkeylock.png" alt="幻读问题在RR下的解决"></p>
-<hr>
-<h2 id="2-锁"><a href="#2-锁" class="headerlink" title="2. 锁"></a>2. 锁</h2><p>锁主要为<strong>共享锁</strong>和<strong>排他锁</strong>。</p>
-<p>两段锁协议：两段锁协议规定所有的事务应遵守的规则：<br>　　① 在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁。<br>　　② 在释放一个封锁之后，事务不再申请和获得其它任何封锁。<br>　　即事务的执行分为两个阶段：<br>　　第一阶段是获得封锁的阶段，称为<strong>扩展阶段</strong>。第二阶段是释放封锁的阶段，称为<strong>收缩阶段</strong>。</p>
-<p><strong>悲观锁</strong>：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁。<em>Java里面的同步原语synchronized关键字的实现也是悲观锁。</em></p>
-<p><strong>乐观锁</strong>：顾名思义，就是很乐观，假设认为数据一般情况下不会产生并发冲突，所以在数据进行提交更新的时候，才会正式对数据是否产生并发冲突进行检测，如果发现并发冲突了，则让返回用户错误的信息，让用户决定如何去做，可以使用版本号等机制。乐观锁适用于<strong>多读的应用类型</strong>，这样可以提高吞吐量。</p>
-<blockquote>
-<p>乐观锁的一种实现方式-<strong>CAS(Compare and Swap 比较并交换)</strong>：主要就是两个步骤：<strong>冲突检测</strong>和<strong>数据更新</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>CAS与Synchronized的使用情景：</strong>　</p>
-<ol>
-<li>对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</li>
-<li>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</li>
-</ol>
-</blockquote>
-<p><strong>隐式锁Synchronized</strong>：synchronized是Java的关键字，悲观锁的一种，当它用来修饰一个方法或一个代码块时，能够保证在同一时刻最多只有一个线程执行该代码。因为当调用Synchronized修饰的代码时，并不需要显示的加锁和解锁的过程，所以称之为隐式锁。</p>
-<blockquote>
-<p>synchronized在JVM上实现；针对一个对象。</p>
-</blockquote>
-<p><strong>显式锁Lock</strong>：Lock是一个<strong>接口</strong>，提供了无条件的、可轮询的、定时的、可中断的锁获取操作，所有的加锁和解锁操作方法都是显示的，因而称为显示锁。 主要有以下几个实现类：<em>ReentrantLock</em>（可重入锁）、<em>ReentrantReadWriteLock.ReadLock</em>和<em>ReentrantReadWriteLock.WriteLock</em>。记住，每次上锁，都务必记得解锁。</p>
-<blockquote>
-<p>ReentrantLock和ReentrantReadWriteLock是代码块层面的锁定，而且需要显式的加解锁。</p>
-</blockquote>
-<p><strong>快照读</strong>：读取的是记录数据的可见版本（可能是过期的数据），不用加锁。</p>
-<p><strong>当前读</strong>：读取的是记录数据的最新版本，并且当前读返回的记录都会加上锁，保证其他事务不会再并发的修改这条记录。</p>
-<hr>
-<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。说白了就是<strong>一张数据表的表结构所符合的某种设计标准的级别</strong>。范式级别越高，表的设计就越标准。</p>
-<p><img src="/images/DB/fanshi_relation.png" alt="各范式关系"></p>
-<p><strong>第一范式</strong>：第一范式是数据库表需要符合的最基本条件：表的每一个属性不能是再可分的数据项。</p>
-<p><img src="/images/DB/fanshi_1.jpg" alt></p>
-<p><strong>第二范式</strong>：第二范式就是在第一范式的基础之上消除了非主属性对码的部分依赖 。</p>
-<p><strong>第三范式</strong>：就是在第二范式的基础上再消除了非主属性对码的传递依赖。</p>
-<p><strong>BCNF</strong>：就是在第三范式的基础上消除了主属性对码的部分依赖和传递依赖。</p>
-<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><p><strong>drop，truncate和delete的区别</strong>：</p>
-<blockquote>
-<ol>
-<li>DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。</li>
-</ol>
-<p>​       TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行    是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。</p>
-<ol start="2">
-<li><p>表和索引所占空间。</p>
-<p>当表被TRUNCATE 后，这个表和索引所占用的空间会恢复到初始大小，</p>
-<p>DELETE操作不会减少表或索引所占用的空间。</p>
-</li>
-</ol>
-<p>​       drop语句将表所占用的空间全释放掉。</p>
-<ol start="3">
-<li><p>速度上，一般而言，drop &gt; truncate &gt; delete</p>
-</li>
-<li><p>应用范围。</p>
-<p>TRUNCATE 只能对TABLE；         DELETE可以是table和view</p>
-</li>
-<li><p>TRUNCATE 和DELETE只删除数据， DROP则删除整个表（结构和数据）。</p>
-</li>
-</ol>
-</blockquote>
-<h2 id="视图View"><a href="#视图View" class="headerlink" title="视图View"></a>视图View</h2><p>有时候我们不想用户看到所有的逻辑模型，会使用视图。视图有很多用处，比如一个比较复杂的查询不想每次都写很多语句，就可以写个视图；或者给特定用户开放某些表的读取权限，但要加一些行和列的限制，也可以写个视图。</p>
-<p>视图的好处，可以主要分为四点： </p>
-<ol>
-<li><p>使用视图，可以定制用户数据，<strong>聚焦特定的数据</strong>。  </p>
-<blockquote>
-<p>在实际过程中，公司有不同角色的工作人员，我们以销售公司为例的话，<br>采购人员，可以需要一些与其有关的 数据，而与他无关的数据，对他没<br>有任何意义，我们可以根据这一实际情况，专门为采购人员创建一个视<br>图，以后他在查询数据时，只需select   *   from   view_caigou   就可以啦。 </p>
-</blockquote>
-</li>
-<li><p>使用视图，可以<strong>简化数据操作</strong>。 </p>
-<blockquote>
-<p>我们在使用查询时，在很多时候我们要使用聚合函数，同时还要<br>显示其它字段的信息，可能还会需要关联到其它表，这时写的语句可能<br>会很长很复杂，如果这个动作频繁发生的话，我们可以创建视图，这以后，我<br>们只需要select   *   from   view1就可以啦。 </p>
-</blockquote>
-</li>
-<li><p>使用视图，基表中的数据就有了一定的<strong>安全性</strong> 。</p>
-<blockquote>
-<p>因为视图是虚拟的，物理上是不存在的，只是存储了数据的集合，我们可以<br>将基表中重要的字段信息，可以不通过视图给用户，视图是动态的数据的集<br>合，数据是随着基表的更新而更新。同时，用户对视图，不可以随意的更改<br>和删除，可以保证数据的安全性。 </p>
-</blockquote>
-</li>
-<li><p>可以<strong>合并分离的数据</strong>，创建分区视图。 </p>
-<blockquote>
-<p>随着社会的发展，公司的业务量的不断的扩大，一个大公司，下属都设有很<br>多的分公司，为了管理方便，我们需要统一表的结构，定期查看各公司业务<br>情况，而分别看各个公司的数据很不方便，没有很好的可比性，如果将这些<br>数据合并为一个表格里，就方便多啦，这时我们就可以使用union关键字，<br>将各分公司的数据合并为一个视图。</p>
-</blockquote>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/blog_logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/OS_review_1_20190222/" itemprop="url">操作系统复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="分页和分段的区别"><a href="#分页和分段的区别" class="headerlink" title="分页和分段的区别"></a>分页和分段的区别</h3><blockquote>
-<ul>
-<li>页是信息的物理单位，分页是为了实现离散分配方式、消减内存零头、提高内存利用率。仅仅处于系统内存管理的需求而非用户需求；段是信息的逻辑单位，分段目的是为了更好满足用户需求。</li>
-<li>页的大小固定，由系统把逻辑地址分为页号和页内地址两部分；而段是由用户编写程序决定，长度不固定</li>
-</ul>
-</blockquote>
-<h3 id="进程与线程的区别、应用场景"><a href="#进程与线程的区别、应用场景" class="headerlink" title="进程与线程的区别、应用场景"></a>进程与线程的区别、应用场景</h3><blockquote>
-<ul>
-<li><p>线程：<strong>CPU调度的基本单位</strong>，是进程内部的一个执行流，在进程的地址空间内运行。</p>
-</li>
-<li><p>进程：<strong>系统分配资源的基本单位、能独立运行的基本单位</strong>，是拥有一个/多个执行流的线程组。</p>
-</li>
-<li><p>创建、销毁一个线程相对于进程的成本要低（创建进程要创建PCB、虚拟地址空间、页表、维护映射、加载数据到内存等；而创建线程只需要一个PCB指向进程的虚拟空间即可，同理销毁线程只需要销毁PCB）。</p>
-</li>
-<li><p>线程的切换比进程的切换容易的多，<strong>进程切换需要PCB切换、页表切换；线程切换需要PCB切换，页表不切换。</strong></p>
-</li>
-<li><p>进程拥有自己独立的虚拟地址空间，而一个进程中的多个线程共享进程的虚拟地址空间。因此线程缺乏访问控制，<strong>进程中的一个线程出错，会终止掉整个进程，从而导致其他线程也凉凉，而一个进程出错，不会影响另一个进程</strong>。</p>
-</li>
-<li><p>线程共享进程空间，通信成本容易；进程通信难，成本高。</p>
-</li>
-<li><p>线程的应用场景：等待慢速I/O时，交给一个线程等待，接着做其他事情；</p>
-<p>​                               需要频发创建销毁的；</p>
-<p>​                               需要大量计算的；</p>
-<p>​                强相关的。</p>
-</li>
-<li><p>进程的应用场景：有安全、稳定的需求时；需要速度时；需要速度和安全时；</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="多线程与多进程："><a href="#多线程与多进程：" class="headerlink" title="多线程与多进程："></a>多线程与多进程：</h3><table>
-<thead>
-<tr>
-<th><strong>对比维度</strong></th>
-<th><strong>多进程</strong></th>
-<th><strong>多线程</strong></th>
-<th><strong>总结</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据共享、同步</td>
-<td>数据共享复杂，需要用IPC（进程间通信，InterProcess Communication）；数据是分开的，同步简单</td>
-<td>因为共享进程数据，数据共享简单，但也是因为这个原因导致同步复杂</td>
-<td>各有优势</td>
-</tr>
-<tr>
-<td>内存、CPU</td>
-<td>占用内存多，切换复杂，CPU利用率低</td>
-<td>占用内存少，切换简单，CPU利用率高</td>
-<td>线程占优</td>
-</tr>
-<tr>
-<td>创建销毁、切换</td>
-<td>创建销毁、切换复杂，速度慢</td>
-<td>创建销毁、切换简单，速度很快</td>
-<td>线程占优</td>
-</tr>
-<tr>
-<td>编程、调试</td>
-<td>编程简单，调试简单</td>
-<td>编程复杂，调试复杂</td>
-<td>进程占优</td>
-</tr>
-<tr>
-<td>可靠性</td>
-<td>进程间不会互相影响</td>
-<td>一个线程挂掉将导致整个进程挂掉</td>
-<td>进程占优</td>
-</tr>
-<tr>
-<td>分布式</td>
-<td>适应于多核、多机分布式；如果一台机器不够，扩展到多台机器比较简单</td>
-<td>适应于多核分布式</td>
-<td>进程占优</td>
-</tr>
-</tbody>
-</table>
-<h3 id="进程间通信（IPC）"><a href="#进程间通信（IPC）" class="headerlink" title="进程间通信（IPC）"></a>进程间通信（IPC）</h3><blockquote>
-<p>主要方式包括：管道、FIFO、消息队列、信号量、共享内存、Socket。</p>
-<ul>
-<li><p>管道（无名管道）：半双工，只能在具有公共祖先额度两个进程中使用（通常为父进程与子进程）。</p>
-</li>
-<li><p>FIFO（命名管道）：可以在不想关的进程间交换数据。FIFO是一种文件类型。 shell命令使用FIFO将数据从一条管道传送到另一条管道时，无须创建中间的临时文件。</p>
-<p>无名管道与有名管道的区别在于<strong>单向通信</strong>以及<strong>有关联的进程</strong>。</p>
-</li>
-<li><p>消息队列：消息的链接表，存储在内核中，有消息队列标识符标识。并不一定以先进先出的顺序取消息，可以按照消息的<strong>类型字段</strong>取消息。</p>
-</li>
-<li><p>信号量：与管道，FIFO以及消息队列不同。它是一个计数器，用于为多个进程提供共享数据对象的访问</p>
-</li>
-<li><p>共享内存：允许两个或多个进程共享一个给定的存储区，因为数据不需要在客户进程和服务器进程之间复制，所以这是最快的IPC。<strong>信号量</strong>用于同步共享存储访问。</p>
-</li>
-<li><p>socket：网络中进程之间通信。open—write/read—close”模式的一种实现。</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="动态链接dll和静态链接lib："><a href="#动态链接dll和静态链接lib：" class="headerlink" title="动态链接dll和静态链接lib："></a>动态链接dll和静态链接lib：</h3><blockquote>
-<p>这两者都是共享代码的一种方式。共享代码就是说，一帮程序员要开发一个项目，如果每个人做的不同块中有相同的功能，那么，在最后的封装中，可以把相同代码塞到链接库里（这样就不用写n遍了，节约空间）。</p>
-<ul>
-<li><p>静态链接：</p>
-<p>优点：</p>
-<ol>
-<li><p>代码装载速度快，执行速度略快。<strong>原因：</strong>你一开始就调用了整个静态链接库，so，不用一个个装载当前用的函数或者方法； </p>
-<ol start="2">
-<li>只需保证在开发者的计算机中有正确的.LIB文件，在以二进制形式发布程序时不需考虑在                用户的计算机上.LIB文件是否存在及版本问题，<strong>可避免DLL地狱</strong>等问题。 </li>
-</ol>
-</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>使用静态链接生成的可执行文件体积较大，包含相同的公共代码，造成浪费（<strong>这就是重复代码一遍遍被封装的后果</strong>）。</li>
-<li>.lib用空间换时间。</li>
-</ol>
-</li>
-<li><p>动态链接：</p>
-<p>优点：</p>
-<ol>
-<li>更加节省内存并减少页面交换。原因：<strong>仅仅调用自己需要的</strong>，不需要的就不调用，所以减少内存（减少页面交换同理）。</li>
-<li>DLL文件与EXE文件独立，只要输出接口不变（即名称、参数、返回值类型和调用约定不变），更换DLL文件不会对EXE文件造成任何影响，因而极大地提高了可维护性和可扩展性。</li>
-<li>不同编程语言编写的程序只要按照函数调用约定就可以调用同一个DLL函数（<strong>当然你必须遵守函数调用约定。这东西可以视为一种协议。</strong>）</li>
-<li>由于具有以上三种性质，所以.dll适用于大规模的软件开发，使开发过程独立、耦合度小，便于不同开发者和开发组织之间进行<strong>开发</strong>和<strong>测试（你可以理解为模块化程度高）</strong>。</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>使用动态链接库的应用程序不是自完备的，它依赖的DLL模块也要存在。</li>
-</ol>
-<ul>
-<li>如果使用载入时动态链接，程序启动时发现DLL不存在，系统将终止程序并给出错误信息。</li>
-<li>使用运行时动态链接，系统不会终止，但由于DLL中的导出函数不可用，程序会加载失败。</li>
-</ul>
-<ol start="2">
-<li>速度比静态链接慢。</li>
-<li>如果新模块与旧的模块不兼容，那么那些需要该模块才能运行的软件，统统撕掉。这在早期Windows中很常见（<strong>譬如 “缺少XXX.dll，程序无法运行”</strong>）。</li>
-<li>用时间换空间。</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2635,7 +2513,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2657,7 +2535,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
