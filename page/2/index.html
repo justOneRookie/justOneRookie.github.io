@@ -261,6 +261,449 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/MySQL_learn_1_20190225/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/blog_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/25/MySQL_learn_1_20190225/" itemprop="url">MySQL的一些学习过程（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T00:00:00+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MySQL学习日记-一"><a href="#MySQL学习日记-一" class="headerlink" title="MySQL学习日记(一)"></a>MySQL学习日记(一)</h1><h2 id="索引："><a href="#索引：" class="headerlink" title="索引："></a>索引：</h2><p>索引在MySQL中也叫做“<strong>键</strong>”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能<br>非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。<br>索引优化应该是<em>对查询性能优化最有效的手段</em>了。索引能够轻易将查询性能提高好几个数量级。</p>
+<p>首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，<strong>当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都读取到内存缓冲区内</strong>，因为局部预读性原理告诉我们，当计算机访问一个地址的数据的时候，与其相邻的数据也会很快被访问到。每一次IO读取的数据我们称之为一页(page)。具体一页有多大数据跟操作系统有关，一般为4k或8k，也就是我们读取一页内的数据时候，实际上才发生了一次IO，这个理论对于索引的数据结构设计非常有帮助。</p>
+<p><strong>索引的数据结构</strong>：任何一种数据结构都不是凭空产生的，一定会有它的背景和使用场景，我们现在总结一下，我们需要这种数据结构能够做些什么，其实很简单，那就是：每次查找数据时把磁盘IO次数控制在一个很小的数量级，最好是常数数量级。那么我们就想到如果一个高度可控的多路搜索树是否能满足需求呢？就这样，b+树应运而生。</p>
+<p><img src="/images/MySQL/B+tree.png" alt></p>
+<p>如上图，是一颗b+树，浅蓝色的块我们称之为一个磁盘块，可以看到每个磁盘块包含几个数据项（深蓝色所示）和指针（黄色所示），真实的数据存在于叶子节点，非叶子节点只不存储真实的数据，只存储指引搜索方向的数据项，如17、35并不真实存在于数据表中。</p>
+<p><strong>b+树的查找过程</strong>：如图所示，如果要查找数据项29，那么首先会把磁盘块1由磁盘加载到内存，此时发生一次IO，在内存中用二分查找确定29在17和35之间，锁定磁盘块1的P2指针，内存时间因为非常短（相比磁盘的IO）可以忽略不计，通过磁盘块1的P2指针的磁盘地址把磁盘块3由磁盘加载到内存，发生第二次IO，29在26和30之间，锁定磁盘块3的P2指针，通过指针加载磁盘块8到内存，发生第三次IO，同时内存中做二分查找找到29，结束查询，总计三次IO。真实的情况是，3层的b+树可以表示上百万的数据，如果上百万的数据查找只需要三次IO，性能提高将是巨大的，如果没有索引，每个数据项都要发生一次IO，那么总共需要百万次的IO，显然成本非常非常高。</p>
+<p>因此，我们可以总结出：</p>
+<blockquote>
+<ol>
+<li><strong>索引字段要尽量的小</strong>：通过上面的分析，我们知道IO次数取决于b+数的高度h，假设当前数据表的数据为N，每个磁盘块的数据项的数量是m，则有$$h = \log_mN$$，当数据量N一定的情况下，m越大，h越小；而m = 磁盘块的大小 / 数据项的大小，磁盘块的大小也就是一个数据页的大小，是固定的，如果数据项占的空间越小，数据项的数量越多，树的高度越低。这就是为什么每个数据项，即索引字段要尽量的小，比如int占4字节，要比bigint8字节少一半。这也是为什么b+树要求把真实的数据放到叶子节点而不是内层节点，一旦放到内层节点，磁盘块的数据项会大幅度下降，导致树增高。当数据项等于1时将会退化成线性表。</li>
+<li><strong>索引的最左匹配特性（即从左往右匹配）</strong>：当b+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性。</li>
+</ol>
+</blockquote>
+<p><strong>MySQL的索引分类</strong>:</p>
+<blockquote>
+<p>索引分类<br>1.普通索引index :加速查找<br>2.唯一索引<br>    主键索引：primary key ：加速查找+约束（不为空且唯一）<br>    唯一索引：unique：加速查找+约束 （唯一）<br>3.联合索引<br>    -primary key(id,name):联合主键索引<br>    -unique(id,name):联合唯一索引<br>    -index(id,name):联合普通索引<br>4.全文索引fulltext :用于搜索很长一篇文章的时候，效果最好。<br>5.空间索引spatial :了解就好，几乎不用</p>
+</blockquote>
+<p> 索引的两大类型hash与btree:</p>
+<ul>
+<li>hash类型的索引：查询单条快，范围查询慢</li>
+<li>btree类型的索引：b+树，层数越多，数据量指数级增长（我们就用它，因为innodb默认支持它）。</li>
+</ul>
+<p><strong>创建/删除索引的语法</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方法一：创建表时</span></span><br><span class="line">     　<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名 (</span><br><span class="line">                字段名<span class="number">1</span>  数据类型 [完整性约束条件…],</span><br><span class="line">                字段名<span class="number">2</span>  数据类型 [完整性约束条件…],</span><br><span class="line">                [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL ]   <span class="keyword">INDEX</span> | <span class="keyword">KEY</span></span><br><span class="line">                [索引名]  (字段名[(长度)]  [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]) </span><br><span class="line">                );</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法二：CREATE在已存在的表上创建索引</span></span><br><span class="line">        <span class="keyword">CREATE</span>  [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL ]  <span class="keyword">INDEX</span>  索引名 </span><br><span class="line">                     <span class="keyword">ON</span> 表名 (字段名[(长度)]  [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]) ;</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法三：ALTER TABLE在已存在的表上创建索引</span></span><br><span class="line">        <span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span>  [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL ] <span class="keyword">INDEX</span></span><br><span class="line">                             索引名 (字段名[(长度)]  [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]) ;</span><br><span class="line">                             </span><br><span class="line"><span class="comment">#删除索引：DROP INDEX 索引名 ON 表名字;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1.创建索引</span><br><span class="line">    -在创建表时就创建（需要注意的几点）</span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">table</span> s1(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">int</span> ,<span class="comment">#可以在这加primary key</span></span><br><span class="line">    <span class="comment">#id int index #不可以这样加索引，因为index只是索引，没有约束一说，</span></span><br><span class="line">    <span class="comment">#不能像主键，还有唯一约束一样，在定义字段的时候加索引</span></span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>),</span><br><span class="line">    age <span class="built_in">int</span>,</span><br><span class="line">    email <span class="built_in">varchar</span>(<span class="number">30</span>)</span><br><span class="line">    <span class="comment">#primary key(id) #也可以在这加</span></span><br><span class="line">    <span class="keyword">index</span>(<span class="keyword">id</span>) <span class="comment">#可以这样加</span></span><br><span class="line">    );</span><br><span class="line">    -在创建表后在创建</span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">index</span> <span class="keyword">name</span> <span class="keyword">on</span> s1(<span class="keyword">name</span>); <span class="comment">#添加普通索引</span></span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">unique</span> age <span class="keyword">on</span> s1(age);添加唯一索引</span><br><span class="line">    <span class="keyword">alter</span> <span class="keyword">table</span> s1 <span class="keyword">add</span> primary <span class="keyword">key</span>(<span class="keyword">id</span>); <span class="comment">#添加住建索引，也就是给id字段增加一个主键约束</span></span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">index</span> <span class="keyword">name</span> <span class="keyword">on</span> s1(<span class="keyword">id</span>,<span class="keyword">name</span>); <span class="comment">#添加普通联合索引</span></span><br><span class="line">2.删除索引</span><br><span class="line">    <span class="keyword">drop</span> <span class="keyword">index</span> <span class="keyword">id</span> <span class="keyword">on</span> s1;</span><br><span class="line">    <span class="keyword">drop</span> <span class="keyword">index</span> <span class="keyword">name</span> <span class="keyword">on</span> s1; <span class="comment">#删除普通索引</span></span><br><span class="line">    <span class="keyword">drop</span> <span class="keyword">index</span> age <span class="keyword">on</span> s1; <span class="comment">#删除唯一索引，就和普通索引一样，不用在index前加unique来删，直接就可以删了</span></span><br><span class="line">    <span class="keyword">alter</span> <span class="keyword">table</span> s1 <span class="keyword">drop</span> primary <span class="keyword">key</span>; <span class="comment">#删除主键(因为它添加的时候是按照alter来增加的，那么我们也用alter来删)</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/blog_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/22/OS_review_1_20190222/" itemprop="url">操作系统复习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="分页和分段的区别"><a href="#分页和分段的区别" class="headerlink" title="分页和分段的区别"></a>分页和分段的区别</h3><blockquote>
+<ul>
+<li>页是信息的物理单位，分页是为了实现离散分配方式、消减内存零头、提高内存利用率。仅仅处于系统内存管理的需求而非用户需求；段是信息的逻辑单位，分段目的是为了更好满足用户需求。</li>
+<li>页的大小固定，由系统把逻辑地址分为页号和页内地址两部分；而段是由用户编写程序决定，长度不固定</li>
+</ul>
+</blockquote>
+<h3 id="进程与线程的区别、应用场景"><a href="#进程与线程的区别、应用场景" class="headerlink" title="进程与线程的区别、应用场景"></a>进程与线程的区别、应用场景</h3><blockquote>
+<ul>
+<li><p>线程：<strong>CPU调度的基本单位</strong>，是进程内部的一个执行流，在进程的地址空间内运行。</p>
+</li>
+<li><p>进程：<strong>系统分配资源的基本单位、能独立运行的基本单位</strong>，是拥有一个/多个执行流的线程组。</p>
+</li>
+<li><p>创建、销毁一个线程相对于进程的成本要低（创建进程要创建PCB、虚拟地址空间、页表、维护映射、加载数据到内存等；而创建线程只需要一个PCB指向进程的虚拟空间即可，同理销毁线程只需要销毁PCB）。</p>
+</li>
+<li><p>线程的切换比进程的切换容易的多，<strong>进程切换需要PCB切换、页表切换；线程切换需要PCB切换，页表不切换。</strong></p>
+</li>
+<li><p>进程拥有自己独立的虚拟地址空间，而一个进程中的多个线程共享进程的虚拟地址空间。因此线程缺乏访问控制，<strong>进程中的一个线程出错，会终止掉整个进程，从而导致其他线程也凉凉，而一个进程出错，不会影响另一个进程</strong>。</p>
+</li>
+<li><p>线程共享进程空间，通信成本容易；进程通信难，成本高。</p>
+</li>
+<li><p>线程的应用场景：等待慢速I/O时，交给一个线程等待，接着做其他事情；</p>
+<p>​                               需要频发创建销毁的；</p>
+<p>​                               需要大量计算的；</p>
+<p>​                强相关的。</p>
+</li>
+<li><p>进程的应用场景：有安全、稳定的需求时；需要速度时；需要速度和安全时；</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="多线程与多进程："><a href="#多线程与多进程：" class="headerlink" title="多线程与多进程："></a>多线程与多进程：</h3><table>
+<thead>
+<tr>
+<th><strong>对比维度</strong></th>
+<th><strong>多进程</strong></th>
+<th><strong>多线程</strong></th>
+<th><strong>总结</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据共享、同步</td>
+<td>数据共享复杂，需要用IPC（进程间通信，InterProcess Communication）；数据是分开的，同步简单</td>
+<td>因为共享进程数据，数据共享简单，但也是因为这个原因导致同步复杂</td>
+<td>各有优势</td>
+</tr>
+<tr>
+<td>内存、CPU</td>
+<td>占用内存多，切换复杂，CPU利用率低</td>
+<td>占用内存少，切换简单，CPU利用率高</td>
+<td>线程占优</td>
+</tr>
+<tr>
+<td>创建销毁、切换</td>
+<td>创建销毁、切换复杂，速度慢</td>
+<td>创建销毁、切换简单，速度很快</td>
+<td>线程占优</td>
+</tr>
+<tr>
+<td>编程、调试</td>
+<td>编程简单，调试简单</td>
+<td>编程复杂，调试复杂</td>
+<td>进程占优</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>进程间不会互相影响</td>
+<td>一个线程挂掉将导致整个进程挂掉</td>
+<td>进程占优</td>
+</tr>
+<tr>
+<td>分布式</td>
+<td>适应于多核、多机分布式；如果一台机器不够，扩展到多台机器比较简单</td>
+<td>适应于多核分布式</td>
+<td>进程占优</td>
+</tr>
+</tbody>
+</table>
+<h3 id="进程间通信（IPC）"><a href="#进程间通信（IPC）" class="headerlink" title="进程间通信（IPC）"></a>进程间通信（IPC）</h3><blockquote>
+<p>主要方式包括：管道、FIFO、消息队列、信号量、共享内存、Socket。</p>
+<ul>
+<li><p>管道（无名管道）：半双工，只能在具有公共祖先额度两个进程中使用（通常为父进程与子进程）。</p>
+</li>
+<li><p>FIFO（命名管道）：可以在不想关的进程间交换数据。FIFO是一种文件类型。 shell命令使用FIFO将数据从一条管道传送到另一条管道时，无须创建中间的临时文件。</p>
+<p>无名管道与有名管道的区别在于<strong>单向通信</strong>以及<strong>有关联的进程</strong>。</p>
+</li>
+<li><p>消息队列：消息的链接表，存储在内核中，有消息队列标识符标识。并不一定以先进先出的顺序取消息，可以按照消息的<strong>类型字段</strong>取消息。</p>
+</li>
+<li><p>信号量：与管道，FIFO以及消息队列不同。它是一个计数器，用于为多个进程提供共享数据对象的访问</p>
+</li>
+<li><p>共享内存：允许两个或多个进程共享一个给定的存储区，因为数据不需要在客户进程和服务器进程之间复制，所以这是最快的IPC。<strong>信号量</strong>用于同步共享存储访问。</p>
+</li>
+<li><p>socket：网络中进程之间通信。open—write/read—close”模式的一种实现。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="动态链接dll和静态链接lib："><a href="#动态链接dll和静态链接lib：" class="headerlink" title="动态链接dll和静态链接lib："></a>动态链接dll和静态链接lib：</h3><blockquote>
+<p>这两者都是共享代码的一种方式。共享代码就是说，一帮程序员要开发一个项目，如果每个人做的不同块中有相同的功能，那么，在最后的封装中，可以把相同代码塞到链接库里（这样就不用写n遍了，节约空间）。</p>
+<ul>
+<li><p>静态链接：</p>
+<p>优点：</p>
+<ol>
+<li><p>代码装载速度快，执行速度略快。<strong>原因：</strong>你一开始就调用了整个静态链接库，so，不用一个个装载当前用的函数或者方法； </p>
+<ol start="2">
+<li>只需保证在开发者的计算机中有正确的.LIB文件，在以二进制形式发布程序时不需考虑在                用户的计算机上.LIB文件是否存在及版本问题，<strong>可避免DLL地狱</strong>等问题。 </li>
+</ol>
+</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>使用静态链接生成的可执行文件体积较大，包含相同的公共代码，造成浪费（<strong>这就是重复代码一遍遍被封装的后果</strong>）。</li>
+<li>.lib用空间换时间。</li>
+</ol>
+</li>
+<li><p>动态链接：</p>
+<p>优点：</p>
+<ol>
+<li>更加节省内存并减少页面交换。原因：<strong>仅仅调用自己需要的</strong>，不需要的就不调用，所以减少内存（减少页面交换同理）。</li>
+<li>DLL文件与EXE文件独立，只要输出接口不变（即名称、参数、返回值类型和调用约定不变），更换DLL文件不会对EXE文件造成任何影响，因而极大地提高了可维护性和可扩展性。</li>
+<li>不同编程语言编写的程序只要按照函数调用约定就可以调用同一个DLL函数（<strong>当然你必须遵守函数调用约定。这东西可以视为一种协议。</strong>）</li>
+<li>由于具有以上三种性质，所以.dll适用于大规模的软件开发，使开发过程独立、耦合度小，便于不同开发者和开发组织之间进行<strong>开发</strong>和<strong>测试（你可以理解为模块化程度高）</strong>。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>使用动态链接库的应用程序不是自完备的，它依赖的DLL模块也要存在。</li>
+</ol>
+<ul>
+<li>如果使用载入时动态链接，程序启动时发现DLL不存在，系统将终止程序并给出错误信息。</li>
+<li>使用运行时动态链接，系统不会终止，但由于DLL中的导出函数不可用，程序会加载失败。</li>
+</ul>
+<ol start="2">
+<li>速度比静态链接慢。</li>
+<li>如果新模块与旧的模块不兼容，那么那些需要该模块才能运行的软件，统统撕掉。这在早期Windows中很常见（<strong>譬如 “缺少XXX.dll，程序无法运行”</strong>）。</li>
+<li>用时间换空间。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/DB_review_1_20190222/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -955,284 +1398,6 @@
 <h2 id="4-索引库的修改"><a href="#4-索引库的修改" class="headerlink" title="　　4 索引库的修改"></a>　　4 索引库的修改</h2><p>　　更新的原理就是先删除在添加</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改索引库</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateIndex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Directory directory = FSDirectory.open(<span class="keyword">new</span> File(<span class="string">"E:\\programme\\test"</span>));</span><br><span class="line">    Analyzer analyzer = <span class="keyword">new</span> IKAnalyzer();</span><br><span class="line">    IndexWriterConfig config = <span class="keyword">new</span> IndexWriterConfig(Version.LATEST, analyzer);</span><br><span class="line">    IndexWriter indexWriter = <span class="keyword">new</span> IndexWriter(directory, config);</span><br><span class="line">    <span class="comment">//创建一个Document对象</span></span><br><span class="line">    Document document = <span class="keyword">new</span> Document();</span><br><span class="line">    <span class="comment">//向document对象中添加域。</span></span><br><span class="line">    <span class="comment">//不同的document可以有不同的域，同一个document可以有相同的域。</span></span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"fileXXX"</span>, <span class="string">"要更新的文档"</span>, Store.YES));</span><br><span class="line">    document.add(<span class="keyword">new</span> TextField(<span class="string">"contentYYY"</span>, <span class="string">"简介 Lucene 是一个基于 Java 的全文信息检索工具包。"</span>, Store.YES));</span><br><span class="line">    indexWriter.updateDocument(<span class="keyword">new</span> Term(<span class="string">"fileName"</span>, <span class="string">"apache"</span>), document);</span><br><span class="line">    <span class="comment">//关闭indexWriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> 　　这样，Lucene的简单介绍使用就完成了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/OS_review_1_20190222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/blog_logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/OS_review_1_20190222/" itemprop="url">操作系统复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:00:00+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="分页和分段的区别"><a href="#分页和分段的区别" class="headerlink" title="分页和分段的区别"></a>分页和分段的区别</h3><blockquote>
-<ul>
-<li>页是信息的物理单位，分页是为了实现离散分配方式、消减内存零头、提高内存利用率。仅仅处于系统内存管理的需求而非用户需求；段是信息的逻辑单位，分段目的是为了更好满足用户需求。</li>
-<li>页的大小固定，由系统把逻辑地址分为页号和页内地址两部分；而段是由用户编写程序决定，长度不固定</li>
-</ul>
-</blockquote>
-<h3 id="进程与线程的区别、应用场景"><a href="#进程与线程的区别、应用场景" class="headerlink" title="进程与线程的区别、应用场景"></a>进程与线程的区别、应用场景</h3><blockquote>
-<ul>
-<li><p>线程：<strong>CPU调度的基本单位</strong>，是进程内部的一个执行流，在进程的地址空间内运行。</p>
-</li>
-<li><p>进程：<strong>系统分配资源的基本单位、能独立运行的基本单位</strong>，是拥有一个/多个执行流的线程组。</p>
-</li>
-<li><p>创建、销毁一个线程相对于进程的成本要低（创建进程要创建PCB、虚拟地址空间、页表、维护映射、加载数据到内存等；而创建线程只需要一个PCB指向进程的虚拟空间即可，同理销毁线程只需要销毁PCB）。</p>
-</li>
-<li><p>线程的切换比进程的切换容易的多，<strong>进程切换需要PCB切换、页表切换；线程切换需要PCB切换，页表不切换。</strong></p>
-</li>
-<li><p>进程拥有自己独立的虚拟地址空间，而一个进程中的多个线程共享进程的虚拟地址空间。因此线程缺乏访问控制，<strong>进程中的一个线程出错，会终止掉整个进程，从而导致其他线程也凉凉，而一个进程出错，不会影响另一个进程</strong>。</p>
-</li>
-<li><p>线程共享进程空间，通信成本容易；进程通信难，成本高。</p>
-</li>
-<li><p>线程的应用场景：等待慢速I/O时，交给一个线程等待，接着做其他事情；</p>
-<p>​                               需要频发创建销毁的；</p>
-<p>​                               需要大量计算的；</p>
-<p>​                强相关的。</p>
-</li>
-<li><p>进程的应用场景：有安全、稳定的需求时；需要速度时；需要速度和安全时；</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="多线程与多进程："><a href="#多线程与多进程：" class="headerlink" title="多线程与多进程："></a>多线程与多进程：</h3><table>
-<thead>
-<tr>
-<th><strong>对比维度</strong></th>
-<th><strong>多进程</strong></th>
-<th><strong>多线程</strong></th>
-<th><strong>总结</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据共享、同步</td>
-<td>数据共享复杂，需要用IPC（进程间通信，InterProcess Communication）；数据是分开的，同步简单</td>
-<td>因为共享进程数据，数据共享简单，但也是因为这个原因导致同步复杂</td>
-<td>各有优势</td>
-</tr>
-<tr>
-<td>内存、CPU</td>
-<td>占用内存多，切换复杂，CPU利用率低</td>
-<td>占用内存少，切换简单，CPU利用率高</td>
-<td>线程占优</td>
-</tr>
-<tr>
-<td>创建销毁、切换</td>
-<td>创建销毁、切换复杂，速度慢</td>
-<td>创建销毁、切换简单，速度很快</td>
-<td>线程占优</td>
-</tr>
-<tr>
-<td>编程、调试</td>
-<td>编程简单，调试简单</td>
-<td>编程复杂，调试复杂</td>
-<td>进程占优</td>
-</tr>
-<tr>
-<td>可靠性</td>
-<td>进程间不会互相影响</td>
-<td>一个线程挂掉将导致整个进程挂掉</td>
-<td>进程占优</td>
-</tr>
-<tr>
-<td>分布式</td>
-<td>适应于多核、多机分布式；如果一台机器不够，扩展到多台机器比较简单</td>
-<td>适应于多核分布式</td>
-<td>进程占优</td>
-</tr>
-</tbody>
-</table>
-<h3 id="进程间通信（IPC）"><a href="#进程间通信（IPC）" class="headerlink" title="进程间通信（IPC）"></a>进程间通信（IPC）</h3><blockquote>
-<p>主要方式包括：管道、FIFO、消息队列、信号量、共享内存、Socket。</p>
-<ul>
-<li><p>管道（无名管道）：半双工，只能在具有公共祖先额度两个进程中使用（通常为父进程与子进程）。</p>
-</li>
-<li><p>FIFO（命名管道）：可以在不想关的进程间交换数据。FIFO是一种文件类型。 shell命令使用FIFO将数据从一条管道传送到另一条管道时，无须创建中间的临时文件。</p>
-<p>无名管道与有名管道的区别在于<strong>单向通信</strong>以及<strong>有关联的进程</strong>。</p>
-</li>
-<li><p>消息队列：消息的链接表，存储在内核中，有消息队列标识符标识。并不一定以先进先出的顺序取消息，可以按照消息的<strong>类型字段</strong>取消息。</p>
-</li>
-<li><p>信号量：与管道，FIFO以及消息队列不同。它是一个计数器，用于为多个进程提供共享数据对象的访问</p>
-</li>
-<li><p>共享内存：允许两个或多个进程共享一个给定的存储区，因为数据不需要在客户进程和服务器进程之间复制，所以这是最快的IPC。<strong>信号量</strong>用于同步共享存储访问。</p>
-</li>
-<li><p>socket：网络中进程之间通信。open—write/read—close”模式的一种实现。</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="动态链接dll和静态链接lib："><a href="#动态链接dll和静态链接lib：" class="headerlink" title="动态链接dll和静态链接lib："></a>动态链接dll和静态链接lib：</h3><blockquote>
-<p>这两者都是共享代码的一种方式。共享代码就是说，一帮程序员要开发一个项目，如果每个人做的不同块中有相同的功能，那么，在最后的封装中，可以把相同代码塞到链接库里（这样就不用写n遍了，节约空间）。</p>
-<ul>
-<li><p>静态链接：</p>
-<p>优点：</p>
-<ol>
-<li><p>代码装载速度快，执行速度略快。<strong>原因：</strong>你一开始就调用了整个静态链接库，so，不用一个个装载当前用的函数或者方法； </p>
-<ol start="2">
-<li>只需保证在开发者的计算机中有正确的.LIB文件，在以二进制形式发布程序时不需考虑在                用户的计算机上.LIB文件是否存在及版本问题，<strong>可避免DLL地狱</strong>等问题。 </li>
-</ol>
-</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>使用静态链接生成的可执行文件体积较大，包含相同的公共代码，造成浪费（<strong>这就是重复代码一遍遍被封装的后果</strong>）。</li>
-<li>.lib用空间换时间。</li>
-</ol>
-</li>
-<li><p>动态链接：</p>
-<p>优点：</p>
-<ol>
-<li>更加节省内存并减少页面交换。原因：<strong>仅仅调用自己需要的</strong>，不需要的就不调用，所以减少内存（减少页面交换同理）。</li>
-<li>DLL文件与EXE文件独立，只要输出接口不变（即名称、参数、返回值类型和调用约定不变），更换DLL文件不会对EXE文件造成任何影响，因而极大地提高了可维护性和可扩展性。</li>
-<li>不同编程语言编写的程序只要按照函数调用约定就可以调用同一个DLL函数（<strong>当然你必须遵守函数调用约定。这东西可以视为一种协议。</strong>）</li>
-<li>由于具有以上三种性质，所以.dll适用于大规模的软件开发，使开发过程独立、耦合度小，便于不同开发者和开发组织之间进行<strong>开发</strong>和<strong>测试（你可以理解为模块化程度高）</strong>。</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>使用动态链接库的应用程序不是自完备的，它依赖的DLL模块也要存在。</li>
-</ol>
-<ul>
-<li>如果使用载入时动态链接，程序启动时发现DLL不存在，系统将终止程序并给出错误信息。</li>
-<li>使用运行时动态链接，系统不会终止，但由于DLL中的导出函数不可用，程序会加载失败。</li>
-</ul>
-<ol start="2">
-<li>速度比静态链接慢。</li>
-<li>如果新模块与旧的模块不兼容，那么那些需要该模块才能运行的软件，统统撕掉。这在早期Windows中很常见（<strong>譬如 “缺少XXX.dll，程序无法运行”</strong>）。</li>
-<li>用时间换空间。</li>
-</ol>
-</li>
-</ul>
-</blockquote>
 
           
         
@@ -2132,7 +2297,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

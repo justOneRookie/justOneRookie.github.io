@@ -261,6 +261,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/jzOffer_3_20190306/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/blog_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/06/jzOffer_3_20190306/" itemprop="url">剑指Offer刷题日记（三）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">
+                2019-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、斐波那契数列第n项"><a href="#一、斐波那契数列第n项" class="headerlink" title="一、斐波那契数列第n项"></a>一、斐波那契数列第n项</h1><p>大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0）。</p>
+<p>n&lt;=39</p>
+<p><strong>时间限制：1秒 空间限制：32768K</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自己的算法 咋一想，用递归，但是很慢，差点超时，真实too young too naive：</span></span><br><span class="line"><span class="comment">运行时间：967ms</span></span><br><span class="line"><span class="comment">占用内存：9224k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">return</span> Fibonacci(n-<span class="number">1</span>)+Fibonacci(n-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">于是想了想，优化算法如下：但是好像也是挺麻烦呀！</span></span><br><span class="line"><span class="comment">运行时间：14ms</span></span><br><span class="line"><span class="comment">占用内存：9312k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;<span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"n &lt; 0!"</span>);</span><br><span class="line">        <span class="keyword">int</span>[] x = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">        x[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        x[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">            x[i%<span class="number">2</span>] = x[<span class="number">0</span>]+x[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> x[n%<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//可以这样来：</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> f = <span class="number">0</span>, g = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(n--&gt;<span class="number">0</span>) &#123;</span><br><span class="line">            g += f;</span><br><span class="line">            f = g - f;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二、跳台阶"><a href="#二、跳台阶" class="headerlink" title="二、跳台阶"></a>二、跳台阶</h1><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。</p>
+<p><strong>时间限制：1秒 空间限制：32768K</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自己的解法，</span></span><br><span class="line"><span class="comment">第一时间就是1+C(1,n-1)+C(2,n-2)+……+C(n/2, n-n/2)</span></span><br><span class="line"><span class="comment">但是有什么问题呢？阶乘数据过大，储存不了。</span></span><br><span class="line"><span class="comment">想了好久，最终受不了去看了论坛，自己还是太菜了呀！</span></span><br><span class="line"><span class="comment">原来，这还是斐波那契数列。</span></span><br><span class="line"><span class="comment">即第n阶只能由第n-1或者第n-2阶跳上来。</span></span><br><span class="line"><span class="comment">运行时间：14ms</span></span><br><span class="line"><span class="comment">占用内存：9392k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">JumpFloor</span><span class="params">(<span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> f=<span class="number">1</span>,g=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(target&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            g+=f;</span><br><span class="line">            f=g-f;</span><br><span class="line">            target--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三、变态跳台阶"><a href="#三、变态跳台阶" class="headerlink" title="三、变态跳台阶"></a>三、变态跳台阶</h1><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<p><strong>时间限制：1秒 空间限制：32768K</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">同理，青蛙可能从第0阶、第一阶..第n-1阶跳上来，故F(n) = F(n-1)+F(n-2)+...+F(0)= 2F(n-1)</span></span><br><span class="line"><span class="comment">这就很简单了，是等比数列。</span></span><br><span class="line"><span class="comment">运行时间：16ms</span></span><br><span class="line"><span class="comment">占用内存：9416k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">JumpFloorII</span><span class="params">(<span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)Math.pow(<span class="number">2</span>, target-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//此外，用位操作似乎比用Math.pow()好多了</span></span><br><span class="line"><span class="keyword">int</span> a=<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> a&lt;&lt;(target-<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/05/icbc_intertview_20190305/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -583,6 +734,12 @@
 <p>大牛也是使用同样的思想，但是大牛的处理显然比我的好太多太多..</p>
 <p>(但是运行时空似乎相差不大..)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">链接：https://www.nowcoder.com/questionTerminal/8a19cbe657394eeaac2f6ea9b0f6fcf6</span></span><br><span class="line"><span class="comment">来源：牛客网</span></span><br><span class="line"><span class="comment">运行时间：282ms</span></span><br><span class="line"><span class="comment">占用内存：23068k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span> [] pre,<span class="keyword">int</span> [] in)</span> </span>&#123;</span><br><span class="line">        TreeNode root=reConstructBinaryTree(pre,<span class="number">0</span>,pre.length-<span class="number">1</span>,in,<span class="number">0</span>,in.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//前序遍历&#123;1,2,4,7,3,5,6,8&#125;和中序遍历序列&#123;4,7,2,1,5,3,8,6&#125;</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> TreeNode <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span> [] pre,<span class="keyword">int</span> startPre,<span class="keyword">int</span> endPre,<span class="keyword">int</span> [] in,<span class="keyword">int</span> startIn,<span class="keyword">int</span> endIn)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">if</span>(startPre&gt;endPre||startIn&gt;endIn)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode root=<span class="keyword">new</span> TreeNode(pre[startPre]);</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=startIn;i&lt;=endIn;i++)</span><br><span class="line">            <span class="keyword">if</span>(in[i]==pre[startPre])&#123;</span><br><span class="line">                root.left=reConstructBinaryTree(pre,startPre+<span class="number">1</span>,startPre+i-startIn,in,startIn,i-<span class="number">1</span>);</span><br><span class="line">                root.right=reConstructBinaryTree(pre,i-startIn+startPre+<span class="number">1</span>,endPre,in,i+<span class="number">1</span>,endIn);</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">                 </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二、用两个栈实现队列"><a href="#二、用两个栈实现队列" class="headerlink" title="二、用两个栈实现队列"></a>二、用两个栈实现队列</h1><p>用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
+<p><strong>时间限制：1秒 空间限制：32768K</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自己的算法</span></span><br><span class="line"><span class="comment">运行时间：13ms</span></span><br><span class="line"><span class="comment">占用内存：9532k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    Stack&lt;Integer&gt; stack1 = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">    Stack&lt;Integer&gt; stack2 = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> node)</span> </span>&#123;</span><br><span class="line">        stack1.add((Integer)node);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(stack1.empty()&amp;&amp;stack2.empty())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Queue is empty!"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//以stack1为基本存储，每次pop操作的时候，如果stack2为空，</span></span><br><span class="line">        <span class="comment">//就将stack1的内容全部放到stack2中再pop</span></span><br><span class="line">        <span class="keyword">if</span>(stack2.empty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(!stack1.empty())</span><br><span class="line">                stack2.add(stack1.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stack2.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三、旋转数组的最小数字"><a href="#三、旋转数组的最小数字" class="headerlink" title="三、旋转数组的最小数字"></a>三、旋转数组的最小数字</h1><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。</p>
+<p><strong>时间限制：3秒 空间限制：32768K </strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自己的算法   有人说用二分查找，但是如果是有重复元素的话二分法就不行了</span></span><br><span class="line"><span class="comment">运行时间：267ms</span></span><br><span class="line"><span class="comment">占用内存：27896k</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minNumberInRotateArray</span><span class="params">(<span class="keyword">int</span> [] array)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = array.length;</span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">1</span>) <span class="keyword">return</span> array[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(array[i]&gt;array[i+<span class="number">1</span>]) <span class="keyword">return</span> array[i+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> array[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -979,157 +1136,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/sort_20190227/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/blog_logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/27/sort_20190227/" itemprop="url">常用的一些简单排序算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
-                2019-02-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>思想：从某个方向两两相邻比较元素的值，若为逆序，则交换。每一轮冒泡完可以保证在第i个位置的元素是正确的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len-<span class="number">1</span>;i&gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasSwap = <span class="keyword">false</span>; <span class="comment">//判断是否进行过交换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span>;j--)&#123;   </span><br><span class="line">             <span class="keyword">if</span>(a[j]&gt;a[j-<span class="number">1</span>])&#123;</span><br><span class="line">            	swap(a[j], a[j-<span class="number">1</span>]);</span><br><span class="line">            	hasSwap = <span class="keyword">true</span>;</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!hasSwap) <span class="keyword">break</span>;  <span class="comment">//如果一次交换都没有，则表示已经有序，直接结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>思想：依次将待排序的目标插入到已经排好序的序列里，直到所有的序列都排好序</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i-<span class="number">1</span>]&lt;a[i])&#123;  <span class="comment">//如果待排元素比已排最小元素大，则需要进行排序</span></span><br><span class="line">            <span class="keyword">int</span> temp=a[i];  <span class="comment">//保存待排元素</span></span><br><span class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j=i-<span class="number">1</span>;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            	<span class="keyword">if</span>(a[j]&lt;temp)   <span class="comment">//如果这个位置比待排元素小，后移</span></span><br><span class="line">                    a[j+<span class="number">1</span>]=a[j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>；<span class="comment">//否则，表示找到了位置。</span></span><br><span class="line">        	&#125;</span><br><span class="line">            a[j+<span class="number">1</span>]=temp;<span class="comment">//插入到找到的合适的位置。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>思路：从无序区选择一个最大/最小的元素插入到有序区的最后。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> max=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;len;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j]&gt;a[max])</span><br><span class="line">                max=j;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(a[i],a[max]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><p>思想：让序列基本有序，使用<strong>分组插入排序</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,gap,k;</span><br><span class="line">    <span class="keyword">for</span>(gap=len/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap=gap/<span class="number">2</span>)&#123;  <span class="comment">//确定步长</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;gap;i++)&#123;  <span class="comment">//确定分组个数</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(j=i+gap;j&lt;len;j=j+gap)&#123; <span class="comment">//对每个分组进行插入排序</span></span><br><span class="line">                <span class="keyword">if</span>(a[j]&gt;a[j-gap])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = a[j];</span><br><span class="line">                    <span class="keyword">for</span>(k=j-gap;k&gt;=<span class="number">0</span>;k=k-gap)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(a[k]&lt;temp) a[k+gap]=a[k];</span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    a[k+gap]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>思想：分治法，将数组拆分为n个组排序，然后归并。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> end, <span class="keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/java_interview_20190227/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1249,6 +1255,157 @@
 <p><a href="https://blog.csdn.net/u012073449/article/details/50992348" target="_blank" rel="noopener">CSDN ALice_yufeng的博客: 阿里JAVA开发面试常问问题总结4</a></p>
 <p><a href="https://blog.csdn.net/u012073449/article/details/50975024" target="_blank" rel="noopener">CSDN ALice_yufeng的博客: Java中几个“区别”总结</a></p>
 <p><a href="https://blog.csdn.net/andong154564667/article/details/80117546" target="_blank" rel="noopener">CSDN 东东咚咚咚咚咚丶的博客: 后端开发常问面试题集锦</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/sort_20190227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rookieChen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/blog_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RookieGuy Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/27/sort_20190227/" itemprop="url">常用的一些简单排序算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>思想：从某个方向两两相邻比较元素的值，若为逆序，则交换。每一轮冒泡完可以保证在第i个位置的元素是正确的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len-<span class="number">1</span>;i&gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasSwap = <span class="keyword">false</span>; <span class="comment">//判断是否进行过交换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span>;j--)&#123;   </span><br><span class="line">             <span class="keyword">if</span>(a[j]&gt;a[j-<span class="number">1</span>])&#123;</span><br><span class="line">            	swap(a[j], a[j-<span class="number">1</span>]);</span><br><span class="line">            	hasSwap = <span class="keyword">true</span>;</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!hasSwap) <span class="keyword">break</span>;  <span class="comment">//如果一次交换都没有，则表示已经有序，直接结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>思想：依次将待排序的目标插入到已经排好序的序列里，直到所有的序列都排好序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i-<span class="number">1</span>]&lt;a[i])&#123;  <span class="comment">//如果待排元素比已排最小元素大，则需要进行排序</span></span><br><span class="line">            <span class="keyword">int</span> temp=a[i];  <span class="comment">//保存待排元素</span></span><br><span class="line">        	<span class="keyword">for</span>(<span class="keyword">int</span> j=i-<span class="number">1</span>;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            	<span class="keyword">if</span>(a[j]&lt;temp)   <span class="comment">//如果这个位置比待排元素小，后移</span></span><br><span class="line">                    a[j+<span class="number">1</span>]=a[j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>；<span class="comment">//否则，表示找到了位置。</span></span><br><span class="line">        	&#125;</span><br><span class="line">            a[j+<span class="number">1</span>]=temp;<span class="comment">//插入到找到的合适的位置。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>思路：从无序区选择一个最大/最小的元素插入到有序区的最后。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> max=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;len;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j]&gt;a[max])</span><br><span class="line">                max=j;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(a[i],a[max]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><p>思想：让序列基本有序，使用<strong>分组插入排序</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//降序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,gap,k;</span><br><span class="line">    <span class="keyword">for</span>(gap=len/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap=gap/<span class="number">2</span>)&#123;  <span class="comment">//确定步长</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;gap;i++)&#123;  <span class="comment">//确定分组个数</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(j=i+gap;j&lt;len;j=j+gap)&#123; <span class="comment">//对每个分组进行插入排序</span></span><br><span class="line">                <span class="keyword">if</span>(a[j]&gt;a[j-gap])&#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = a[j];</span><br><span class="line">                    <span class="keyword">for</span>(k=j-gap;k&gt;=<span class="number">0</span>;k=k-gap)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(a[k]&lt;temp) a[k+gap]=a[k];</span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    a[k+gap]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>思想：分治法，将数组拆分为n个组排序，然后归并。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> end, <span class="keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1925,171 +2082,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/MySQL_learn_1_20190225/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="rookieChen">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/blog_logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RookieGuy Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/25/MySQL_learn_1_20190225/" itemprop="url">MySQL的一些学习过程（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T00:00:00+08:00">
-                2019-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL学习日记-一"><a href="#MySQL学习日记-一" class="headerlink" title="MySQL学习日记(一)"></a>MySQL学习日记(一)</h1><h2 id="索引："><a href="#索引：" class="headerlink" title="索引："></a>索引：</h2><p>索引在MySQL中也叫做“<strong>键</strong>”，是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能<br>非常关键，尤其是当表中的数据量越来越大时，索引对于性能的影响愈发重要。<br>索引优化应该是<em>对查询性能优化最有效的手段</em>了。索引能够轻易将查询性能提高好几个数量级。</p>
-<p>首先，我们知道磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，<strong>当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都读取到内存缓冲区内</strong>，因为局部预读性原理告诉我们，当计算机访问一个地址的数据的时候，与其相邻的数据也会很快被访问到。每一次IO读取的数据我们称之为一页(page)。具体一页有多大数据跟操作系统有关，一般为4k或8k，也就是我们读取一页内的数据时候，实际上才发生了一次IO，这个理论对于索引的数据结构设计非常有帮助。</p>
-<p><strong>索引的数据结构</strong>：任何一种数据结构都不是凭空产生的，一定会有它的背景和使用场景，我们现在总结一下，我们需要这种数据结构能够做些什么，其实很简单，那就是：每次查找数据时把磁盘IO次数控制在一个很小的数量级，最好是常数数量级。那么我们就想到如果一个高度可控的多路搜索树是否能满足需求呢？就这样，b+树应运而生。</p>
-<p><img src="/images/MySQL/B+tree.png" alt></p>
-<p>如上图，是一颗b+树，浅蓝色的块我们称之为一个磁盘块，可以看到每个磁盘块包含几个数据项（深蓝色所示）和指针（黄色所示），真实的数据存在于叶子节点，非叶子节点只不存储真实的数据，只存储指引搜索方向的数据项，如17、35并不真实存在于数据表中。</p>
-<p><strong>b+树的查找过程</strong>：如图所示，如果要查找数据项29，那么首先会把磁盘块1由磁盘加载到内存，此时发生一次IO，在内存中用二分查找确定29在17和35之间，锁定磁盘块1的P2指针，内存时间因为非常短（相比磁盘的IO）可以忽略不计，通过磁盘块1的P2指针的磁盘地址把磁盘块3由磁盘加载到内存，发生第二次IO，29在26和30之间，锁定磁盘块3的P2指针，通过指针加载磁盘块8到内存，发生第三次IO，同时内存中做二分查找找到29，结束查询，总计三次IO。真实的情况是，3层的b+树可以表示上百万的数据，如果上百万的数据查找只需要三次IO，性能提高将是巨大的，如果没有索引，每个数据项都要发生一次IO，那么总共需要百万次的IO，显然成本非常非常高。</p>
-<p>因此，我们可以总结出：</p>
-<blockquote>
-<ol>
-<li><strong>索引字段要尽量的小</strong>：通过上面的分析，我们知道IO次数取决于b+数的高度h，假设当前数据表的数据为N，每个磁盘块的数据项的数量是m，则有$$h = \log_mN$$，当数据量N一定的情况下，m越大，h越小；而m = 磁盘块的大小 / 数据项的大小，磁盘块的大小也就是一个数据页的大小，是固定的，如果数据项占的空间越小，数据项的数量越多，树的高度越低。这就是为什么每个数据项，即索引字段要尽量的小，比如int占4字节，要比bigint8字节少一半。这也是为什么b+树要求把真实的数据放到叶子节点而不是内层节点，一旦放到内层节点，磁盘块的数据项会大幅度下降，导致树增高。当数据项等于1时将会退化成线性表。</li>
-<li><strong>索引的最左匹配特性（即从左往右匹配）</strong>：当b+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性。</li>
-</ol>
-</blockquote>
-<p><strong>MySQL的索引分类</strong>:</p>
-<blockquote>
-<p>索引分类<br>1.普通索引index :加速查找<br>2.唯一索引<br>    主键索引：primary key ：加速查找+约束（不为空且唯一）<br>    唯一索引：unique：加速查找+约束 （唯一）<br>3.联合索引<br>    -primary key(id,name):联合主键索引<br>    -unique(id,name):联合唯一索引<br>    -index(id,name):联合普通索引<br>4.全文索引fulltext :用于搜索很长一篇文章的时候，效果最好。<br>5.空间索引spatial :了解就好，几乎不用</p>
-</blockquote>
-<p> 索引的两大类型hash与btree:</p>
-<ul>
-<li>hash类型的索引：查询单条快，范围查询慢</li>
-<li>btree类型的索引：b+树，层数越多，数据量指数级增长（我们就用它，因为innodb默认支持它）。</li>
-</ul>
-<p><strong>创建/删除索引的语法</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方法一：创建表时</span></span><br><span class="line">     　<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名 (</span><br><span class="line">                字段名<span class="number">1</span>  数据类型 [完整性约束条件…],</span><br><span class="line">                字段名<span class="number">2</span>  数据类型 [完整性约束条件…],</span><br><span class="line">                [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL ]   <span class="keyword">INDEX</span> | <span class="keyword">KEY</span></span><br><span class="line">                [索引名]  (字段名[(长度)]  [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]) </span><br><span class="line">                );</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法二：CREATE在已存在的表上创建索引</span></span><br><span class="line">        <span class="keyword">CREATE</span>  [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL ]  <span class="keyword">INDEX</span>  索引名 </span><br><span class="line">                     <span class="keyword">ON</span> 表名 (字段名[(长度)]  [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]) ;</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法三：ALTER TABLE在已存在的表上创建索引</span></span><br><span class="line">        <span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span>  [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL ] <span class="keyword">INDEX</span></span><br><span class="line">                             索引名 (字段名[(长度)]  [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]) ;</span><br><span class="line">                             </span><br><span class="line"><span class="comment">#删除索引：DROP INDEX 索引名 ON 表名字;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1.创建索引</span><br><span class="line">    -在创建表时就创建（需要注意的几点）</span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">table</span> s1(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">int</span> ,<span class="comment">#可以在这加primary key</span></span><br><span class="line">    <span class="comment">#id int index #不可以这样加索引，因为index只是索引，没有约束一说，</span></span><br><span class="line">    <span class="comment">#不能像主键，还有唯一约束一样，在定义字段的时候加索引</span></span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>),</span><br><span class="line">    age <span class="built_in">int</span>,</span><br><span class="line">    email <span class="built_in">varchar</span>(<span class="number">30</span>)</span><br><span class="line">    <span class="comment">#primary key(id) #也可以在这加</span></span><br><span class="line">    <span class="keyword">index</span>(<span class="keyword">id</span>) <span class="comment">#可以这样加</span></span><br><span class="line">    );</span><br><span class="line">    -在创建表后在创建</span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">index</span> <span class="keyword">name</span> <span class="keyword">on</span> s1(<span class="keyword">name</span>); <span class="comment">#添加普通索引</span></span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">unique</span> age <span class="keyword">on</span> s1(age);添加唯一索引</span><br><span class="line">    <span class="keyword">alter</span> <span class="keyword">table</span> s1 <span class="keyword">add</span> primary <span class="keyword">key</span>(<span class="keyword">id</span>); <span class="comment">#添加住建索引，也就是给id字段增加一个主键约束</span></span><br><span class="line">    <span class="keyword">create</span> <span class="keyword">index</span> <span class="keyword">name</span> <span class="keyword">on</span> s1(<span class="keyword">id</span>,<span class="keyword">name</span>); <span class="comment">#添加普通联合索引</span></span><br><span class="line">2.删除索引</span><br><span class="line">    <span class="keyword">drop</span> <span class="keyword">index</span> <span class="keyword">id</span> <span class="keyword">on</span> s1;</span><br><span class="line">    <span class="keyword">drop</span> <span class="keyword">index</span> <span class="keyword">name</span> <span class="keyword">on</span> s1; <span class="comment">#删除普通索引</span></span><br><span class="line">    <span class="keyword">drop</span> <span class="keyword">index</span> age <span class="keyword">on</span> s1; <span class="comment">#删除唯一索引，就和普通索引一样，不用在index前加unique来删，直接就可以删了</span></span><br><span class="line">    <span class="keyword">alter</span> <span class="keyword">table</span> s1 <span class="keyword">drop</span> primary <span class="keyword">key</span>; <span class="comment">#删除主键(因为它添加的时候是按照alter来增加的，那么我们也用alter来删)</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2142,7 +2134,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
