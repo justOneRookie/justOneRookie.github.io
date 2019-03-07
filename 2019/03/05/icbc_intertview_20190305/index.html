@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="面试,">
+  <meta name="keywords" content="面试,GC内存收集,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="首先是2分钟的自我介绍，我处理的并不好之前并没有充分的准备，条例不够清晰，也没有把重要的点说出来，hr要求看成绩单的时候还没有..对于项目只问了一点点，自己觉得的亮点是什么，遇到什么问题，很简单地提了一下，大概是因为我答的实在不好吧。难受呀老哥！ 接下来看看问题吧： 一、关于数据结构，对于排序算法有什么了解？归并算法的了解这个我主要回答了选择排序、插入排序、冒泡排序、快速排序、希尔排序、归并排序、">
-<meta name="keywords" content="面试">
+<meta name="keywords" content="面试,GC内存收集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ICBC工行软件研发中心面试问题">
 <meta property="og:url" content="http://yoursite.com/2019/03/05/icbc_intertview_20190305/index.html">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/interview/icbc_merge.jpg">
 <meta property="og:image" content="http://yoursite.com/images/interview/icbc_heap.png">
-<meta property="og:updated_time" content="2019-03-05T10:26:44.234Z">
+<meta property="og:updated_time" content="2019-03-07T10:57:24.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ICBC工行软件研发中心面试问题">
 <meta name="twitter:description" content="首先是2分钟的自我介绍，我处理的并不好之前并没有充分的准备，条例不够清晰，也没有把重要的点说出来，hr要求看成绩单的时候还没有..对于项目只问了一点点，自己觉得的亮点是什么，遇到什么问题，很简单地提了一下，大概是因为我答的实在不好吧。难受呀老哥！ 接下来看看问题吧： 一、关于数据结构，对于排序算法有什么了解？归并算法的了解这个我主要回答了选择排序、插入排序、冒泡排序、快速排序、希尔排序、归并排序、">
@@ -418,8 +418,8 @@
 <p>　　堆结构图如下：</p>
 <p><img src="/images/interview/icbc_heap.png" alt></p>
 <p>新生代：新创建的对象都是用新生代分配内存，Eden空间不足时，触发Minor GC，这时会把存活的对象转移进Survivor区。<br>　　老年代：老年代用于存放经过多次Minor GC之后依然存活的对象。</p>
-<p>　　新生代的GC（Minor GC）：新生代通常存活时间较短基于Copying算法进行回收，所谓Copying算法就是扫描出存活的对象，并复制到一块新的完全未使用的空间中，对应于新生代，就是在Eden和FromSpace或ToSpace之间copy。新生代采用空闲指针的方式来控制GC触发，指针保持最后一个分配的对象在新生代区间的位置，当有新的对象要分配内存时，用于检查空间是否足够，不够就触发GC。当连续分配对象时，对象会逐渐从Eden到Survivor，最后到老年代。</p>
-<p>　　老年代的GC（Major GC/Full GC）：老年代与新生代不同，老年代对象存活的时间比较长、比较稳定，因此采用标记(Mark)算法来进行回收，所谓标记就是扫描出存活的对象，然后再进行回收未被标记的对象，回收后对用空出的空间要么进行合并、要么标记出来便于下次进行分配，总之目的就是要减少内存碎片带来的效率损耗。</p>
+<p>　　新生代的GC（Minor GC）：新生代通常存活时间较短基于Copying算法进行回收，所谓Copying算法就是扫描出存活的对象，并复制到一块新的完全未使用的空间中，对应于新生代，就是在Eden和FromSpace或ToSpace之间copy。新生代采用空闲指针的方式来控制GC触发，指针保持最后一个分配的对象在新生代区间的位置，当有新的对象要分配内存时，用于检查空间是否足够，不够就触发GC。当连续分配对象时，对象会逐渐从Eden到Survivor，最后到老年代。<strong>主要用Copying复制算法。</strong></p>
+<p>　　老年代的GC（Major GC/Full GC）：老年代与新生代不同，老年代对象存活的时间比较长、比较稳定，因此<strong>采用标记(Mark)算法来进行回收</strong>，所谓标记就是扫描出存活的对象，然后再进行回收未被标记的对象，回收后对用空出的空间要么进行合并、要么标记出来便于下次进行分配，总之目的就是要减少内存碎片带来的效率损耗。</p>
 <p>更多的看<a href="https://www.cnblogs.com/wjtaigwh/p/6635484.html" target="_blank" rel="noopener">博客园阿呆哥哥的博客：Java–深入浅出GC自动回收机制</a></p>
 <h1 id="五、Java的堆和栈的区别？"><a href="#五、Java的堆和栈的区别？" class="headerlink" title="五、Java的堆和栈的区别？"></a>五、Java的堆和栈的区别？</h1><blockquote>
 <p>Java把内存划分成两种：一种是堆内存，一种是栈内存。</p>
@@ -457,6 +457,8 @@
         <div class="post-tags">
           
             <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+            <a href="/tags/GC内存收集/" rel="tag"># GC内存收集</a>
           
         </div>
       
@@ -582,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
